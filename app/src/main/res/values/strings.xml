@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">AIYA</string>
+    <string name="night_mode">夜间模式</string>
+    <string name="navi_1">菜单1</string>
+    <string name="navi_2">菜单2</string>
+    <string name="navi_3">菜单3</string>
+    <string name="navi_4">菜单4</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
