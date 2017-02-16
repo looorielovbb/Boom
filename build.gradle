@@ -16,7 +16,11 @@ buildscript {
 allprojects {
     repositories {
         jcenter()
+        maven {
+            url 'https://dl.bintray.com/wangyuwei/maven'
+        }
     }
+
 }
 
 task clean(type: Delete) {

@@ -1,33 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="me.looorielovbb.boom.splashpage.SplashActivity">
+    android:orientation="vertical">
 
-    <ImageView
+
+    <me.wangyuwei.particleview.ParticleView
+        android:id="@+id/particleview"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="5"
-        android:scaleType="centerCrop"
-        android:src="@drawable/start" />
+        android:layout_height="match_parent"
+        app:pv_background_color="@color/colorPrimary"
+        app:pv_host_text="LooorieLovBB"
+        app:pv_host_text_anim_time="1000"
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
+        app:pv_particle_text=".me"
+        app:pv_particle_text_size="16sp"
+        app:pv_spread_anim_time="200"
+        app:pv_text_anim_time="1000"
+        app:pv_text_color="#FFF" />
 
-        <TextView
-            android:gravity="center_horizontal"
-            android:id="@+id/tv_skip"
-            android:layout_width="60dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerInParent="true"
-            android:layout_marginRight="@dimen/horizontal_margin"
-            android:background="@drawable/round_rect"
-            android:padding="4dp"
-            android:textColor="@color/textColorPrimary" />
-    </RelativeLayout>
-</LinearLayout>
+
+</RelativeLayout>

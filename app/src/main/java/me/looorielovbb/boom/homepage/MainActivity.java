@@ -6,7 +6,6 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.AppCompatDelegate;
-import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.CompoundButton;
@@ -20,12 +19,8 @@ import me.looorielovbb.boom.NewActivity;
 import me.looorielovbb.boom.R;
 import me.looorielovbb.boom.config.Constants;
 import me.looorielovbb.boom.utils.PreferencesUtils;
-import me.looorielovbb.boom.utils.ToastUtils;
-import me.looorielovbb.boom.utils.ToolbarUtils;
 
 public class MainActivity extends AppCompatActivity implements MainContract.View {
-    @BindView(R.id.toolbar)
-    Toolbar toolbar;
     @BindView(R.id.switcher)
     Switch switcher;
     @BindView(R.id.bottomnavi)
@@ -38,7 +33,6 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
         setContentView(R.layout.activity_main);
         XLog.e("onCreate");
         ButterKnife.bind(this);
-        ToolbarUtils.initToolBarNoBack(this, toolbar, "HomePage");
 
         if (PreferencesUtils.getBoolean(this, Constants.THEME_MODE, false)) {
             switcher.setChecked(true);
@@ -65,23 +59,19 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.navi1:
-                        ToastUtils.show("1");
                         break;
                     case R.id.navi2:
-                        ToastUtils.show("2");
                         break;
                     case R.id.navi3:
-                        ToastUtils.show("3");
+                        break;
+                    case R.id.navi4:
+                        break;
+                    case R.id.navi5:
                         break;
                 }
                 return true;
             }
         });
-    }
-
-
-    public void btn(View view) {
-        startActivity(new Intent(MainActivity.this, NewActivity.class));
     }
 
     @Override

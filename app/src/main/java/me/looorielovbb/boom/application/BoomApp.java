@@ -3,9 +3,13 @@ package me.looorielovbb.boom.application;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.support.multidex.MultiDexApplication;
+import android.support.v7.app.AppCompatDelegate;
 
 import com.elvishew.xlog.LogLevel;
 import com.elvishew.xlog.XLog;
+
+import me.looorielovbb.boom.config.Constants;
+import me.looorielovbb.boom.utils.PreferencesUtils;
 
 /**
  * Created by Lulei on 2017/2/9.
@@ -24,5 +28,11 @@ public class BoomApp extends MultiDexApplication {
         super.onCreate();
         appCtx = getApplicationContext();
         XLog.init(LogLevel.ALL);
+
+        if (PreferencesUtils.getBoolean(this, Constants.THEME_MODE, false)) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        }
     }
 }
