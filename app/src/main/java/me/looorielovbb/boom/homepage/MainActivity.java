@@ -1,13 +1,11 @@
 package me.looorielovbb.boom.homepage;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.AppCompatDelegate;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 
@@ -15,7 +13,6 @@ import com.elvishew.xlog.XLog;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import me.looorielovbb.boom.NewActivity;
 import me.looorielovbb.boom.R;
 import me.looorielovbb.boom.config.Constants;
 import me.looorielovbb.boom.utils.PreferencesUtils;
