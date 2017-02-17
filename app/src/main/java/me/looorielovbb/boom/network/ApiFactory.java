@@ -42,11 +42,7 @@ public class ApiFactory {
     public static DoubanApi getDoubanApi() {
         initOkHttpClient();
         if (null == doubanApi) {
-            Retrofit retrofit = new Retrofit.Builder()
-                    .client(client)
-                    .baseUrl(DoubanApi.DOUBAN)
-                    .addConverterFactory(gsonConverterFactory)
-                    .build();
+            Retrofit retrofit = initRetrofitClient(DoubanApi.DOUBAN);
             doubanApi = retrofit.create(DoubanApi.class);
         }
         return doubanApi;
@@ -55,11 +51,7 @@ public class ApiFactory {
     public static GankApi getGankApi() {
         initOkHttpClient();
         if (null == gankApi) {
-            Retrofit retrofit = new Retrofit.Builder()
-                    .client(client)
-                    .baseUrl(GankApi.GANK)
-                    .addConverterFactory(gsonConverterFactory)
-                    .build();
+            Retrofit retrofit = initRetrofitClient(GankApi.GANK);
             gankApi = retrofit.create(GankApi.class);
         }
         return gankApi;
@@ -68,13 +60,17 @@ public class ApiFactory {
     public static ZhihuApi getZhihuApi() {
         initOkHttpClient();
         if (null == zhihuApi) {
-            Retrofit retrofit = new Retrofit.Builder()
-                    .client(client)
-                    .baseUrl(ZhihuApi.ZHIHU)
-                    .addConverterFactory(gsonConverterFactory)
-                    .build();
+            Retrofit retrofit = initRetrofitClient(ZhihuApi.ZHIHU);
             zhihuApi = retrofit.create(ZhihuApi.class);
         }
         return zhihuApi;
+    }
+
+    private static Retrofit initRetrofitClient(String host) {
+        return new Retrofit.Builder()
+                .client(client)
+                .baseUrl(host)
+                .addConverterFactory(gsonConverterFactory)
+                .build();
     }
 }
