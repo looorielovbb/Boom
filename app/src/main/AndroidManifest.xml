@@ -11,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".splashpage.SplashActivity"
+            android:name=".ui.splashpage.SplashActivity"
             android:launchMode="singleInstance"
             android:theme="@style/AppTheme.Splash">
             <intent-filter>
@@ -21,7 +21,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".homepage.MainActivity"
+            android:name=".ui.homepage.MainActivity"
             android:launchMode="singleInstance">
             <intent-filter>
                 <category android:name="android.intent.category.DEFAULT" />

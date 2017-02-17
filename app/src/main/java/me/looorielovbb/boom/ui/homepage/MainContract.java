@@ -1,4 +1,4 @@
-package me.looorielovbb.boom.homepage;
+package me.looorielovbb.boom.ui.homepage;
 
 import me.looorielovbb.boom.base.BasePresenter;
 import me.looorielovbb.boom.base.BaseView;
@@ -16,7 +16,6 @@ public interface MainContract {
 
         void showerror();
 
-        boolean isActive();
     }
 
     interface Presenter extends BasePresenter{

@@ -1,4 +1,4 @@
-package me.looorielovbb.boom.splashpage;
+package me.looorielovbb.boom.ui.splashpage;
 
 import android.content.Context;
 import android.content.Intent;
@@ -8,7 +8,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import me.looorielovbb.boom.R;
 import me.looorielovbb.boom.base.BaseActivity;
-import me.looorielovbb.boom.homepage.MainActivity;
+import me.looorielovbb.boom.ui.homepage.MainActivity;
 import me.wangyuwei.particleview.ParticleView;
 import rx.Subscription;
 

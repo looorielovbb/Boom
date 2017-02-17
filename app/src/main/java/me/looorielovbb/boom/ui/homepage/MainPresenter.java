@@ -1,4 +1,4 @@
-package me.looorielovbb.boom.homepage;
+package me.looorielovbb.boom.ui.homepage;
 
 import rx.subscriptions.CompositeSubscription;
 

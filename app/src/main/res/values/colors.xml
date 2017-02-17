@@ -6,4 +6,6 @@
     <color name="textColorPrimary">#616161</color>
     <color name="viewBackground">@android:color/white</color>
     <color name="white">#fff</color>
+    <color name="black">#000</color>
+    <color name="transparent">#00000000</color>
 </resources>

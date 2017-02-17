@@ -1,4 +1,4 @@
-package me.looorielovbb.boom.homepage;
+package me.looorielovbb.boom.ui.homepage;
 
 
 import android.os.Bundle;
@@ -20,6 +20,8 @@ public class MainFragment extends Fragment implements MainContract.View {
     RecyclerView recyclerView;
     @BindView(R.id.refreshLayout)
     SwipeRefreshLayout refreshLayout;
+
+    MainContract.Presenter presenter;
 
     public MainFragment() {
 
@@ -51,12 +53,9 @@ public class MainFragment extends Fragment implements MainContract.View {
     }
 
     @Override
-    public boolean isActive() {
-        return isAdded();
-    }
-
-    @Override
     public void setPresenter(MainContract.Presenter presenter) {
-
+        if (presenter!=null){
+            this.presenter = presenter;
+        }
     }
 }
