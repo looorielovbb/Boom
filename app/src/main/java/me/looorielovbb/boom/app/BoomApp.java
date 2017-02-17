@@ -1,4 +1,4 @@
-package me.looorielovbb.boom.application;
+package me.looorielovbb.boom.app;
 
 import android.annotation.SuppressLint;
 import android.content.Context;

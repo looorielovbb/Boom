@@ -3,7 +3,7 @@ package me.looorielovbb.boom.utils;
 import android.content.Context;
 import android.widget.Toast;
 
-import me.looorielovbb.boom.application.BoomApp;
+import me.looorielovbb.boom.app.BoomApp;
 
 
 /**

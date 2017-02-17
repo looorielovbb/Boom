@@ -3,7 +3,7 @@
     package="me.looorielovbb.boom">
 
     <application
-        android:name=".application.BoomApp"
+        android:name=".app.BoomApp"
         android:allowBackup="true"
         android:fullBackupContent="true"
         android:icon="@mipmap/ic_launcher"

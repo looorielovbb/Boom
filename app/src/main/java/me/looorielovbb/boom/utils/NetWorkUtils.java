@@ -6,7 +6,7 @@ import android.net.NetworkInfo;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 
-import me.looorielovbb.boom.application.BoomApp;
+import me.looorielovbb.boom.app.BoomApp;
 
 
 /**
