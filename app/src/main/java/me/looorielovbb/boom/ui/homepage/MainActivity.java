@@ -16,8 +16,6 @@ import me.looorielovbb.boom.ui.uitools.TabFragmentManager;
 
 public class MainActivity extends AppCompatActivity {
 
-    //    @BindView(R.id.switcher)
-//    Switch switcher;
     @BindView(R.id.bottomnavi)
     BottomNavigationView bottomNavi;
     Fragment[] fragments = new Fragment[5];

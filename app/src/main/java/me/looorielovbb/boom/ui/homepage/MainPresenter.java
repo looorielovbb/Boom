@@ -10,6 +10,7 @@ import rx.subscriptions.CompositeSubscription;
  */
 
 public class MainPresenter implements MainContract.Presenter {
+
     private CompositeSubscription subscriptions = new CompositeSubscription();
 
     @Override
@@ -19,6 +20,7 @@ public class MainPresenter implements MainContract.Presenter {
 
     @Override
     public void subscribe() {
+
     }
 
     @Override

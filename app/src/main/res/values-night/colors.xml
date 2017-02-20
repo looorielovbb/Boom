@@ -5,4 +5,6 @@
     <color name="colorAccent">#009688</color>
     <color name="textColorPrimary">#616161</color>
     <color name="viewBackground">#212a2f</color>
+
+    <color name="navibottombackgroud">#757575</color>
 </resources>
