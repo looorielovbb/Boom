@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -30,21 +30,23 @@
                 android:drawablePadding="20dp" />
         </LinearLayout>
     -->
+    <include layout="@layout/layout_toolbar" />
 
     <FrameLayout
         android:id="@+id/maincontent"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/bottomnavi" />
+        android:layout_above="@+id/bottomnavi"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/bottomnavi"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_gravity="bottom"
         android:background="@color/navibottombackgroud"
         app:elevation="4dp"
-        app:layout_behavior="@string/footerbehavior"
+        app:layout_behavior="@string/ByeBurgerBottomBehavior"
         app:menu="@menu/navigation" />
-</RelativeLayout>
+</android.support.design.widget.CoordinatorLayout>

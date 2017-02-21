@@ -67,13 +67,6 @@ public class MainFragment extends Fragment implements MainContract.View, SwipeRe
         list.add(new Object());
         list.add(new Object());
         list.add(new Object());
-        list.add(new Object());
-        list.add(new Object());
-        list.add(new Object());
-        list.add(new Object());
-        list.add(new Object());
-        list.add(new Object());
-        list.add(new Object());
         adapter.setList(list);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         rvMain.setLayoutManager(layoutManager);

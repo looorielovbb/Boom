@@ -3,10 +3,13 @@ package me.looorielovbb.boom.ui.homepage;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+import android.view.View;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -16,9 +19,12 @@ import me.looorielovbb.boom.ui.uitools.TabFragmentManager;
 
 public class MainActivity extends AppCompatActivity {
 
+    @BindView(R.id.appbarlayout)
+    AppBarLayout appBarLayout;
     @BindView(R.id.bottomnavi)
     BottomNavigationView bottomNavi;
     Fragment[] fragments = new Fragment[5];
+    FragmentManager fragmentManager;
     TabFragmentManager tabFragmentManager;
 
 
@@ -28,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         BottomNavigationViewHelper.disableShiftMode(bottomNavi);
-
+        fragmentManager = getSupportFragmentManager();
 //        if (PreferencesUtils.getBoolean(this, Constants.THEME_MODE, false)) {
 //            switcher.setChecked(true);
 //        } else {
@@ -49,12 +55,20 @@ public class MainActivity extends AppCompatActivity {
 //                recreate();
 //            }
 //        });
-        fragments[0] = MainFragment.newInstance();
-        fragments[1] = MeiziFragment.newInstance();
-        fragments[2] = CleanerFragment.newInstance();
-        fragments[3] = MovieFragment.newInstance();
-        fragments[4] = MineFragment.newInstance();
-        tabFragmentManager = new TabFragmentManager(this, fragments,R.id.maincontent);
+        if (null != savedInstanceState) {
+            fragments[0] = fragmentManager.getFragment(savedInstanceState, "MainFragment");
+            fragments[1] = fragmentManager.getFragment(savedInstanceState, "MeiziFragment");
+            fragments[2] = fragmentManager.getFragment(savedInstanceState, "CleanerFragment");
+            fragments[3] = fragmentManager.getFragment(savedInstanceState, "MovieFragment");
+            fragments[4] = fragmentManager.getFragment(savedInstanceState, "MineFragment");
+        } else {
+            fragments[0] = MainFragment.newInstance();
+            fragments[1] = MeiziFragment.newInstance();
+            fragments[2] = CleanerFragment.newInstance();
+            fragments[3] = MovieFragment.newInstance();
+            fragments[4] = MineFragment.newInstance();
+        }
+        tabFragmentManager = new TabFragmentManager(this, fragments, R.id.maincontent);
         bottomNavi.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -90,8 +104,4 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-    }
 }

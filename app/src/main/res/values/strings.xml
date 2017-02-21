@@ -7,8 +7,8 @@
     <string name="navi_4">电影</string>
     <string name="navi_5">我的</string>
 
-    <string name="footerbehavior">me.looorielovbb.boom.ui.uitools.FooterBehavior</string>
-
+    <string name="ByeBurgerBottomBehavior">me.looorielovbb.boom.ui.behavior.byeburgernavigationview.ByeBurgerBottomBehavior</string>
+    <string name="ByeBurgerTitleBehavior">me.looorielovbb.boom.ui.behavior.byeburgernavigationview.ByeBurgerTitleBehavior</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
