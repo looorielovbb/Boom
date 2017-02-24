@@ -9,4 +9,6 @@ package me.looorielovbb.boom.config;
 
 public class Constants {
     public static final String THEME_MODE = "theme_mode";
+    //===================================================//
+    public static final int PAGE_COUNT = 10;
 }

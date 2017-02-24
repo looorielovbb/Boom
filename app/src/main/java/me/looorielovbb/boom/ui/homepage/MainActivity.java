@@ -9,11 +9,15 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
-import android.view.View;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import me.looorielovbb.boom.R;
+import me.looorielovbb.boom.ui.homepage.cleaner.CleanerFragment;
+import me.looorielovbb.boom.ui.homepage.main.MainFragment;
+import me.looorielovbb.boom.ui.homepage.meizi.MeiziFragment;
+import me.looorielovbb.boom.ui.homepage.mine.MineFragment;
+import me.looorielovbb.boom.ui.homepage.movie.MovieFragment;
 import me.looorielovbb.boom.ui.uitools.BottomNavigationViewHelper;
 import me.looorielovbb.boom.ui.uitools.TabFragmentManager;
 

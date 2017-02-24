@@ -1,4 +1,4 @@
-package me.looorielovbb.boom.ui.homepage;
+package me.looorielovbb.boom.ui.homepage.mine;
 
 
 import android.os.Bundle;
@@ -12,22 +12,21 @@ import me.looorielovbb.boom.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class MovieFragment extends Fragment {
+public class MineFragment extends Fragment {
 
 
-    public MovieFragment() {
+    public MineFragment() {
         // Required empty public constructor
     }
 
+    public static Fragment newInstance() {
+        return new MineFragment();
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_movie, container, false);
-    }
-
-    public static Fragment newInstance() {
-        return new MovieFragment();
+        return inflater.inflate(R.layout.fragment_mine, container, false);
     }
 }

@@ -1,4 +1,4 @@
-package me.looorielovbb.boom.ui.homepage;
+package me.looorielovbb.boom.ui.homepage.main;
 
 
 import android.os.Bundle;
@@ -21,6 +21,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import me.looorielovbb.boom.R;
 import me.looorielovbb.boom.ui.adapter.MainAdapter;
+import me.looorielovbb.boom.ui.homepage.MainContract;
 import me.looorielovbb.boom.utils.ToastUtils;
 
 

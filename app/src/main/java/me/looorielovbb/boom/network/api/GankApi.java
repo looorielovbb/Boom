@@ -1,5 +1,11 @@
 package me.looorielovbb.boom.network.api;
 
+import me.looorielovbb.boom.data.bean.Base;
+import me.looorielovbb.boom.data.bean.Meizi;
+import retrofit2.http.GET;
+import retrofit2.http.Path;
+import rx.Observable;
+
 /**
  * Created by Lulei on 2017/2/17.
  * time : 15:58
@@ -8,5 +14,12 @@ package me.looorielovbb.boom.network.api;
  */
 
 public interface GankApi {
-    public final String GANK = "";
+    public final String GANK = "http://gank.io/";
+
+    @GET("api/data/{type}/{count}/{page}")
+    Observable<Base<Meizi>> getGankRes(
+            @Path("type") String type,
+            @Path("count") int count,
+            @Path("page") int page
+    );
 }
