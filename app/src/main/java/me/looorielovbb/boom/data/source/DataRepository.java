@@ -12,29 +12,28 @@ import me.looorielovbb.boom.data.source.remote.RemoteDataSource;
  * mail to lulei4461@gmail.com
  */
 
-public class Repository implements DataSource {
-    private static Repository INSTANCE;
+public class DataRepository implements DataSource {
+    private static DataRepository INSTANCE;
 
     @NonNull private LocalDataSource mLocalDataSource;
     @NonNull private RemoteDataSource mRemoteDataSource;
 
-    private Repository(@NonNull LocalDataSource mLocalDataSource,
-                       @NonNull RemoteDataSource mRemoteDataSource) {
+    private DataRepository(@NonNull LocalDataSource mLocalDataSource,
+                           @NonNull RemoteDataSource mRemoteDataSource) {
         this.mLocalDataSource = mLocalDataSource;
         this.mRemoteDataSource = mRemoteDataSource;
     }
 
-    public static Repository getInstance() {
+    public static DataRepository getInstance() {
         if (null == INSTANCE) {
-            INSTANCE = new Repository(LocalDataSource.getInstance(),
-                                      RemoteDataSource.getInstance());
+            INSTANCE = new DataRepository(LocalDataSource.getInstance(),
+                                          RemoteDataSource.getInstance());
         }
         return INSTANCE;
     }
 
     @Override
     public void getGirls(int page, ResponseListener listener) {
-//        return mRemoteDataSource.getGirls(page,listener);
         mRemoteDataSource.getGirls(page, listener);
     }
 }
