@@ -2,6 +2,7 @@ package me.looorielovbb.boom.ui.homepage.meizi;
 
 import android.support.annotation.NonNull;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import me.looorielovbb.boom.data.bean.Meizi;
@@ -25,6 +26,8 @@ public class MeiziPresenter implements MeiziContract.Presenter {
     CompositeSubscription mSubscriptions = new CompositeSubscription();
     @NonNull private DataRepository mRepository;
     @NonNull private MeiziContract.View mView;
+
+    private List<Meizi> mList = new LinkedList<>();
 
     public MeiziPresenter(@NonNull DataRepository mRepository, @NonNull MeiziContract.View mView) {
         this.mRepository = checkNotNull(mRepository, "mRepository can not be null");
@@ -58,7 +61,10 @@ public class MeiziPresenter implements MeiziContract.Presenter {
                     @Override
                     public void onNext(List<Meizi> list) {
                         mView.dismissLoading();
-                        mView.showList(list);
+                        if (list != null) {
+                            mList.addAll(list);
+                        }
+                        mView.showList(mList);
                     }
                 });
         mSubscriptions.add(subscription);
