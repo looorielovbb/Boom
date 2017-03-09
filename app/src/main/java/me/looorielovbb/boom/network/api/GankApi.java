@@ -14,12 +14,11 @@ import rx.Observable;
  */
 
 public interface GankApi {
-    public final String GANK = "http://gank.io/";
+    String GANK = "http://gank.io/";
+    String[] types = {"福利", "Android", "ios"};
 
     @GET("api/data/{type}/{count}/{page}")
-    Observable<Base<Meizi>> getGankRes(
-            @Path("type") String type,
-            @Path("count") int count,
-            @Path("page") int page
-    );
+    Observable<Base<Meizi>> getGankRes(@Path("type") String type,
+                                       @Path("count") int count,
+                                       @Path("page") int page);
 }

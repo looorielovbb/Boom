@@ -6,6 +6,7 @@ import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Func1;
 
+
 /**
  * Created by Lulei on 2017/2/14.
  * time : 11:23
@@ -18,7 +19,8 @@ public class RxCount {
         if (seconds < 0) seconds = 0;
 
         final int countTime = seconds;
-        return Observable.interval(0, 1, TimeUnit.SECONDS)
+        return Observable
+                .interval(0, 1, TimeUnit.SECONDS)
                 .subscribeOn(AndroidSchedulers.mainThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .map(new Func1<Long, Integer>() {

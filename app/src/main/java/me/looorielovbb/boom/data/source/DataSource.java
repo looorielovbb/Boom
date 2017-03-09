@@ -1,5 +1,10 @@
 package me.looorielovbb.boom.data.source;
 
+import java.util.List;
+
+import me.looorielovbb.boom.data.bean.Meizi;
+import rx.Observable;
+
 /**
  * Created by Lulei on 2017/2/24.
  * time : 16:56
@@ -8,7 +13,5 @@ package me.looorielovbb.boom.data.source;
  */
 
 public interface DataSource {
-
-    void getGirls(int page, ResponseListener listener);
-
+    Observable<List<Meizi>> getMeizi(int page);
 }

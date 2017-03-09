@@ -4,14 +4,14 @@
     android:id="@+id/activity_new"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="me.looorielovbb.boom.AboutActivity">
+    tools:context="me.looorielovbb.boom.ui.aboutpage.AboutActivity">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:gravity="center"
-        android:text="第二"
+        android:text="关于"
         android:textSize="20sp" />
 
 </RelativeLayout>

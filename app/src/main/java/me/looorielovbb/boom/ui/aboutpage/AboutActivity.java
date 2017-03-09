@@ -1,7 +1,8 @@
-package me.looorielovbb.boom;
+package me.looorielovbb.boom.ui.aboutpage;
 
 import android.os.Bundle;
 
+import me.looorielovbb.boom.R;
 import me.looorielovbb.boom.base.BaseActivity;
 
 public class AboutActivity extends BaseActivity {

@@ -10,14 +10,12 @@ import me.looorielovbb.boom.R;
 import me.looorielovbb.boom.base.BaseActivity;
 import me.looorielovbb.boom.ui.homepage.MainActivity;
 import me.wangyuwei.particleview.ParticleView;
-import rx.Subscription;
 
 
 public class SplashActivity extends BaseActivity {
 
     @BindView(R.id.particleview)
     ParticleView mParticleview;
-    Subscription subscription;
     Context mContext;
 
     @Override
@@ -65,13 +63,7 @@ public class SplashActivity extends BaseActivity {
 //                });
     }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-        if (subscription != null) {
-            subscription.unsubscribe();
-        }
-    }
+
 
     @Override
     public void onBackPressed() {

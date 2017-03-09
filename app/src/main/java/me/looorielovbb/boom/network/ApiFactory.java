@@ -9,6 +9,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Converter;
 import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
@@ -25,6 +26,7 @@ public class ApiFactory {
     private static ZhihuApi zhihuApi;
     private static OkHttpClient client;
     private static Converter.Factory gsonConverterFactory = GsonConverterFactory.create();
+    private static RxJavaCallAdapterFactory rxJavaCallAdapterFactory = RxJavaCallAdapterFactory.create();
 
     private static void initOkHttpClient() {
         if (client == null) {
@@ -71,6 +73,7 @@ public class ApiFactory {
                 .client(client)
                 .baseUrl(host)
                 .addConverterFactory(gsonConverterFactory)
+                .addCallAdapterFactory(rxJavaCallAdapterFactory)
                 .build();
     }
 }

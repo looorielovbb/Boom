@@ -8,5 +8,5 @@ package me.looorielovbb.boom.network.api;
  */
 
 public interface DoubanApi {
-    public final String DOUBAN = "";
+    String DOUBAN = "";
 }

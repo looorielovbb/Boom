@@ -1,7 +1,10 @@
 package me.looorielovbb.boom.data.source.local;
 
+import java.util.List;
+
+import me.looorielovbb.boom.data.bean.Meizi;
 import me.looorielovbb.boom.data.source.DataSource;
-import me.looorielovbb.boom.data.source.ResponseListener;
+import rx.Observable;
 
 /**
  * Created by Lulei on 2017/2/21.
@@ -25,7 +28,7 @@ public class LocalDataSource implements DataSource{
     }
 
     @Override
-    public void getGirls(int page, ResponseListener listener) {
-
+    public Observable<List<Meizi>> getMeizi(int page) {
+        return Observable.empty();
     }
 }

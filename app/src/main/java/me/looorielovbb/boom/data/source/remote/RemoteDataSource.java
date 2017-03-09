@@ -1,15 +1,17 @@
 package me.looorielovbb.boom.data.source.remote;
 
 
+import java.util.List;
+
 import me.looorielovbb.boom.config.Constants;
 import me.looorielovbb.boom.data.bean.Base;
 import me.looorielovbb.boom.data.bean.Meizi;
 import me.looorielovbb.boom.data.source.DataSource;
-import me.looorielovbb.boom.data.source.ResponseListener;
 import me.looorielovbb.boom.network.ApiFactory;
-import rx.Subscriber;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
+import me.looorielovbb.boom.network.api.GankApi;
+import rx.Observable;
+import rx.functions.Func1;
+
 
 /**
  * Created by Lulei on 2017/2/21.
@@ -32,28 +34,19 @@ public class RemoteDataSource implements DataSource {
         return INSTANCE;
     }
 
-
     @Override
-    public void getGirls(int page,final ResponseListener listener) {
-         ApiFactory
+    public Observable<List<Meizi>> getMeizi(int page) {
+        return ApiFactory
                 .getGankApi()
-                .getGankRes("福利", Constants.PAGE_COUNT, page)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<Base<Meizi>>() {
-                    @Override
-                    public void onCompleted() {
-
-                    }
+                .getGankRes(GankApi.types[0], Constants.PAGE_COUNT, page)
+                .map(new Func1<Base<Meizi>, List<Meizi>>() {
 
                     @Override
-                    public void onError(Throwable e) {
-                        listener.onError(e);
-                    }
-
-                    @Override
-                    public void onNext(Base<Meizi> meiziBase) {
-                        listener.onSuccess(meiziBase);
+                    public List<Meizi> call(Base<Meizi> meiziBase) {
+                        if (meiziBase == null) {
+                            return null;
+                        }
+                        return meiziBase.getList();
                     }
                 });
     }

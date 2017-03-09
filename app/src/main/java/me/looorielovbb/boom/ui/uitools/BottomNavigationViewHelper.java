@@ -14,7 +14,7 @@ import java.lang.reflect.Field;
  */
 
 public class BottomNavigationViewHelper {
-    //反射方式
+    //反射方式 改变mShiftingMode的值
     public static void disableShiftMode(BottomNavigationView navigationView) {
 
         BottomNavigationMenuView menuView = (BottomNavigationMenuView) navigationView.getChildAt(0);

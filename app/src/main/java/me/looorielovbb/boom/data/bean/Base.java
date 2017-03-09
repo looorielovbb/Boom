@@ -11,7 +11,7 @@ import java.util.List;
 
 public class Base<T> {
     private boolean error;
-    private List<T> list;
+    private List<T> results;
 
     public boolean isError() {
         return error;
@@ -22,10 +22,10 @@ public class Base<T> {
     }
 
     public List<T> getList() {
-        return list;
+        return results;
     }
 
     public void setList(List<T> list) {
-        this.list = list;
+        this.results = list;
     }
 }

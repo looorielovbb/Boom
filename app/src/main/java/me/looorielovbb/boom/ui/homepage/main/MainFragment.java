@@ -21,18 +21,16 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import me.looorielovbb.boom.R;
 import me.looorielovbb.boom.ui.adapter.MainAdapter;
-import me.looorielovbb.boom.ui.homepage.MainContract;
 import me.looorielovbb.boom.utils.ToastUtils;
 
 
-public class MainFragment extends Fragment implements MainContract.View, SwipeRefreshLayout.OnRefreshListener {
+public class MainFragment extends Fragment implements  SwipeRefreshLayout.OnRefreshListener {
 
     @BindView(R.id.recyclerView)
     RecyclerView rvMain;
     @BindView(R.id.refreshLayout)
     SwipeRefreshLayout refreshLayout;
 
-    MainContract.Presenter presenter;
     private MainAdapter adapter;
 
     public MainFragment() {
@@ -75,22 +73,7 @@ public class MainFragment extends Fragment implements MainContract.View, SwipeRe
         rvMain.setAdapter(adapter);
     }
 
-    @Override
-    public void showloading() {
-        refreshLayout.setRefreshing(true);
-    }
 
-    @Override
-    public void showerror() {
-        refreshLayout.setRefreshing(false);
-    }
-
-    @Override
-    public void setPresenter(MainContract.Presenter presenter) {
-        if (presenter != null) {
-            this.presenter = presenter;
-        }
-    }
 
     @Override
     public void onRefresh() {
