@@ -13,6 +13,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
+import com.github.nukc.stateview.StateView;
+
 import java.lang.reflect.Field;
 
 import butterknife.BindView;
@@ -28,10 +30,9 @@ import me.looorielovbb.boom.ui.uitools.TabFragmentManager;
 
 public class MainActivity extends AppCompatActivity {
 
-    @BindView(R.id.appbarlayout)
-    AppBarLayout appBarLayout;
-    @BindView(R.id.bottomnavi)
-    BottomNavigationView bottomNavi;
+    @BindView(R.id.appbarlayout) AppBarLayout appBarLayout;
+    @BindView(R.id.bottomnavi) BottomNavigationView bottomNavi;
+    @BindView(R.id.stateview) StateView mStateView;
     Fragment[] fragments = new Fragment[5];
     FragmentManager fragmentManager;
     TabFragmentManager tabFragmentManager;
@@ -78,9 +79,11 @@ public class MainActivity extends AppCompatActivity {
             fragments[4] = MineFragment.newInstance();
         }
         tabFragmentManager = new TabFragmentManager(this, fragments, R.id.maincontent);
-        bottomNavi.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+        bottomNavi.setOnNavigationItemSelectedListener(new BottomNavigationView
+                .OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                mStateView.showContent();
                 switch (item.getItemId()) {
                     case R.id.navi1:
                         tabFragmentManager.setCurrentItem(0);
@@ -104,16 +107,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
-        super.onSaveInstanceState(outState, outPersistentState);
-        for (Fragment fragment : fragments) {
-            if (fragment != null && fragment.isAdded()) {
-                getSupportFragmentManager().putFragment(outState, fragment.getClass().getSimpleName(), fragment);
-            }
-        }
-    }
-
-    @Override
     protected void onDestroy() {
         super.onDestroy();
         fixInputMethodManagerLeak(this);
@@ -124,33 +117,51 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
-        InputMethodManager imm = (InputMethodManager) destContext.getSystemService(Context.INPUT_METHOD_SERVICE);
+        InputMethodManager imm
+                = (InputMethodManager) destContext.getSystemService(Context.INPUT_METHOD_SERVICE);
         if (imm == null) {
             return;
         }
 
-        String [] arr = new String[]{"mCurRootView", "mServedView", "mNextServedView"};
+        String[] arr = new String[]{"mCurRootView", "mServedView", "mNextServedView"};
         Field f = null;
         Object obj_get = null;
-        for (int i = 0;i < arr.length;i ++) {
+        for (int i = 0; i < arr.length; i++) {
             String param = arr[i];
-            try{
-                f = imm.getClass().getDeclaredField(param);
+            try {
+                f = imm
+                        .getClass()
+                        .getDeclaredField(param);
                 if (f.isAccessible() == false) {
                     f.setAccessible(true);
                 } // author: sodino mail:sodino@qq.com
                 obj_get = f.get(imm);
                 if (obj_get != null && obj_get instanceof View) {
                     View v_get = (View) obj_get;
-                    if (v_get.getContext() == destContext) { // 被InputMethodManager持有引用的context是想要目标销毁的
+                    if (v_get.getContext() ==
+                        destContext) { // 被InputMethodManager持有引用的context是想要目标销毁的
                         f.set(imm, null); // 置空，破坏掉path to gc节点
                     } else {
                         // 不是想要目标销毁的，即为又进了另一层界面了，不要处理，避免影响原逻辑,也就不用继续for循环了
                         break;
                     }
                 }
-            }catch(Throwable t){
+            } catch (Throwable t) {
                 t.printStackTrace();
+            }
+        }
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
+        super.onSaveInstanceState(outState, outPersistentState);
+        for (Fragment fragment : fragments) {
+            if (fragment != null && fragment.isAdded()) {
+                getSupportFragmentManager().putFragment(outState,
+                                                        fragment
+                                                                .getClass()
+                                                                .getSimpleName(),
+                                                        fragment);
             }
         }
     }

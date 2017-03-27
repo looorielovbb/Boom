@@ -27,6 +27,8 @@ public class MeiziPresenter implements MeiziContract.Presenter {
     @NonNull private DataRepository mRepository;
     @NonNull private MeiziContract.View mView;
 
+    private int mCurrentPage = 0;
+
     private List<Meizi> mList = new LinkedList<>();
 
     public MeiziPresenter(@NonNull DataRepository mRepository, @NonNull MeiziContract.View mView) {
@@ -36,14 +38,15 @@ public class MeiziPresenter implements MeiziContract.Presenter {
 
     @Override
     public void subscribe() {
-        getListdata();
+        if (mList.isEmpty()) {
+            loaddata(mCurrentPage);
+        }
     }
 
     @Override
-    public void getListdata() {
-        mView.showloading();
+    public void loaddata(int page) {
         Subscription subscription = mRepository
-                .getMeizi(0)
+                .getMeizi(page)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<List<Meizi>>() {
@@ -61,7 +64,12 @@ public class MeiziPresenter implements MeiziContract.Presenter {
                     @Override
                     public void onNext(List<Meizi> list) {
                         mView.dismissLoading();
-                        if (list != null) {
+                        if (list == null) {
+                            return;
+                        } else if (list.size() == 0) {
+                            mView.showerror("没有新数据~ 喵");
+                        } else {
+                            mCurrentPage++;
                             mList.addAll(list);
                         }
                         mView.showList(mList);
@@ -72,6 +80,22 @@ public class MeiziPresenter implements MeiziContract.Presenter {
 
     @Override
     public void unsubscribe() {
+        mView.dismissLoading();
         mSubscriptions.clear();
+    }
+
+    @Override
+    public void clearListData() {
+        mList = new LinkedList<>();
+    }
+
+    @Override
+    public int getCurrentPage(){
+        return mCurrentPage;
+    }
+
+    @Override
+    public void setCurrentPage(int page) {
+        this.mCurrentPage = page;
     }
 }

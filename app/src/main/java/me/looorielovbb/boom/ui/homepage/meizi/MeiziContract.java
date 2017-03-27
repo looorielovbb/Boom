@@ -14,18 +14,24 @@ import me.looorielovbb.boom.data.bean.Meizi;
  */
 
 public interface MeiziContract {
-    interface View extends BaseView<Presenter>{
+    interface View extends BaseView<Presenter> {
         void showloading();
 
         void dismissLoading();
 
-        void showerror(String  error);
+        void showerror(String error);
 
         void showList(List<Meizi> list);
 
     }
 
-    interface Presenter extends BasePresenter{
-        void getListdata();
+    interface Presenter extends BasePresenter {
+        void loaddata(int page);
+
+        int  getCurrentPage();
+
+        void setCurrentPage(int page);
+
+        void clearListData();
     }
 }
