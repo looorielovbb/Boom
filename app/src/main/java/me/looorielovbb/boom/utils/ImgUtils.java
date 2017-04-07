@@ -5,6 +5,9 @@ import android.support.annotation.DrawableRes;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+
+import me.looorielovbb.boom.R;
 
 
 /**
@@ -19,24 +22,29 @@ public class ImgUtils {
                                     @DrawableRes Integer url,
                                     ImageView imageView) {
         Glide.with(context).load(url)//图片地址
-//             .placeholder(R.drawable.load)//占位图
-//             .error(R.drawable.loadfail)//加载出错显示的图片
+             .placeholder(R.drawable.loading)//占位图
+             .error(R.drawable.error)//加载出错显示的图片
              .crossFade()//淡入效果
              .into(imageView);
     }
 
     public static void LoadNetImg(Context context, String url, ImageView imageView) {
         Glide.with(context).load(url)//图片地址
-//             .placeholder(R.drawable.load)//占位图
-//             .error(R.drawable.loadfail)//加载出错显示的图片
+             .placeholder(R.drawable.loading)//占位图
+             .error(R.drawable.error)//加载出错显示的图片
              .crossFade()//淡入效果
+             .thumbnail( 0.1f )
+             .diskCacheStrategy(DiskCacheStrategy.NONE)
+             .centerCrop()
              .into(imageView);
     }
 
+
+
     public static void LoadNetImgForAvatar(Context context, String url, ImageView imageView) {
         Glide.with(context).load(url)//图片地址
-//             .placeholder(R.drawable.avatar)//占位图
-//             .error(R.drawable.avatar)//加载出错显示的图片
+             .placeholder(R.drawable.avatar)//占位图
+             .error(R.drawable.avatar)//加载出错显示的图片
              .crossFade()//淡入效果
              .into(imageView);
     }
@@ -44,10 +52,12 @@ public class ImgUtils {
     public static void LoadNetGif(Context context, String url, ImageView imageView) {
         Glide.with(context).load(url)//图片地址
              .asGif()//asGif加载Gif动态图，asBitmap可以将Gif或者视频（没试过）解码成bitmap
-//             .placeholder(R.drawable.load)//占位图
-//             .error(R.drawable.loadfail)//加载出错显示的图片
+             .placeholder(R.drawable.loading)//占位图
+             .error(R.drawable.error)//加载出错显示的图片
              .crossFade()//淡入效果
              .into(imageView);
     }
+
+
 
 }

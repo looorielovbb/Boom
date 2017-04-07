@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">i 哔哔</string>
+    <string name="app_name">爱哔哔</string>
     <string name="night_mode">夜间模式</string>
     <string name="navi_1">首页</string>
     <string name="navi_2">妹子</string>
@@ -9,8 +9,7 @@
 
     <string name="ByeBurgerBottomBehavior">me.looorielovbb.boom.ui.behavior.byeburgernavigationview.ByeBurgerBottomBehavior</string>
     <string name="ByeBurgerTitleBehavior">me.looorielovbb.boom.ui.behavior.byeburgernavigationview.ByeBurgerTitleBehavior</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
     <string name="advertisement">广告</string>
     <string name="homepage">主页</string>
     <string name="about">关于</string>

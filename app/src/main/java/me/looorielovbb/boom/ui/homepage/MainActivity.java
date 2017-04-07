@@ -13,8 +13,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
-import com.github.nukc.stateview.StateView;
-
 import java.lang.reflect.Field;
 
 import butterknife.BindView;
@@ -32,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
 
     @BindView(R.id.appbarlayout) AppBarLayout appBarLayout;
     @BindView(R.id.bottomnavi) BottomNavigationView bottomNavi;
-    @BindView(R.id.stateview) StateView mStateView;
+    //    @BindView(R.id.stateview) StateView mStateView;
     Fragment[] fragments = new Fragment[5];
     FragmentManager fragmentManager;
     TabFragmentManager tabFragmentManager;
@@ -83,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
                 .OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                mStateView.showContent();
+//                mStateView.showContent();
                 switch (item.getItemId()) {
                     case R.id.navi1:
                         tabFragmentManager.setCurrentItem(0);

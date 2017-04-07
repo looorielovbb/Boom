@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatDelegate;
 
 import com.elvishew.xlog.LogLevel;
 import com.elvishew.xlog.XLog;
+import com.facebook.drawee.backends.pipeline.Fresco;
 import com.squareup.leakcanary.LeakCanary;
 
 import me.looorielovbb.boom.config.Constants;
@@ -27,19 +28,16 @@ public class BoomApp extends MultiDexApplication {
     @Override
     public void onCreate() {
         super.onCreate();
-
-        if (LeakCanary.isInAnalyzerProcess(this)) {
-            return;
-        }
-
-        LeakCanary.install(this);
+        Fresco.initialize(this);
         appCtx = getApplicationContext();
         XLog.init(LogLevel.ALL);
-
         if (PreferencesUtils.getBoolean(this, Constants.THEME_MODE, false)) {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
         } else {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        }
+        if (!LeakCanary.isInAnalyzerProcess(this)) {
+            LeakCanary.install(this);
         }
     }
 }

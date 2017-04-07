@@ -1,4 +1,4 @@
-package me.looorielovbb.boom.ui.homepage.meizi;
+package me.looorielovbb.boom.ui.homepage.cleaner;
 
 import android.support.annotation.NonNull;
 
@@ -16,32 +16,24 @@ import rx.subscriptions.CompositeSubscription;
 import static me.looorielovbb.boom.utils.Preconditions.checkNotNull;
 
 /**
- * Created by Lulei on 2017/2/9.
- * time : 10:58
- * date : 2017/2/9
+ * Created by Lulei on 2017/4/6.
+ * time : 16:31
+ * date : 2017/4/6
  * mail to lulei4461@gmail.com
  */
 
-public class MeiziPresenter implements MeiziContract.Presenter {
-
+public class CleanerPresenter implements CleanerContract.Presenter{
     CompositeSubscription mSubscriptions = new CompositeSubscription();
-    @NonNull private DataRepository mRepository;
-    @NonNull private MeiziContract.View mView;
+    private final DataRepository mRepository;
+    private final CleanerContract.View mView;
 
-    private List<Meizi> mList = new ArrayList<>();
-
-    public MeiziPresenter(@NonNull DataRepository mRepository, @NonNull MeiziContract.View mView) {
+    public CleanerPresenter(@NonNull DataRepository mRepository, @NonNull CleanerContract.View mView) {
         this.mRepository = checkNotNull(mRepository, "mRepository can not be null");
         this.mView = checkNotNull(mView, "mView can not be null");
     }
 
-    @Override
-    public void subscribe() {
-        if (mList.isEmpty()) {
-            mView.showloading();
-            loaddata(1);
-        }
-    }
+    private List<Meizi> mList = new ArrayList<>();
+
 
     @Override
     public void loaddata(int page) {
@@ -82,14 +74,20 @@ public class MeiziPresenter implements MeiziContract.Presenter {
     }
 
     @Override
-    public void unsubscribe() {
-        mView.dismissLoading();
-        mSubscriptions.clear();
-    }
-
-    @Override
     public void clearListData() {
         mList.clear();
     }
 
+    @Override
+    public void subscribe() {
+        if (mList.isEmpty()){
+            mView.showloading();
+            loaddata(1);
+        }
+    }
+
+    @Override
+    public void unsubscribe() {
+        mSubscriptions.clear();
+    }
 }

@@ -10,8 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.github.nukc.stateview.StateView;
-
 import java.util.List;
 
 import butterknife.BindView;
@@ -19,28 +17,25 @@ import butterknife.ButterKnife;
 import me.looorielovbb.boom.R;
 import me.looorielovbb.boom.data.bean.Meizi;
 import me.looorielovbb.boom.data.source.DataRepository;
-import me.looorielovbb.boom.ui.adapter.LoadMoreAdapter;
 import me.looorielovbb.boom.ui.adapter.MeiziAdapter;
+import me.looorielovbb.boom.ui.uitools.loadmore.OnVerticalScrollListener;
+import me.looorielovbb.boom.ui.uitools.loadmore.SupportLoadMoreLinearLayoutManager;
 import me.looorielovbb.boom.utils.ToastUtils;
+import me.solidev.statusviewlayout.StatusViewLayout;
 
-/**
- * A simple {@link Fragment} subclass.
- */
+
 public class MeiziFragment extends Fragment
-        implements MeiziContract.View, SwipeRefreshLayout.OnRefreshListener,
-        StateView.OnRetryClickListener {
+        implements MeiziContract.View, SwipeRefreshLayout.OnRefreshListener {
 
-
+    @BindView(R.id.stateview) StatusViewLayout mStatusView;
     @BindView(R.id.recyclerView) RecyclerView recyclerView;
     @BindView(R.id.refreshLayout) SwipeRefreshLayout refreshLayout;
 
     MeiziContract.Presenter mPresenter;
-    StateView mStateView;
+    private int mCurrentPage;
     MeiziAdapter meiziAdapter;
-    LinearLayoutManager mLayoutManager;
 
     public MeiziFragment() {
-        // Required empty public constructor
     }
 
     public static Fragment newInstance() {
@@ -48,54 +43,37 @@ public class MeiziFragment extends Fragment
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater,
-                             ViewGroup container,
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_meizi, container, false);
+        View view = inflater.inflate(R.layout.fragment_list, container, false);
         ButterKnife.bind(this, view);
         setPresenter(new MeiziPresenter(DataRepository.getInstance(), this));
-        mStateView = (StateView) getActivity().findViewById(R.id.stateview);
         refreshLayout.setOnRefreshListener(this);
-        mStateView.setOnRetryClickListener(this);
         init();
         return view;
     }
 
     private void init() {
-        meiziAdapter = new MeiziAdapter();
-        mLayoutManager = new LinearLayoutManager(getActivity());
-        recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.setAdapter(meiziAdapter);
-
-        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-
-            private int lastVisibleItem;
-
+        mStatusView.setOnRetryListener(new View.OnClickListener() {
             @Override
-            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-                super.onScrollStateChanged(recyclerView, newState);
-                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
-                    lastVisibleItem = mLayoutManager.findLastVisibleItemPosition();
-                    if (mLayoutManager.getItemCount() == 1) {
-                        if (meiziAdapter != null) {
-                            meiziAdapter.updateLoadStatus(LoadMoreAdapter.LOAD_NONE);
-                        }
-                        return;
-
-                    }
-                    if (lastVisibleItem + 1 == mLayoutManager.getItemCount()) {
-                        if (meiziAdapter != null) {
-                            meiziAdapter.updateLoadStatus(LoadMoreAdapter.LOAD_PULL_TO);
-                            // isLoadMore = true;
-                            meiziAdapter.updateLoadStatus(LoadMoreAdapter.LOAD_MORE);
-                        }
-                        mPresenter.loaddata(mPresenter.getCurrentPage());
-
-                    }
-                }
+            public void onClick(View v) {
+               onRefresh();
             }
-
+        });
+        meiziAdapter = new MeiziAdapter();
+        SupportLoadMoreLinearLayoutManager layout = new SupportLoadMoreLinearLayoutManager
+                (getContext(),
+                  LinearLayoutManager.VERTICAL,
+                 false);
+        recyclerView.setLayoutManager(layout);
+        recyclerView.setAdapter(meiziAdapter);
+        recyclerView.addOnScrollListener(new OnVerticalScrollListener() {
+            @Override
+            public void onScrolledDownToLastItem() {
+                super.onScrolledDownToLastItem();
+                mCurrentPage++;
+                mPresenter.loaddata(mCurrentPage);
+            }
         });
     }
 
@@ -133,22 +111,24 @@ public class MeiziFragment extends Fragment
     @Override
     public void showerror(String error) {
         ToastUtils.show(error);
-        mStateView.showRetry();
     }
 
     @Override
     public void showList(List<Meizi> list) {
         meiziAdapter.setList(list);
+        meiziAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void loadComplete() {
+        meiziAdapter.updateLoadingStatus(true);
     }
 
     @Override
     public void onRefresh() {
-        mPresenter.setCurrentPage(0);
-        mPresenter.loaddata(mPresenter.getCurrentPage());
+        mPresenter.clearListData();
+        mCurrentPage = 1;
+        mPresenter.loaddata(mCurrentPage);
     }
 
-    @Override
-    public void onRetryClick() {
-        mPresenter.loaddata(mPresenter.getCurrentPage());
-    }
 }

@@ -5,58 +5,55 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-
-import java.util.LinkedList;
-import java.util.List;
+import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import me.looorielovbb.boom.R;
 import me.looorielovbb.boom.data.bean.Meizi;
+import me.looorielovbb.boom.ui.uitools.loadmore.LoadMoreAdapter;
 import me.looorielovbb.boom.utils.ImgUtils;
 
 /**
- * Created by Lulei on 2017/3/10.
- * time : 15:29
- * date : 2017/3/10
+ * Created by Lulei on 2017/4/6.
+ * time : 15:03
+ * date : 2017/4/6
  * mail to lulei4461@gmail.com
  */
 
 public class MeiziAdapter extends LoadMoreAdapter<Meizi> {
+    private Context context;
+
 
     @Override
-    public RecyclerView.ViewHolder getItemHolder(ViewGroup parent, int viewType) {
-        View rootView = View.inflate(parent.getContext(), R.layout.item_meizi, null);
-        return new ViewHolder(rootView);
+    public void onBindItemViewHolder(RecyclerView.ViewHolder holder, int position) {
+        if (holder instanceof ViewHolder) {
+            ViewHolder itemholder = (ViewHolder) holder;
+            Meizi meizi = items.get(position);
+            ImgUtils.LoadNetImg(context,meizi.getUrl(),itemholder.imageView);
+            itemholder.tvDate.setText(items.indexOf(meizi) + 1 + "");
+        }
     }
 
     @Override
-    protected void OnBindItemHolder(RecyclerView.ViewHolder holder, int position) {
-        ViewHolder itemholder = (ViewHolder) holder;
-        itemholder.bindItem(mList.get(position));
+    public RecyclerView.ViewHolder onCreateItemViewHolder(ViewGroup parent, int viewType) {
+        context = parent.getContext();
+        View view = View.inflate(context, R.layout.item_meinv, null);
+        return new ViewHolder(view);
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.iv_item) ImageView imageView;
-        Context context;
+
+    public void updateLoadingStatus(boolean isLoadcomplete) {
+        this.isLoadcomplete = isLoadcomplete;
+    }
+
+    class ViewHolder extends RecyclerView.ViewHolder {
+        @BindView(R.id.iv_img) ImageView imageView;
+        @BindView(R.id.tv_date) TextView tvDate;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            context = itemView.getContext();
             ButterKnife.bind(this, itemView);
         }
-
-        public void bindItem(Meizi item) {
-            ImgUtils.LoadNetImg(context, item.getUrl(), imageView);
-        }
-
-    }
-
-    public void setList(List<Meizi> mList){
-        if (mList==null){
-            mList = new LinkedList<>();
-        }
-        this.mList = mList;
-        notifyDataSetChanged();
     }
 }

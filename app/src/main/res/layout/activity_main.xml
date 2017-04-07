@@ -47,14 +47,15 @@
             android:id="@+id/maincontent"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_above="@+id/bottomnavi"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
+       <!--
         <com.github.nukc.stateview.StateView
             android:id="@+id/stateview"
             android:layout_marginBottom="56dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
+        -->
     </FrameLayout>
 
 
