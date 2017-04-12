@@ -1,6 +1,8 @@
 package me.looorielovbb.boom.ui.adapter;
 
-import android.content.Context;
+import android.app.Activity;
+import android.content.Intent;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +13,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import me.looorielovbb.boom.R;
 import me.looorielovbb.boom.data.bean.Meizi;
+import me.looorielovbb.boom.ui.picturepage.PicActivity;
 import me.looorielovbb.boom.ui.uitools.loadmore.LoadMoreAdapter;
 import me.looorielovbb.boom.utils.ImgUtils;
 
@@ -22,23 +25,40 @@ import me.looorielovbb.boom.utils.ImgUtils;
  */
 
 public class MeiziAdapter extends LoadMoreAdapter<Meizi> {
-    private Context context;
+    private Activity context;
 
+    public MeiziAdapter(Activity activity){
+        this.context = activity;
+    }
 
     @Override
-    public void onBindItemViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindItemViewHolder(final RecyclerView.ViewHolder holder, final int position) {
         if (holder instanceof ViewHolder) {
-            ViewHolder itemholder = (ViewHolder) holder;
-            Meizi meizi = items.get(position);
-            ImgUtils.LoadNetImg(context,meizi.getUrl(),itemholder.imageView);
-            itemholder.tvDate.setText(items.indexOf(meizi) + 1 + "");
+            final ViewHolder itemholder = (ViewHolder) holder;
+            final Meizi meizi = items.get(position);
+            ImgUtils.LoadNetImg(context, meizi.getUrl(), itemholder.imageView);
+            itemholder.tvDate.setText(items
+                                              .get(position)
+                                              .getDate());
+            itemholder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = PicActivity.newIntent(context, meizi.getUrl(), meizi.getDesc());
+                    ActivityOptionsCompat options = ActivityOptionsCompat.makeScaleUpAnimation(
+                            itemholder.itemView,
+                            itemholder.itemView.getWidth() ,
+                            itemholder.itemView.getHeight() ,
+                            0,
+                            0);
+                    context.startActivity(intent, options.toBundle());
+                }
+            });
         }
     }
 
     @Override
     public RecyclerView.ViewHolder onCreateItemViewHolder(ViewGroup parent, int viewType) {
-        context = parent.getContext();
-        View view = View.inflate(context, R.layout.item_meinv, null);
+        View view = View.inflate(context, R.layout.item_meizi, null);
         return new ViewHolder(view);
     }
 

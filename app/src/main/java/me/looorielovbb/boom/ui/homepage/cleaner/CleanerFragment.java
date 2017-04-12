@@ -81,7 +81,7 @@ public class CleanerFragment extends Fragment
     }
 
     private void initRecyclerView() {
-        adapter = new MeiziAdapter();
+        adapter = new MeiziAdapter(getActivity());
         SupportLoadMoreLinearLayoutManager layout = new SupportLoadMoreLinearLayoutManager(
                 getContext(),
                 OrientationHelper.VERTICAL,

@@ -59,6 +59,11 @@ public class Meizi {
         return publishedAt;
     }
 
+    public String getDate(){
+        int end = publishedAt.indexOf("T");
+        return publishedAt.substring(0, end);
+    }
+
     public void setPublishedAt(String publishedAt) {
         this.publishedAt = publishedAt;
     }

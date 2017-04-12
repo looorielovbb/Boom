@@ -1,7 +1,10 @@
 package me.looorielovbb.boom.ui.homepage.meizi;
 
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -15,9 +18,11 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import me.looorielovbb.boom.R;
+import me.looorielovbb.boom.config.Constants;
 import me.looorielovbb.boom.data.bean.Meizi;
 import me.looorielovbb.boom.data.source.DataRepository;
 import me.looorielovbb.boom.ui.adapter.MeiziAdapter;
+import me.looorielovbb.boom.ui.picturepage.PicActivity;
 import me.looorielovbb.boom.ui.uitools.loadmore.OnVerticalScrollListener;
 import me.looorielovbb.boom.ui.uitools.loadmore.SupportLoadMoreLinearLayoutManager;
 import me.looorielovbb.boom.utils.ToastUtils;
@@ -32,8 +37,8 @@ public class MeiziFragment extends Fragment
     @BindView(R.id.refreshLayout) SwipeRefreshLayout refreshLayout;
 
     MeiziContract.Presenter mPresenter;
-    private int mCurrentPage;
     MeiziAdapter meiziAdapter;
+    private int mCurrentPage;
 
     public MeiziFragment() {
     }
@@ -57,24 +62,41 @@ public class MeiziFragment extends Fragment
         mStatusView.setOnRetryListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               onRefresh();
+                onRefresh();
             }
         });
-        meiziAdapter = new MeiziAdapter();
-        SupportLoadMoreLinearLayoutManager layout = new SupportLoadMoreLinearLayoutManager
-                (getContext(),
-                  LinearLayoutManager.VERTICAL,
-                 false);
+        meiziAdapter = new MeiziAdapter(getActivity());
+        //设置图片
+        SupportLoadMoreLinearLayoutManager layout = new SupportLoadMoreLinearLayoutManager(
+                getContext(),
+                LinearLayoutManager.VERTICAL,
+                false);
         recyclerView.setLayoutManager(layout);
         recyclerView.setAdapter(meiziAdapter);
         recyclerView.addOnScrollListener(new OnVerticalScrollListener() {
             @Override
             public void onScrolledDownToLastItem() {
                 super.onScrolledDownToLastItem();
-                mCurrentPage++;
-                mPresenter.loaddata(mCurrentPage);
+                if (mCurrentPage == 1) {
+                    mCurrentPage++;
+                    mPresenter.loaddata(mCurrentPage);
+                    //Count 为item数量加上Bottom Item 若为其他值 最后一页没有加载10条
+                } else if (meiziAdapter.getItemCount() % Constants.PAGE_COUNT == 1) {
+                    mCurrentPage++;
+                    mPresenter.loaddata(mCurrentPage);
+                } else {
+                    meiziAdapter.updateLoadingStatus(true);
+                }
             }
         });
+    }
+
+
+    @Override
+    public void onRefresh() {
+        mPresenter.clearListData();
+        mCurrentPage = 1;
+        mPresenter.loaddata(mCurrentPage);
     }
 
     @Override
@@ -124,11 +146,17 @@ public class MeiziFragment extends Fragment
         meiziAdapter.updateLoadingStatus(true);
     }
 
-    @Override
-    public void onRefresh() {
-        mPresenter.clearListData();
-        mCurrentPage = 1;
-        mPresenter.loaddata(mCurrentPage);
+
+    private void startPictureActivity(Meizi meizhi, View transitView) {
+        Intent intent = PicActivity.newIntent(getActivity(), meizhi.getUrl(), meizhi.getDesc());
+        ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(
+                getActivity(), transitView, PicActivity.TRANSIT_PIC);
+        try {
+            ActivityCompat.startActivity(getActivity(), intent, optionsCompat.toBundle());
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+            startActivity(intent);
+        }
     }
 
 }

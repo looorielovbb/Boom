@@ -16,4 +16,7 @@
     <string name="text_empty">数据不见了~ 喵</string>
     <string name="text_retry">点击重试~喵</string>
     <string name="beauty">妹子图</string>
+
+
+    <string name="image_transition">image_trans_name</string>
 </resources>

@@ -1,5 +1,7 @@
 package me.looorielovbb.boom.ui.homepage;
 
+import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.PersistableBundle;
@@ -27,13 +29,18 @@ import me.looorielovbb.boom.ui.uitools.BottomNavigationViewHelper;
 import me.looorielovbb.boom.ui.uitools.TabFragmentManager;
 
 public class MainActivity extends AppCompatActivity {
-
+    @SuppressLint("StaticFieldLeak") private static MainActivity activity;
     @BindView(R.id.appbarlayout) AppBarLayout appBarLayout;
     @BindView(R.id.bottomnavi) BottomNavigationView bottomNavi;
     //    @BindView(R.id.stateview) StateView mStateView;
     Fragment[] fragments = new Fragment[5];
     FragmentManager fragmentManager;
     TabFragmentManager tabFragmentManager;
+
+
+    public static Activity getInstance() {
+        return activity;
+    }
 
 
     @Override
@@ -77,6 +84,7 @@ public class MainActivity extends AppCompatActivity {
             fragments[4] = MineFragment.newInstance();
         }
         tabFragmentManager = new TabFragmentManager(this, fragments, R.id.maincontent);
+        activity = this;
         bottomNavi.setOnNavigationItemSelectedListener(new BottomNavigationView
                 .OnNavigationItemSelectedListener() {
             @Override
@@ -107,6 +115,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        activity = null;
         fixInputMethodManagerLeak(this);
     }
 
