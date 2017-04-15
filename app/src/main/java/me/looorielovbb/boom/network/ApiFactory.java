@@ -5,6 +5,7 @@ import java.util.concurrent.TimeUnit;
 import me.looorielovbb.boom.network.api.DoubanApi;
 import me.looorielovbb.boom.network.api.GankApi;
 import me.looorielovbb.boom.network.api.ZhihuApi;
+import me.looorielovbb.boom.network.api.ZhuangbiApi;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Converter;
@@ -24,6 +25,7 @@ public class ApiFactory {
     private static DoubanApi doubanApi;
     private static GankApi gankApi;
     private static ZhihuApi zhihuApi;
+    private static ZhuangbiApi zhuangbiApi;
     private static OkHttpClient client;
     private static Converter.Factory gsonConverterFactory = GsonConverterFactory.create();
     private static RxJavaCallAdapterFactory rxJavaCallAdapterFactory = RxJavaCallAdapterFactory.create();
@@ -66,6 +68,15 @@ public class ApiFactory {
             zhihuApi = retrofit.create(ZhihuApi.class);
         }
         return zhihuApi;
+    }
+
+    public static ZhuangbiApi getZhuangbiApi() {
+        initOkHttpClient();
+        if (null == zhuangbiApi) {
+            Retrofit retrofit = initRetrofitClient(ZhuangbiApi.ZHUANGBI);
+            zhuangbiApi = retrofit.create(ZhuangbiApi.class);
+        }
+        return zhuangbiApi;
     }
 
     private static Retrofit initRetrofitClient(String host) {

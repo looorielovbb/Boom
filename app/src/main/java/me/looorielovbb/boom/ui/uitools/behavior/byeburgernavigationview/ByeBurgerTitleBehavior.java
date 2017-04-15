@@ -1,4 +1,8 @@
-package me.looorielovbb.boom.ui.behavior.byeburgernavigationview;
+package me.looorielovbb.boom.ui.uitools.behavior.byeburgernavigationview;
+
+/**
+ * Created by wing on 11/5/16.
+ */
 
 import android.content.Context;
 import android.support.design.widget.CoordinatorLayout;
@@ -6,20 +10,19 @@ import android.util.AttributeSet;
 import android.view.View;
 
 /**
- * Bye Bye Burger Navigation Bar Behavior
+ * Bye Bye Burger Android Title Bar Behavior
  *
- * Created by wing on 11/5/16.
+ * Created by wing on 11/4/16.
  */
 
-public class ByeBurgerBottomBehavior extends ByeBurgerBehavior {
+public class ByeBurgerTitleBehavior extends ByeBurgerBehavior {
 
   private TranslateAnimateHelper mAnimateHelper;
 
-  public ByeBurgerBottomBehavior(Context context, AttributeSet attrs) {
+  public ByeBurgerTitleBehavior(Context context, AttributeSet attrs) {
     super(context, attrs);
+
   }
-
-
 
   @Override
   public void onNestedPreScroll(CoordinatorLayout coordinatorLayout, View child, View target,
@@ -29,7 +32,7 @@ public class ByeBurgerBottomBehavior extends ByeBurgerBehavior {
       isFirstMove = false;
       mAnimateHelper = TranslateAnimateHelper.get(child);
       mAnimateHelper.setStartY(child.getY());
-      mAnimateHelper.setMode(TranslateAnimateHelper.MODE_BOTTOM);
+      mAnimateHelper.setMode(TranslateAnimateHelper.MODE_TITLE);
     }
     if (Math.abs(dy) > mTouchSlop) {
       if (dy < 0) {
@@ -45,3 +48,4 @@ public class ByeBurgerBottomBehavior extends ByeBurgerBehavior {
     }
   }
 }
+

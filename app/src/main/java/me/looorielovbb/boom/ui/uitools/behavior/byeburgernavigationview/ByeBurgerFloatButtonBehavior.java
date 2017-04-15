@@ -1,4 +1,4 @@
-package me.looorielovbb.boom.ui.behavior.byeburgernavigationview;
+package me.looorielovbb.boom.ui.uitools.behavior.byeburgernavigationview;
 
 import android.content.Context;
 import android.support.design.widget.CoordinatorLayout;

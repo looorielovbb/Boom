@@ -34,7 +34,6 @@
     <include
         layout="@layout/layout_toolbar"/>
 
-
     <FrameLayout
         android:id="@+id/content"
         android:layout_width="match_parent"

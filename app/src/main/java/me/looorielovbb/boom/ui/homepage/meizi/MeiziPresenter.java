@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import me.looorielovbb.boom.config.Constants;
-import me.looorielovbb.boom.data.bean.Meizi;
+import me.looorielovbb.boom.data.bean.gank.Meizi;
 import me.looorielovbb.boom.data.source.DataRepository;
 import rx.Subscriber;
 import rx.Subscription;

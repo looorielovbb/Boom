@@ -5,7 +5,7 @@ import android.support.annotation.NonNull;
 import java.util.ArrayList;
 import java.util.List;
 
-import me.looorielovbb.boom.data.bean.Meizi;
+import me.looorielovbb.boom.data.bean.gank.Meizi;
 import me.looorielovbb.boom.data.source.DataRepository;
 import rx.Subscriber;
 import rx.Subscription;

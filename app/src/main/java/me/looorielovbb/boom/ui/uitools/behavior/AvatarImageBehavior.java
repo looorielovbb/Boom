@@ -1,4 +1,4 @@
-package me.looorielovbb.boom.ui.behavior;
+package me.looorielovbb.boom.ui.uitools.behavior;
 
 import android.content.Context;
 import android.support.design.widget.CoordinatorLayout;

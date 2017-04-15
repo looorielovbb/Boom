@@ -1,7 +1,7 @@
 package me.looorielovbb.boom.network.api;
 
-import me.looorielovbb.boom.data.bean.Base;
-import me.looorielovbb.boom.data.bean.Meizi;
+import me.looorielovbb.boom.data.bean.gank.Base;
+import me.looorielovbb.boom.data.bean.gank.Meizi;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
 import rx.Observable;

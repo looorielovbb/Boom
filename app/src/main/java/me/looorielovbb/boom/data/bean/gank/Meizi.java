@@ -1,4 +1,4 @@
-package me.looorielovbb.boom.data.bean;
+package me.looorielovbb.boom.data.bean.gank;
 
 /**
  * Created by Lulei on 2017/2/24.

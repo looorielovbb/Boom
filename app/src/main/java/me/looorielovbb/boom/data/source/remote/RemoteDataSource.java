@@ -4,8 +4,9 @@ package me.looorielovbb.boom.data.source.remote;
 import java.util.List;
 
 import me.looorielovbb.boom.config.Constants;
-import me.looorielovbb.boom.data.bean.Base;
-import me.looorielovbb.boom.data.bean.Meizi;
+import me.looorielovbb.boom.data.bean.gank.Base;
+import me.looorielovbb.boom.data.bean.gank.Meizi;
+import me.looorielovbb.boom.data.bean.others.ZhuangbiImage;
 import me.looorielovbb.boom.data.source.DataSource;
 import me.looorielovbb.boom.network.ApiFactory;
 import me.looorielovbb.boom.network.api.GankApi;
@@ -51,5 +52,11 @@ public class RemoteDataSource implements DataSource {
                 });
     }
 
+    @Override
+    public Observable<List<ZhuangbiImage>> getEmoji(String keyword) {
+        return ApiFactory
+                .getZhuangbiApi()
+                .search(keyword);
+    }
 
 }

@@ -7,9 +7,6 @@
     <string name="navi_4">电影</string>
     <string name="navi_5">我的</string>
 
-    <string name="ByeBurgerBottomBehavior">me.looorielovbb.boom.ui.behavior.byeburgernavigationview.ByeBurgerBottomBehavior</string>
-    <string name="ByeBurgerTitleBehavior">me.looorielovbb.boom.ui.behavior.byeburgernavigationview.ByeBurgerTitleBehavior</string>
-
     <string name="advertisement">广告</string>
     <string name="homepage">主页</string>
     <string name="about">关于</string>
@@ -19,4 +16,10 @@
 
 
     <string name="image_transition">image_trans_name</string>
+    <!--Behavior-->
+
+    <string name="ByeBurgerBottomBehavior">me.looorielovbb.boom.ui.uitools.behavior.byeburgernavigationview.ByeBurgerBottomBehavior</string>
+    <string name="ByeBurgerTitleBehavior">me.looorielovbb.boom.ui.uitools.behavior.byeburgernavigationview.ByeBurgerTitleBehavior</string>
+    <string name="ByeBurgerToolbarBehavior">me.looorielovbb.boom.ui.uitools.behavior.byeburgernavigationview.ToolbarAlphaBehavior</string>
+
 </resources>

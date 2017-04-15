@@ -16,7 +16,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import me.looorielovbb.boom.R;
-import me.looorielovbb.boom.data.bean.Meizi;
+import me.looorielovbb.boom.data.bean.gank.Meizi;
 import me.looorielovbb.boom.data.source.DataRepository;
 import me.looorielovbb.boom.ui.adapter.MeiziAdapter;
 import me.looorielovbb.boom.ui.uitools.loadmore.OnVerticalScrollListener;

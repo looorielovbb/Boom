@@ -1,4 +1,4 @@
-package me.looorielovbb.boom.data.bean;
+package me.looorielovbb.boom.data.bean.gank;
 
 import java.util.List;
 

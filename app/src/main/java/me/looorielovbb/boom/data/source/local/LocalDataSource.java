@@ -2,7 +2,8 @@ package me.looorielovbb.boom.data.source.local;
 
 import java.util.List;
 
-import me.looorielovbb.boom.data.bean.Meizi;
+import me.looorielovbb.boom.data.bean.gank.Meizi;
+import me.looorielovbb.boom.data.bean.others.ZhuangbiImage;
 import me.looorielovbb.boom.data.source.DataSource;
 import rx.Observable;
 
@@ -29,6 +30,11 @@ public class LocalDataSource implements DataSource{
 
     @Override
     public Observable<List<Meizi>> getMeizi(int page) {
+        return Observable.empty();
+    }
+
+    @Override
+    public Observable<List<ZhuangbiImage>> getEmoji(String keyword) {
         return Observable.empty();
     }
 }

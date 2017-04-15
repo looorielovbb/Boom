@@ -1,7 +1,5 @@
 package me.looorielovbb.boom.ui.homepage;
 
-import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.PersistableBundle;
@@ -29,7 +27,6 @@ import me.looorielovbb.boom.ui.uitools.BottomNavigationViewHelper;
 import me.looorielovbb.boom.ui.uitools.TabFragmentManager;
 
 public class MainActivity extends AppCompatActivity {
-    @SuppressLint("StaticFieldLeak") private static MainActivity activity;
     @BindView(R.id.appbarlayout) AppBarLayout appBarLayout;
     @BindView(R.id.bottomnavi) BottomNavigationView bottomNavi;
     //    @BindView(R.id.stateview) StateView mStateView;
@@ -38,9 +35,6 @@ public class MainActivity extends AppCompatActivity {
     TabFragmentManager tabFragmentManager;
 
 
-    public static Activity getInstance() {
-        return activity;
-    }
 
 
     @Override
@@ -84,7 +78,6 @@ public class MainActivity extends AppCompatActivity {
             fragments[4] = MineFragment.newInstance();
         }
         tabFragmentManager = new TabFragmentManager(this, fragments, R.id.maincontent);
-        activity = this;
         bottomNavi.setOnNavigationItemSelectedListener(new BottomNavigationView
                 .OnNavigationItemSelectedListener() {
             @Override
@@ -115,7 +108,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        activity = null;
         fixInputMethodManagerLeak(this);
     }
 
@@ -139,7 +131,7 @@ public class MainActivity extends AppCompatActivity {
                 f = imm
                         .getClass()
                         .getDeclaredField(param);
-                if (f.isAccessible() == false) {
+                if (!f.isAccessible()) {
                     f.setAccessible(true);
                 } // author: sodino mail:sodino@qq.com
                 obj_get = f.get(imm);

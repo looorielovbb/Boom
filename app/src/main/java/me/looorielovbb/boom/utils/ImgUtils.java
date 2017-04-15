@@ -33,7 +33,6 @@ public class ImgUtils {
              .placeholder(R.drawable.loading)//占位图
              .error(R.drawable.error)//加载出错显示的图片
              .crossFade()//淡入效果
-             .thumbnail( 0.1f )
              .diskCacheStrategy(DiskCacheStrategy.NONE)
              .centerCrop()
              .into(imageView);
