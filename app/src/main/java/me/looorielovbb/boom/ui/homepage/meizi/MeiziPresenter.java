@@ -26,13 +26,12 @@ import static me.looorielovbb.boom.utils.Preconditions.checkNotNull;
 public class MeiziPresenter implements MeiziContract.Presenter {
 
     CompositeSubscription mSubscriptions = new CompositeSubscription();
-    @NonNull private DataRepository mRepository;
+    @NonNull private DataRepository mRepository = DataRepository.getInstance();
     @NonNull private MeiziContract.View mView;
 
     private List<Meizi> mList = new ArrayList<>();
 
-    public MeiziPresenter(@NonNull DataRepository mRepository, @NonNull MeiziContract.View mView) {
-        this.mRepository = checkNotNull(mRepository, "mRepository can not be null");
+    public MeiziPresenter(@NonNull MeiziContract.View mView) {
         this.mView = checkNotNull(mView, "mView can not be null");
     }
 
@@ -69,7 +68,7 @@ public class MeiziPresenter implements MeiziContract.Presenter {
 
                         } else if (list.size() == 0) {
                             mView.showerror("没有数据~ 喵");
-                            if(!mList.isEmpty()){
+                            if (!mList.isEmpty()) {
                                 mView.showList(mList);
                                 mView.loadComplete();
                             }
@@ -77,7 +76,7 @@ public class MeiziPresenter implements MeiziContract.Presenter {
 
                             mList.addAll(list);
                             mView.showList(mList);
-                            if (list.size() < Constants.PAGE_COUNT){
+                            if (list.size() < Constants.PAGE_COUNT) {
                                 mView.loadComplete();
                             }
                         }
@@ -87,14 +86,14 @@ public class MeiziPresenter implements MeiziContract.Presenter {
     }
 
     @Override
-    public void unsubscribe() {
-        mView.dismissLoading();
-        mSubscriptions.clear();
+    public void clearListData() {
+        mList.clear();
     }
 
     @Override
-    public void clearListData() {
-        mList.clear();
+    public void unsubscribe() {
+        mView.dismissLoading();
+        mSubscriptions.clear();
     }
 
 }

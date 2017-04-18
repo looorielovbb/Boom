@@ -1,4 +1,4 @@
-package me.looorielovbb.boom.ui.adapter;
+package me.looorielovbb.boom.adapter;
 
 import android.app.Activity;
 import android.content.Intent;

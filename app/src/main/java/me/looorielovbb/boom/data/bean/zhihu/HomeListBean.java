@@ -21,9 +21,9 @@ public class HomeListBean {
 
     private int type;
 
-    private DailyListBean.StoriesBean dailyList;
+    private StoriesBean dailyList;
 
-    private List<HotListBean.RecentBean> hotList;
+    private List<RecentBean> hotList;
 
     private List<ThemeListBean.OthersBean> themeList;
 
@@ -45,19 +45,19 @@ public class HomeListBean {
         this.type = type;
     }
 
-    public DailyListBean.StoriesBean getDailyList() {
+    public StoriesBean getDailyList() {
         return dailyList;
     }
 
-    public void setDailyList(DailyListBean.StoriesBean dailyList) {
+    public void setDailyList(StoriesBean dailyList) {
         this.dailyList = dailyList;
     }
 
-    public List<HotListBean.RecentBean> getHotList() {
+    public List<RecentBean> getHotList() {
         return hotList;
     }
 
-    public void setHotList(List<HotListBean.RecentBean> hotList) {
+    public void setHotList(List<RecentBean> hotList) {
         this.hotList = hotList;
     }
 

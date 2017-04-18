@@ -1,5 +1,6 @@
 package me.looorielovbb.boom.network.api;
 
+import me.looorielovbb.boom.data.bean.zhihu.BeforeDailyBean;
 import me.looorielovbb.boom.data.bean.zhihu.CommentBean;
 import me.looorielovbb.boom.data.bean.zhihu.DailyListBean;
 import me.looorielovbb.boom.data.bean.zhihu.DetailExtraBean;
@@ -8,7 +9,6 @@ import me.looorielovbb.boom.data.bean.zhihu.SectionChildListBean;
 import me.looorielovbb.boom.data.bean.zhihu.SectionListBean;
 import me.looorielovbb.boom.data.bean.zhihu.ThemeChildListBean;
 import me.looorielovbb.boom.data.bean.zhihu.ThemeListBean;
-import me.looorielovbb.boom.data.bean.zhihu.WelcomeBean;
 import me.looorielovbb.boom.data.bean.zhihu.ZhihuDetailBean;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
@@ -22,19 +22,27 @@ import rx.Observable;
  */
 
 public interface ZhihuApi {
-    public final String ZHIHU = "http://news-at.zhihu.com/api/4/";
+    String ZHIHU = "https://news-at.zhihu.com/api/4/";
 
     /**
-     * 启动界面图片
+     * 启动界面图片 (已过期)
      */
-    @GET("start-image/{res}")
-    Observable<WelcomeBean> getWelcomeInfo(@Path("res") String res);
+//    @GET("start-image/{res}")
+//    Observable<WelcomeBean> getWelcomeInfo(@Path("res") String res);
 
     /**
      * 最新日报
      */
     @GET("news/latest")
     Observable<DailyListBean> getDailyList();
+
+    /**
+     * 获取以前的文章列表
+     * @return
+     */
+    @GET("news/before/{date}")
+    Observable<BeforeDailyBean> getBeforeDaily(@Path("date") String date);
+
     /**
      * 主题日报
      */

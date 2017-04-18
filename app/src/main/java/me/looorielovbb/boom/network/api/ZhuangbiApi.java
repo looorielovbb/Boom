@@ -15,7 +15,7 @@ import rx.Observable;
  */
 
 public interface ZhuangbiApi {
-    public final String ZHUANGBI = "https://www.zhuangbi.info/";
+    String ZHUANGBI = "https://www.zhuangbi.info/";
 
     @GET("search")
     Observable<List<ZhuangbiImage>> search(@Query("q") String query);

@@ -24,11 +24,10 @@ import static me.looorielovbb.boom.utils.Preconditions.checkNotNull;
 
 public class CleanerPresenter implements CleanerContract.Presenter{
     CompositeSubscription mSubscriptions = new CompositeSubscription();
-    private final DataRepository mRepository;
+    private final DataRepository mRepository = DataRepository.getInstance();
     private final CleanerContract.View mView;
 
-    public CleanerPresenter(@NonNull DataRepository mRepository, @NonNull CleanerContract.View mView) {
-        this.mRepository = checkNotNull(mRepository, "mRepository can not be null");
+    public CleanerPresenter( @NonNull CleanerContract.View mView) {
         this.mView = checkNotNull(mView, "mView can not be null");
     }
 

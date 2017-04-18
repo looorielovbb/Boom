@@ -6,8 +6,11 @@ import java.util.List;
 
 import me.looorielovbb.boom.data.bean.gank.Meizi;
 import me.looorielovbb.boom.data.bean.others.ZhuangbiImage;
+import me.looorielovbb.boom.data.bean.zhihu.BeforeDailyBean;
+import me.looorielovbb.boom.data.bean.zhihu.DailyListBean;
 import me.looorielovbb.boom.data.source.local.LocalDataSource;
 import me.looorielovbb.boom.data.source.remote.RemoteDataSource;
+import me.looorielovbb.boom.network.ApiFactory;
 import rx.Observable;
 
 /**
@@ -44,6 +47,16 @@ public class DataRepository implements DataSource {
 
     @Override
     public Observable<List<ZhuangbiImage>> getEmoji(String keyword) {
-        return null;
+        return mRemoteDataSource.getEmoji(keyword);
     }
+
+    public Observable<DailyListBean> getLatestDaily(){
+        return ApiFactory.getZhihuApi().getDailyList();
+    }
+
+    public Observable<BeforeDailyBean> getBeforeDaily(String date){
+        return ApiFactory.getZhihuApi().getBeforeDaily(date);
+    }
+
+
 }

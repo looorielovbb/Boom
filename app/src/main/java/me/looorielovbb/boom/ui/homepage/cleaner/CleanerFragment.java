@@ -16,9 +16,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import me.looorielovbb.boom.R;
+import me.looorielovbb.boom.adapter.MeiziAdapter;
 import me.looorielovbb.boom.data.bean.gank.Meizi;
-import me.looorielovbb.boom.data.source.DataRepository;
-import me.looorielovbb.boom.ui.adapter.MeiziAdapter;
 import me.looorielovbb.boom.ui.uitools.loadmore.OnVerticalScrollListener;
 import me.looorielovbb.boom.ui.uitools.loadmore.SupportLoadMoreLinearLayoutManager;
 import me.looorielovbb.boom.utils.ToastUtils;
@@ -50,7 +49,7 @@ public class CleanerFragment extends Fragment
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_list, container, false);
         unbinder = ButterKnife.bind(this, view);
-        setPresenter(new CleanerPresenter(DataRepository.getInstance(), this));
+        setPresenter(new CleanerPresenter(this));
         refreshLayout.setOnRefreshListener(this);
         stateview.setOnRetryListener(new View.OnClickListener() {
             @Override
@@ -118,6 +117,11 @@ public class CleanerFragment extends Fragment
     }
 
     @Override
+    public void showloading() {
+        refreshLayout.setRefreshing(true);
+    }
+
+    @Override
     public void dismissLoading() {
         refreshLayout.setRefreshing(false);
     }
@@ -136,10 +140,5 @@ public class CleanerFragment extends Fragment
     @Override
     public void loadComplete() {
         adapter.updateLoadingStatus(true);
-    }
-
-    @Override
-    public void showloading() {
-        refreshLayout.setRefreshing(true);
     }
 }

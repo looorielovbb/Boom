@@ -18,10 +18,9 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import me.looorielovbb.boom.R;
+import me.looorielovbb.boom.adapter.MeiziAdapter;
 import me.looorielovbb.boom.config.Constants;
 import me.looorielovbb.boom.data.bean.gank.Meizi;
-import me.looorielovbb.boom.data.source.DataRepository;
-import me.looorielovbb.boom.ui.adapter.MeiziAdapter;
 import me.looorielovbb.boom.ui.picturepage.PicActivity;
 import me.looorielovbb.boom.ui.uitools.loadmore.OnVerticalScrollListener;
 import me.looorielovbb.boom.ui.uitools.loadmore.SupportLoadMoreLinearLayoutManager;
@@ -52,7 +51,7 @@ public class MeiziFragment extends Fragment
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_list, container, false);
         ButterKnife.bind(this, view);
-        setPresenter(new MeiziPresenter(DataRepository.getInstance(), this));
+        setPresenter(new MeiziPresenter(this));
         refreshLayout.setOnRefreshListener(this);
         init();
         return view;
@@ -150,7 +149,9 @@ public class MeiziFragment extends Fragment
     private void startPictureActivity(Meizi meizhi, View transitView) {
         Intent intent = PicActivity.newIntent(getActivity(), meizhi.getUrl(), meizhi.getDesc());
         ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(
-                getActivity(), transitView, PicActivity.TRANSIT_PIC);
+                getActivity(),
+                transitView,
+                PicActivity.TRANSIT_PIC);
         try {
             ActivityCompat.startActivity(getActivity(), intent, optionsCompat.toBundle());
         } catch (IllegalArgumentException e) {

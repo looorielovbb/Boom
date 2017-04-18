@@ -66,9 +66,11 @@ dependencies {
 //    compile 'com.github.nukc.stateview:library:1.1.0'
     compile 'me.solidev.library:status-view-layout:0.2.2'
     //multitype
-    compile 'me.drakeet.multitype:multitype:2.4.0'
+    compile 'me.drakeet.multitype:multitype:2.5.0'
     //photoview
     compile 'com.github.chrisbanes.photoview:library:1.2.3'
+    //banner
+    compile 'com.bigkoo:convenientbanner:2.0.5'
 }
 
 //aar 引用
@@ -78,9 +80,3 @@ repositories {
     }
 }
 
-dependencies {
-//    compile(name: 'rxandroid-1.2.1', ext: 'aar')
-}
-dependencies {
-    compile 'com.android.support.constraint:constraint-layout:+'
-}
