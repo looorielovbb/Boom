@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <TextView xmlns:android="http://schemas.android.com/apk/res/android"
           xmlns:tools="http://schemas.android.com/tools"
-          android:id="@+id/story_list_header"
+          android:id="@+id/subtitle"
           android:layout_width="match_parent"
           android:layout_height="@dimen/space_35"
           android:layout_marginLeft="@dimen/space_10"

@@ -1,8 +1,9 @@
 package me.looorielovbb.boom.ui.homepage.main;
 
+import java.util.List;
+
 import me.looorielovbb.boom.base.BasePresenter;
 import me.looorielovbb.boom.base.BaseView;
-import me.looorielovbb.boom.data.bean.zhihu.DailyListBean;
 
 /**
  * Created by Lulei on 2017/4/18.
@@ -20,7 +21,7 @@ public interface MainContract {
 
         void showerror(String error);
 
-        void showList(DailyListBean dailyListBean);
+        void showList(List<Object> listdata);
 
         void loadComplete();
     }
@@ -29,5 +30,7 @@ public interface MainContract {
         void loadLatestData();
 
         void loadbeforeData();
+
+        void clear();
     }
 }

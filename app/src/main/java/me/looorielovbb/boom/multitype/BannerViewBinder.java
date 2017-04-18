@@ -14,8 +14,8 @@ import java.util.List;
 
 import me.drakeet.multitype.ItemViewBinder;
 import me.looorielovbb.boom.R;
-import me.looorielovbb.boom.data.bean.zhihu.DailyListBean;
 import me.looorielovbb.boom.data.bean.zhihu.TopStoriesBean;
+import me.looorielovbb.boom.multitype.bean.Banner;
 
 /**
  * Created by Lulei on 2017/4/17.
@@ -24,7 +24,7 @@ import me.looorielovbb.boom.data.bean.zhihu.TopStoriesBean;
  * mail to lulei4461@gmail.com
  */
 public class BannerViewBinder
-        extends ItemViewBinder<DailyListBean, BannerViewBinder.ViewHolder> {
+        extends ItemViewBinder<Banner, BannerViewBinder.ViewHolder> {
 
     @NonNull
     @Override
@@ -36,7 +36,7 @@ public class BannerViewBinder
 
     @Override
     protected void onBindViewHolder(@NonNull ViewHolder holder,
-                                    @NonNull DailyListBean banner) {
+                                    @NonNull Banner banner) {
         holder.setImages(banner);
     }
 
@@ -49,24 +49,24 @@ public class BannerViewBinder
         }
 
         @SuppressWarnings("unchecked")
-        void setImages(final DailyListBean bean) {
+        void setImages(final Banner bean) {
 
             List<String> imgurls = new ArrayList<>();
-            for (TopStoriesBean img : bean.getTop_stories()) {
+            for (TopStoriesBean img : bean.storiesBeen) {
                 imgurls.add(img.getImage());
             }
             convenientBanner
                     .setPages(new CBViewHolderCreator<NetworkImageHolder>() {
                         @Override
                         public NetworkImageHolder createHolder() {
-                            return new NetworkImageHolder(bean.getTop_stories(), false);
+                            return new NetworkImageHolder(bean.storiesBeen, false);
                         }
                     }, imgurls)
-                    .setPageIndicator(new int[]{R.drawable.indicator_selected,
-                            R.drawable.indicator_unselected})
+                    .setPageIndicator(new int[]{R.drawable.indicator_unselected,
+                            R.drawable.indicator_selected})
                     .setPageIndicatorAlign(ConvenientBanner.PageIndicatorAlign.CENTER_HORIZONTAL);
             if (!convenientBanner.isTurning()) {
-                convenientBanner.startTurning(5000);
+                convenientBanner.startTurning(10 * 1000);
             }
         }
 

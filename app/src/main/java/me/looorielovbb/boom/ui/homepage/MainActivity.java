@@ -4,7 +4,6 @@ import android.content.Context;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -27,7 +26,7 @@ import me.looorielovbb.boom.ui.uitools.BottomNavigationViewHelper;
 import me.looorielovbb.boom.ui.uitools.TabFragmentManager;
 
 public class MainActivity extends AppCompatActivity {
-    @BindView(R.id.appbarlayout) AppBarLayout appBarLayout;
+//    @BindView(R.id.appbarlayout) AppBarLayout appBarLayout;
     @BindView(R.id.bottomnavi) BottomNavigationView bottomNavi;
     //    @BindView(R.id.stateview) StateView mStateView;
     Fragment[] fragments = new Fragment[5];
@@ -77,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
             fragments[3] = MovieFragment.newInstance();
             fragments[4] = MineFragment.newInstance();
         }
-        tabFragmentManager = new TabFragmentManager(this, fragments, R.id.maincontent);
+        tabFragmentManager = new TabFragmentManager(this, fragments, R.id.content);
         bottomNavi.setOnNavigationItemSelectedListener(new BottomNavigationView
                 .OnNavigationItemSelectedListener() {
             @Override

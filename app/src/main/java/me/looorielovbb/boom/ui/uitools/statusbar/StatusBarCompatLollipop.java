@@ -1,4 +1,4 @@
-package me.looorielovbb.boom.utils.statusbar;
+package me.looorielovbb.boom.ui.uitools.statusbar;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
