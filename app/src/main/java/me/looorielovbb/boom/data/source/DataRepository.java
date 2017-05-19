@@ -8,6 +8,8 @@ import me.looorielovbb.boom.data.bean.gank.Meizi;
 import me.looorielovbb.boom.data.bean.others.ZhuangbiImage;
 import me.looorielovbb.boom.data.bean.zhihu.BeforeDailyBean;
 import me.looorielovbb.boom.data.bean.zhihu.DailyListBean;
+import me.looorielovbb.boom.data.bean.zhihu.DetailExtraBean;
+import me.looorielovbb.boom.data.bean.zhihu.ZhihuDetailBean;
 import me.looorielovbb.boom.data.source.local.LocalDataSource;
 import me.looorielovbb.boom.data.source.remote.RemoteDataSource;
 import me.looorielovbb.boom.network.ApiFactory;
@@ -40,16 +42,25 @@ public class DataRepository implements DataSource {
         return INSTANCE;
     }
 
+    /*
+    * Gank
+    * */
     @Override
     public Observable<List<Meizi>> getMeizi(int page) {
         return mRemoteDataSource.getMeizi(page);
     }
 
+    /*
+    * 装逼大全
+    * */
     @Override
     public Observable<List<ZhuangbiImage>> getEmoji(String keyword) {
         return mRemoteDataSource.getEmoji(keyword);
     }
 
+    /*
+    * 知乎
+    * */
     public Observable<DailyListBean> getLatestDaily(){
         return ApiFactory.getZhihuApi().getDailyList();
     }
@@ -58,5 +69,12 @@ public class DataRepository implements DataSource {
         return ApiFactory.getZhihuApi().getBeforeDaily(date);
     }
 
+    public Observable<ZhihuDetailBean> getZhihuDetail(int id){
+        return ApiFactory.getZhihuApi().getDetailInfo(id);
+    }
+
+    public Observable<DetailExtraBean> getDetailExtra(int id){
+        return ApiFactory.getZhihuApi().getDetailExtraInfo(id);
+    }
 
 }

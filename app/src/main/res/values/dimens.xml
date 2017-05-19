@@ -13,4 +13,8 @@
     <dimen name="space_80">80dp</dimen>
     <dimen name="textSize_14">14sp</dimen>
     <dimen name="textSize_20">20sp</dimen>
+    <dimen name="space_260">260dp</dimen>
+    <dimen name="space_15">15dp</dimen>
+    <dimen name="textSize_22">22sp</dimen>
+    <dimen name="textSize_12">12sp</dimen>
 </resources>

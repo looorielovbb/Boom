@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="me.looorielovbb.boom.ui.homepage.MainActivity">
+    tools:context="me.looorielovbb.boom.ui.home.MainActivity">
     <!--
         <LinearLayout
             android:layout_width="match_parent"
@@ -31,7 +30,6 @@
                 android:drawablePadding="20dp" />
         </LinearLayout>
     -->
-
     <!--
         <include layout="@layout/layout_toolbar"/>
     -->
@@ -53,5 +51,5 @@
         android:background="@color/navibottombackgroud"
         app:elevation="4dp"
         app:layout_behavior="@string/ByeBurgerBottomBehavior"
-        app:menu="@menu/navigation"/>
+        app:menu="@menu/navigation" />
 </android.support.design.widget.CoordinatorLayout>

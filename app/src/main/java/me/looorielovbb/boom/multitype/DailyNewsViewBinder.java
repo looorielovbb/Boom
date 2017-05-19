@@ -16,8 +16,8 @@ import butterknife.ButterKnife;
 import me.drakeet.multitype.ItemViewBinder;
 import me.looorielovbb.boom.R;
 import me.looorielovbb.boom.data.bean.zhihu.StoriesBean;
+import me.looorielovbb.boom.ui.home.zhihu.ZhihuFragment;
 import me.looorielovbb.boom.utils.ImgUtils;
-import me.looorielovbb.boom.utils.ToastUtils;
 
 /**
  * Created by Lulei on 2017/4/18.
@@ -25,10 +25,14 @@ import me.looorielovbb.boom.utils.ToastUtils;
  * date : 2017/4/18
  * mail to lulei4461@gmail.com
  */
-public class DailyNewsViewBinder
-        extends ItemViewBinder<StoriesBean, DailyNewsViewBinder.ViewHolder> {
-
+public class DailyNewsViewBinder extends ItemViewBinder<StoriesBean, DailyNewsViewBinder.ViewHolder> {
+    private ZhihuFragment fragment;
     private Context context;
+
+
+    public DailyNewsViewBinder(ZhihuFragment fragment) {
+        this.fragment = fragment;
+    }
 
     @NonNull
     @Override
@@ -40,22 +44,17 @@ public class DailyNewsViewBinder
     }
 
     @Override
-    protected void onBindViewHolder(@NonNull ViewHolder holder, @NonNull StoriesBean story) {
+    protected void onBindViewHolder(@NonNull ViewHolder holder, @NonNull final StoriesBean story) {
         holder.storyTitleTv.setText(story.getTitle());
-        if (story.getImages()!=null) {
+        if (story.getImages() != null) {
             ImgUtils.LoadNetImg(context,
-                                story
-                                        .getImages()
-                                        .get(0),
-                                holder.storyIv);
-            if (story
-                        .getImages()
-                        .size() > 1) {
+                    story.getImages().get(0),
+                    holder.storyIv);
+            if (story.getImages().size() > 1) {
                 holder.multiPicIv.setVisibility(View.VISIBLE);
             } else {
                 holder.multiPicIv.setVisibility(View.GONE);
             }
-
             holder.storyFrameIv.setVisibility(View.VISIBLE);
         } else {
             holder.storyFrameIv.setVisibility(View.GONE);
@@ -64,22 +63,28 @@ public class DailyNewsViewBinder
         holder.card.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ToastUtils.show("点击了该项目");
+//                ToastUtils.show("点击了该项目");
+                fragment.startZhiHuDetailActivity(story.getId(),v);
             }
         });
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
 
-        @BindView(R.id.story_title_tv) TextView storyTitleTv;
-        @BindView(R.id.story_iv) ImageView storyIv;
-        @BindView(R.id.multi_pic_iv) ImageView multiPicIv;
-        @BindView(R.id.story_frame_iv) FrameLayout storyFrameIv;
-        @BindView(R.id.card) CardView card;
+        @BindView(R.id.story_title_tv)
+        TextView storyTitleTv;
+        @BindView(R.id.story_iv)
+        ImageView storyIv;
+        @BindView(R.id.multi_pic_iv)
+        ImageView multiPicIv;
+        @BindView(R.id.story_frame_iv)
+        FrameLayout storyFrameIv;
+        @BindView(R.id.card)
+        CardView card;
 
         ViewHolder(View itemView) {
             super(itemView);
-            ButterKnife.bind(this,itemView);
+            ButterKnife.bind(this, itemView);
         }
     }
 }

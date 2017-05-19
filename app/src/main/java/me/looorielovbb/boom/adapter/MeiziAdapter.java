@@ -13,7 +13,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import me.looorielovbb.boom.R;
 import me.looorielovbb.boom.data.bean.gank.Meizi;
-import me.looorielovbb.boom.ui.picturepage.PicActivity;
+import me.looorielovbb.boom.ui.picture.PicActivity;
 import me.looorielovbb.boom.ui.uitools.loadmore.LoadMoreAdapter;
 import me.looorielovbb.boom.utils.ImgUtils;
 

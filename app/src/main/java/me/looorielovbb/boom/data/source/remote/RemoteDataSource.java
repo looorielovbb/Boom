@@ -37,26 +37,22 @@ public class RemoteDataSource implements DataSource {
 
     @Override
     public Observable<List<Meizi>> getMeizi(int page) {
-        return ApiFactory
-                .getGankApi()
-                .getGankRes(GankApi.types[0], Constants.PAGE_COUNT, page)
-                .map(new Func1<Base<Meizi>, List<Meizi>>() {
+        return ApiFactory.getGankApi().getGankRes(GankApi.types[0], Constants.PAGE_COUNT, page).map(
+                new Func1<Base<Meizi>, List<Meizi>>() {
 
                     @Override
                     public List<Meizi> call(Base<Meizi> meiziBase) {
-                        if (meiziBase == null) {
-                            return null;
+                        if (meiziBase != null) {
+                            return meiziBase.getList();
                         }
-                        return meiziBase.getList();
+                        return null;
                     }
                 });
     }
 
     @Override
     public Observable<List<ZhuangbiImage>> getEmoji(String keyword) {
-        return ApiFactory
-                .getZhuangbiApi()
-                .search(keyword);
+        return ApiFactory.getZhuangbiApi().search(keyword);
     }
 
 }

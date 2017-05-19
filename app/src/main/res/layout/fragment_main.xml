@@ -4,7 +4,7 @@
     android:id="@+id/refreshLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.homepage.main.MainFragment">
+    tools:context=".ui.home.zhihu.ZhihuFragment">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerView"

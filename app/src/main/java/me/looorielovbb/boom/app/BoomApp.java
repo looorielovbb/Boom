@@ -7,7 +7,6 @@ import android.support.v7.app.AppCompatDelegate;
 
 import com.elvishew.xlog.LogLevel;
 import com.elvishew.xlog.XLog;
-import com.squareup.leakcanary.LeakCanary;
 
 import me.looorielovbb.boom.config.Constants;
 import me.looorielovbb.boom.utils.PreferencesUtils;
@@ -26,8 +25,10 @@ public class BoomApp extends MultiDexApplication {
     @Override
     public void onCreate() {
         super.onCreate();
-//        Fresco.initialize(this);
-        LeakCanary.install(this);
+//        if (LeakCanary.isInAnalyzerProcess(this)) {
+//            return;
+//        }
+//        LeakCanary.install(this);
         appCtx = getApplicationContext();
         XLog.init(LogLevel.ALL);
         if (PreferencesUtils.getBoolean(this, Constants.THEME_MODE, false)) {

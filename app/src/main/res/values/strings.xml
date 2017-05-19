@@ -1,11 +1,11 @@
 <resources>
     <string name="app_name">爱哔哔</string>
-    <string name="night_mode">夜间模式</string>
     <string name="navi_1">首页</string>
     <string name="navi_2">妹子</string>
     <string name="navi_3">精选</string>
     <string name="navi_4">电影</string>
     <string name="navi_5">我的</string>
+    <string name="night_mode">夜间模式</string>
 
     <string name="advertisement">广告</string>
     <string name="homepage">主页</string>
@@ -21,5 +21,6 @@
     <string name="ByeBurgerBottomBehavior">me.looorielovbb.boom.ui.uitools.behavior.byeburgernavigationview.ByeBurgerBottomBehavior</string>
     <string name="ByeBurgerTitleBehavior">me.looorielovbb.boom.ui.uitools.behavior.byeburgernavigationview.ByeBurgerTitleBehavior</string>
     <string name="ByeBurgerToolbarBehavior">me.looorielovbb.boom.ui.uitools.behavior.byeburgernavigationview.ToolbarAlphaBehavior</string>
+    <string name="zhihu_detail_title">文章详情</string>
 
 </resources>

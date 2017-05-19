@@ -1,24 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<me.wangyuwei.particleview.ParticleView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/particleview"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    app:pv_background_color="@color/black"
+    app:pv_host_text="LooorieLovBB"
+    app:pv_host_text_anim_time="500"
+    app:pv_particle_text=".me"
+    app:pv_particle_text_size="16sp"
+    app:pv_spread_anim_time="200"
+    app:pv_text_anim_time="800"
+    app:pv_text_color="#FFF" />
 
 
-    <me.wangyuwei.particleview.ParticleView
-        android:id="@+id/particleview"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:pv_background_color="@color/black"
-        app:pv_host_text="LooorieLovBB"
-        app:pv_host_text_anim_time="500"
 
-        app:pv_particle_text=".me"
-        app:pv_particle_text_size="16sp"
-        app:pv_spread_anim_time="200"
-        app:pv_text_anim_time="800"
-        app:pv_text_color="#FFF" />
-
-
-</RelativeLayout>
