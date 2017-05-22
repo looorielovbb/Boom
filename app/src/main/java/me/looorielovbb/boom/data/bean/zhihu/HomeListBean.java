@@ -3,9 +3,7 @@ package me.looorielovbb.boom.data.bean.zhihu;
 
 import java.util.List;
 
-/**
- * Created by quantan.liu on 2017/3/23.
- */
+
 
 public class HomeListBean {
    private String title;

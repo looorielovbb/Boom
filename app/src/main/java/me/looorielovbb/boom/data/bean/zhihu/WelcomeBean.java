@@ -1,8 +1,6 @@
 package me.looorielovbb.boom.data.bean.zhihu;
 
-/**
- * Created by quantan.liu on 2017/3/23.
- */
+
 public class WelcomeBean {
 
     /**

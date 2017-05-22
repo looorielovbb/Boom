@@ -7,9 +7,7 @@ import java.util.List;
 import me.looorielovbb.boom.data.bean.douban.moviechild.SubjectsBean;
 
 
-/**
- * Created by jingbin on 2016/11/25.
- */
+
 
 public class HotMovieBean  implements Serializable {
 

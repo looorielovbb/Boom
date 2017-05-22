@@ -2,9 +2,7 @@ package me.looorielovbb.boom.data.bean.douban.moviechild;
 
 import java.io.Serializable;
 
-/**
- * Created by jingbin on 2016/11/25.
- */
+
 
 public class PersonBean  implements Serializable {
     /**

@@ -7,7 +7,7 @@
     android:layout_height="wrap_content"
     android:layout_marginLeft="@dimen/space_5"
     android:layout_marginRight="@dimen/space_5"
-    android:layout_marginTop="@dimen/statusbarSize"
+    android:layout_marginTop="@dimen/space_5"
     android:clickable="true"
     android:foreground="?android:attr/selectableItemBackgroundBorderless"
     app:cardCornerRadius="@dimen/space_5"

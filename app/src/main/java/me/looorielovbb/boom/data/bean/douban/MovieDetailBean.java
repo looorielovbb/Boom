@@ -7,9 +7,7 @@ import me.looorielovbb.boom.data.bean.douban.moviechild.ImagesBean;
 import me.looorielovbb.boom.data.bean.douban.moviechild.PersonBean;
 
 
-/**
- * Created by jingbin on 2016/12/9.
- */
+
 
 public class MovieDetailBean {
 

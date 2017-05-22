@@ -46,8 +46,13 @@
                     android:scheme="http" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.picture.PicActivity"></activity>
-        <activity android:name=".ui.zhihudetail.ZhihuDetailActivity"></activity>
+        <activity android:name=".ui.picture.PicActivity" />
+        <activity
+            android:name=".ui.zhihudetail.ZhihuDetailActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+        <activity android:name=".ui.zhihucomments.CommentsActivity" />
     </application>
 
 </manifest>

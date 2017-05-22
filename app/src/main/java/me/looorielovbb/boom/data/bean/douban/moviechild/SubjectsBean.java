@@ -5,10 +5,6 @@ import java.util.List;
 
 import me.looorielovbb.boom.data.bean.douban.RatingBean;
 
-/**
- * Created by jingbin on 2016/11/25.
- * 豆瓣热映item详情
- */
 
 public class SubjectsBean  implements Serializable{
     /**

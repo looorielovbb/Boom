@@ -7,9 +7,7 @@ import java.util.List;
 import me.looorielovbb.boom.data.bean.douban.RatingBean;
 import me.looorielovbb.boom.data.bean.douban.moviechild.ImagesBean;
 
-/**
- * Created by jingbin on 2016/12/25.
- */
+
 
 public class BookDetailBean implements Serializable{
 

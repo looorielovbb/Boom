@@ -1,7 +1,7 @@
 package me.looorielovbb.boom.ui.zhihudetail;
 
-import android.annotation.SuppressLint;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -18,11 +18,14 @@ import android.webkit.WebViewClient;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.elvishew.xlog.XLog;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import me.looorielovbb.boom.R;
 import me.looorielovbb.boom.data.bean.zhihu.DetailExtraBean;
 import me.looorielovbb.boom.data.bean.zhihu.ZhihuDetailBean;
+import me.looorielovbb.boom.ui.zhihucomments.CommentsActivity;
 import me.looorielovbb.boom.utils.HtmlUtil;
 import me.looorielovbb.boom.utils.ImgUtils;
 import me.looorielovbb.boom.utils.ToastUtils;
@@ -32,8 +35,6 @@ public class ZhihuDetailActivity extends AppCompatActivity implements ZdetailCon
 
     @BindView(R.id.detail_bar_image)
     ImageView detailBarImage;
-    //    @BindView(R.id.detail_bar_title)
-//    TextView detailBarTitle;
     @BindView(R.id.detail_bar_copyright)
     TextView detailBarCopyright;
     @BindView(R.id.toolBar)
@@ -53,7 +54,8 @@ public class ZhihuDetailActivity extends AppCompatActivity implements ZdetailCon
     boolean isNotTransition = false;
     private String imgUrl;
     private String shareUrl;
-    private int id;
+    private int id = 0;
+    private int shortNum, longNum = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,7 +79,6 @@ public class ZhihuDetailActivity extends AppCompatActivity implements ZdetailCon
         mPresenter.unsubscribe();
     }
 
-    @SuppressLint("SetJavaScriptEnabled")
     private void initView() {
 
         WebSettings settings = wvDetailContent.getSettings();
@@ -85,7 +86,7 @@ public class ZhihuDetailActivity extends AppCompatActivity implements ZdetailCon
         settings.setDomStorageEnabled(true);
         settings.setDatabaseEnabled(true);
         settings.setCacheMode(WebSettings.LOAD_DEFAULT);
-        settings.setJavaScriptEnabled(true);
+//        settings.setJavaScriptEnabled(true);
         settings.setLoadWithOverviewMode(true);
         settings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
         settings.setSupportZoom(true);
@@ -121,6 +122,8 @@ public class ZhihuDetailActivity extends AppCompatActivity implements ZdetailCon
     public void showStoryExtras(DetailExtraBean detailExtraBean) {
 //        commentProvider.setNumInt(String.valueOf(detailExtraBean.getComments()));
 //        praiseProvider.setNumInt(String.valueOf(detailExtraBean.getPopularity()));
+        shortNum = detailExtraBean.getShort_comments();
+        longNum = detailExtraBean.getLong_comments();
     }
 
     @Override
@@ -158,7 +161,17 @@ public class ZhihuDetailActivity extends AppCompatActivity implements ZdetailCon
 
         switch (item.getItemId()) {
             case R.id.comments:
-                ToastUtils.show("评论");
+                Intent intent = new Intent();
+                intent.setClass(this, CommentsActivity.class);
+                if (id == 0 || shortNum == -1 || longNum == -1) {
+                    XLog.e(id + "  ||  " + shortNum + "  ||  " + longNum);
+                    ToastUtils.show("数据加载中...");
+                    break;
+                }
+                intent.putExtra("id", id);
+                intent.putExtra("shortNum", shortNum);
+                intent.putExtra("longNum", longNum);
+                startActivity(intent);
                 break;
             case R.id.share:
                 ToastUtils.show("分享");

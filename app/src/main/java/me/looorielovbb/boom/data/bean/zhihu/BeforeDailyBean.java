@@ -2,9 +2,6 @@ package me.looorielovbb.boom.data.bean.zhihu;
 
 import java.util.List;
 
-/**
- * Created by Administrator on 2017/1/4.
- */
 
 public class BeforeDailyBean {
 
