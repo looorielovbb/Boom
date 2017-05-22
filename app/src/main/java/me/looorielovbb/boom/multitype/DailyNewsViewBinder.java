@@ -1,7 +1,9 @@
 package me.looorielovbb.boom.multitype;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -17,6 +19,7 @@ import me.drakeet.multitype.ItemViewBinder;
 import me.looorielovbb.boom.R;
 import me.looorielovbb.boom.data.bean.zhihu.StoriesBean;
 import me.looorielovbb.boom.ui.home.zhihu.ZhihuFragment;
+import me.looorielovbb.boom.ui.zhihudetail.ZhihuDetailActivity;
 import me.looorielovbb.boom.utils.ImgUtils;
 
 /**
@@ -64,7 +67,18 @@ public class DailyNewsViewBinder extends ItemViewBinder<StoriesBean, DailyNewsVi
             @Override
             public void onClick(View v) {
 //                ToastUtils.show("点击了该项目");
-                fragment.startZhiHuDetailActivity(story.getId(),v);
+//                fragment.startZhiHuDetailActivity(story.getId(),v);
+                Intent intent = new Intent();
+                intent.setClass(context, ZhihuDetailActivity.class);
+                intent.putExtra("id", story.getId());
+                intent.putExtra("isNotTransition", true);
+                ActivityOptionsCompat options = ActivityOptionsCompat.makeScaleUpAnimation(
+                        v,
+                        v.getWidth() ,
+                        v.getHeight() ,
+                        0,
+                        0);
+                context.startActivity(intent,options.toBundle());
             }
         });
     }

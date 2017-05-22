@@ -16,8 +16,6 @@ import android.webkit.WebViewClient;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.elvishew.xlog.XLog;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import me.looorielovbb.boom.R;
@@ -31,8 +29,8 @@ public class ZhihuDetailActivity extends AppCompatActivity implements ZdetailCon
 
     @BindView(R.id.detail_bar_image)
     ImageView detailBarImage;
-    @BindView(R.id.detail_bar_title)
-    TextView detailBarTitle;
+//    @BindView(R.id.detail_bar_title)
+//    TextView detailBarTitle;
     @BindView(R.id.detail_bar_copyright)
     TextView detailBarCopyright;
     @BindView(R.id.toolBar)
@@ -78,8 +76,6 @@ public class ZhihuDetailActivity extends AppCompatActivity implements ZdetailCon
 
     @SuppressLint("SetJavaScriptEnabled")
     private void initView() {
-//        collapsingToolbar.setExpandedTitleColor(Color.TRANSPARENT);//设置还没收缩时状态下字体颜色
-//        collapsingToolbar.setCollapsedTitleTextColor(Color.WHITE);//设置收缩后Toolbar上字体的颜色
 
         WebSettings settings = wvDetailContent.getSettings();
         settings.setAppCacheEnabled(true);
@@ -101,7 +97,6 @@ public class ZhihuDetailActivity extends AppCompatActivity implements ZdetailCon
         //加载
         id = getIntent().getIntExtra("id",0);
         isNotTransition = getIntent().getBooleanExtra("isNotTransition", false);
-        XLog.e(id);
         mPresenter.getStoryContent(id);
         mPresenter.getStoryExtras(id);
     }
@@ -111,8 +106,9 @@ public class ZhihuDetailActivity extends AppCompatActivity implements ZdetailCon
         imgUrl = zhihuDetailBean.getImage();
         shareUrl = zhihuDetailBean.getShare_url();
         ImgUtils.LoadNetImg(this,zhihuDetailBean.getImage(),detailBarImage);
-//        toolBar.setTitle(zhihuDetailBean.getTitle());
-        detailBarTitle.setText(zhihuDetailBean.getTitle());
+        toolBar.setTitle(zhihuDetailBean.getTitle());
+        collapsingToolbar.setTitle(zhihuDetailBean.getTitle());
+//        detailBarTitle.setText(zhihuDetailBean.getTitle());
         detailBarCopyright.setText(zhihuDetailBean.getImage_source());
         String htmlData = HtmlUtil.createHtmlData(zhihuDetailBean.getBody(), zhihuDetailBean.getCss(), zhihuDetailBean.getJs());
         wvDetailContent.loadData(htmlData, HtmlUtil.MIME_TYPE, HtmlUtil.ENCODING);

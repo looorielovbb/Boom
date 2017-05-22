@@ -1,10 +1,8 @@
 package me.looorielovbb.boom.ui.home.zhihu;
 
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -25,7 +23,6 @@ import me.looorielovbb.boom.multitype.DailyNewsViewBinder;
 import me.looorielovbb.boom.multitype.SubTitleViewBinder;
 import me.looorielovbb.boom.multitype.bean.Banner;
 import me.looorielovbb.boom.multitype.bean.SubTitle;
-import me.looorielovbb.boom.ui.zhihudetail.ZhihuDetailActivity;
 import me.looorielovbb.boom.utils.ToastUtils;
 
 
@@ -56,7 +53,7 @@ public class ZhihuFragment extends Fragment implements  SwipeRefreshLayout.OnRef
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_main, container, false);
+        View view = inflater.inflate(R.layout.fragment_zhihu, container, false);
         ButterKnife.bind(this, view);
         setPresenter(new ZhihuPresenter(this));
         initView();
@@ -139,19 +136,4 @@ public class ZhihuFragment extends Fragment implements  SwipeRefreshLayout.OnRef
             throw new NullPointerException("presenter can not be null");
         }
     }
-
-    public void startZhiHuDetailActivity(int id, View view) {
-        Intent intent = new Intent();
-        intent.setClass(getActivity(), ZhihuDetailActivity.class);
-        intent.putExtra("id", id);
-        intent.putExtra("isNotTransition", true);
-        ActivityOptionsCompat options = ActivityOptionsCompat.makeScaleUpAnimation(
-                view,
-                view.getWidth() ,
-                view.getHeight() ,
-                0,
-                0);
-        getActivity().startActivity(intent,options.toBundle());
-    }
-
 }

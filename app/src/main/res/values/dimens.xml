@@ -3,6 +3,7 @@
     <dimen name="horizontal_margin">16dp</dimen>
     <dimen name="vertical_margin">16dp</dimen>
     <dimen name="image_width">120dp</dimen>
+    <dimen name="statusbarSize">24dp</dimen>
     <dimen name="actionbarSize">52dp</dimen>
     <dimen name="space_1">1dp</dimen>
     <dimen name="space_5">5dp</dimen>

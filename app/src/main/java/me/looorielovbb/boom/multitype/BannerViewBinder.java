@@ -26,6 +26,8 @@ import me.looorielovbb.boom.multitype.bean.Banner;
 public class BannerViewBinder
         extends ItemViewBinder<Banner, BannerViewBinder.ViewHolder> {
 
+
+
     @NonNull
     @Override
     protected ViewHolder onCreateViewHolder(@NonNull LayoutInflater inflater,
@@ -41,7 +43,8 @@ public class BannerViewBinder
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
-        @NonNull final ConvenientBanner convenientBanner;
+        @NonNull
+        final ConvenientBanner convenientBanner;
 
         ViewHolder(View itemView) {
             super(itemView);
@@ -59,7 +62,7 @@ public class BannerViewBinder
                     .setPages(new CBViewHolderCreator<NetworkImageHolder>() {
                         @Override
                         public NetworkImageHolder createHolder() {
-                            return new NetworkImageHolder(bean.storiesBeen, false);
+                            return new NetworkImageHolder(bean.storiesBeen);
                         }
                     }, imgurls)
                     .setPageIndicator(new int[]{R.drawable.indicator_unselected,
