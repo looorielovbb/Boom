@@ -26,8 +26,6 @@ import me.looorielovbb.boom.multitype.bean.Banner;
 public class BannerViewBinder
         extends ItemViewBinder<Banner, BannerViewBinder.ViewHolder> {
 
-
-
     @NonNull
     @Override
     protected ViewHolder onCreateViewHolder(@NonNull LayoutInflater inflater,

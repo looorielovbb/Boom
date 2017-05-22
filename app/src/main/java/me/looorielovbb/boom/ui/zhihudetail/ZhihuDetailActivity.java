@@ -10,6 +10,8 @@ import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -23,13 +25,14 @@ import me.looorielovbb.boom.data.bean.zhihu.DetailExtraBean;
 import me.looorielovbb.boom.data.bean.zhihu.ZhihuDetailBean;
 import me.looorielovbb.boom.utils.HtmlUtil;
 import me.looorielovbb.boom.utils.ImgUtils;
+import me.looorielovbb.boom.utils.ToastUtils;
 import me.looorielovbb.boom.utils.ToolbarUtils;
 
 public class ZhihuDetailActivity extends AppCompatActivity implements ZdetailContract.View {
 
     @BindView(R.id.detail_bar_image)
     ImageView detailBarImage;
-//    @BindView(R.id.detail_bar_title)
+    //    @BindView(R.id.detail_bar_title)
 //    TextView detailBarTitle;
     @BindView(R.id.detail_bar_copyright)
     TextView detailBarCopyright;
@@ -47,9 +50,9 @@ public class ZhihuDetailActivity extends AppCompatActivity implements ZdetailCon
     CoordinatorLayout activityEditorDetail;
 
     ZdetailContract.Presenter mPresenter;
+    boolean isNotTransition = false;
     private String imgUrl;
     private String shareUrl;
-    boolean isNotTransition = false;
     private int id;
 
     @Override
@@ -58,7 +61,7 @@ public class ZhihuDetailActivity extends AppCompatActivity implements ZdetailCon
         setContentView(R.layout.activity_zhihu_detail);
         ButterKnife.bind(this);
         mPresenter = new ZdetailPresenter(this);
-        ToolbarUtils.initToolBar(this,toolBar,"");
+        ToolbarUtils.initToolBar(this, toolBar, "");
         initView();
     }
 
@@ -95,7 +98,7 @@ public class ZhihuDetailActivity extends AppCompatActivity implements ZdetailCon
         });
 
         //加载
-        id = getIntent().getIntExtra("id",0);
+        id = getIntent().getIntExtra("id", 0);
         isNotTransition = getIntent().getBooleanExtra("isNotTransition", false);
         mPresenter.getStoryContent(id);
         mPresenter.getStoryExtras(id);
@@ -105,7 +108,7 @@ public class ZhihuDetailActivity extends AppCompatActivity implements ZdetailCon
     public void showContent(ZhihuDetailBean zhihuDetailBean) {
         imgUrl = zhihuDetailBean.getImage();
         shareUrl = zhihuDetailBean.getShare_url();
-        ImgUtils.LoadNetImg(this,zhihuDetailBean.getImage(),detailBarImage);
+        ImgUtils.LoadNetImg(this, zhihuDetailBean.getImage(), detailBarImage);
         toolBar.setTitle(zhihuDetailBean.getTitle());
         collapsingToolbar.setTitle(zhihuDetailBean.getTitle());
 //        detailBarTitle.setText(zhihuDetailBean.getTitle());
@@ -142,5 +145,25 @@ public class ZhihuDetailActivity extends AppCompatActivity implements ZdetailCon
         } else {
             throw new NullPointerException("presenter can not be null");
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.zhihu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+            case R.id.comments:
+                ToastUtils.show("评论");
+                break;
+            case R.id.share:
+                ToastUtils.show("分享");
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

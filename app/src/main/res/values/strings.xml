@@ -22,5 +22,7 @@
     <string name="ByeBurgerTitleBehavior">me.looorielovbb.boom.ui.uitools.behavior.byeburgernavigationview.ByeBurgerTitleBehavior</string>
     <string name="ByeBurgerToolbarBehavior">me.looorielovbb.boom.ui.uitools.behavior.byeburgernavigationview.ToolbarAlphaBehavior</string>
     <string name="zhihu_detail_title">文章详情</string>
+    <string name="comments">评论</string>
+    <string name="share">分享</string>
 
 </resources>

@@ -18,10 +18,10 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import me.looorielovbb.boom.R;
 import me.looorielovbb.boom.ui.home.cleaner.CleanerFragment;
-import me.looorielovbb.boom.ui.home.zhihu.ZhihuFragment;
 import me.looorielovbb.boom.ui.home.meizi.MeiziFragment;
 import me.looorielovbb.boom.ui.home.mine.MineFragment;
 import me.looorielovbb.boom.ui.home.movie.MovieFragment;
+import me.looorielovbb.boom.ui.home.zhihu.ZhihuFragment;
 import me.looorielovbb.boom.ui.uitools.BottomNavigationViewHelper;
 import me.looorielovbb.boom.ui.uitools.TabFragmentManager;
 
@@ -33,81 +33,6 @@ public class MainActivity extends AppCompatActivity {
     Fragment[] fragments = new Fragment[5];
     FragmentManager fragmentManager;
     TabFragmentManager tabFragmentManager;
-
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        ButterKnife.bind(this);
-        BottomNavigationViewHelper.disableShiftMode(bottomNavi);
-        fragmentManager = getSupportFragmentManager();
-//        if (PreferencesUtils.getBoolean(this, Constants.THEME_MODE, false)) {
-//            switcher.setChecked(true);
-//        } else {
-//            switcher.setChecked(false);
-//        }
-//        switcher.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-//            @Override
-//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-//                if (isChecked) {
-//                    PreferencesUtils.putBoolean(MainActivity.this, Constants.THEME_MODE, true);
-//                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-//
-//                } else {
-//                    PreferencesUtils.putBoolean(MainActivity.this, Constants.THEME_MODE, false);
-//                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-//                }
-//                getWindow().setWindowAnimations(R.style.WindowAnimationFadeInOut);
-//                recreate();
-//            }
-//        });
-        if (null != savedInstanceState) {
-            fragments[0] = fragmentManager.getFragment(savedInstanceState, "ZhihuFragment");
-            fragments[1] = fragmentManager.getFragment(savedInstanceState, "MeiziFragment");
-            fragments[2] = fragmentManager.getFragment(savedInstanceState, "CleanerFragment");
-            fragments[3] = fragmentManager.getFragment(savedInstanceState, "MovieFragment");
-            fragments[4] = fragmentManager.getFragment(savedInstanceState, "MineFragment");
-        } else {
-            fragments[0] = ZhihuFragment.newInstance();
-            fragments[1] = MeiziFragment.newInstance();
-            fragments[2] = CleanerFragment.newInstance();
-            fragments[3] = MovieFragment.newInstance();
-            fragments[4] = MineFragment.newInstance();
-        }
-
-        tabFragmentManager = new TabFragmentManager(this, fragments, R.id.content);
-        bottomNavi.setOnNavigationItemSelectedListener(new BottomNavigationView
-                .OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.navi1:
-                        tabFragmentManager.setCurrentItem(0);
-                        break;
-                    case R.id.navi2:
-                        tabFragmentManager.setCurrentItem(1);
-                        break;
-                    case R.id.navi3:
-                        tabFragmentManager.setCurrentItem(2);
-                        break;
-                    case R.id.navi4:
-                        tabFragmentManager.setCurrentItem(3);
-                        break;
-                    case R.id.navi5:
-                        tabFragmentManager.setCurrentItem(4);
-                        break;
-                }
-                return true;
-            }
-        });
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        fixInputMethodManagerLeak(this);
-    }
 
     public static void fixInputMethodManagerLeak(Context destContext) {
         if (destContext == null) {
@@ -147,6 +72,95 @@ public class MainActivity extends AppCompatActivity {
                 t.printStackTrace();
             }
         }
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
+        BottomNavigationViewHelper.disableShiftMode(bottomNavi);
+        fragmentManager = getSupportFragmentManager();
+//        if (PreferencesUtils.getBoolean(this, Constants.THEME_MODE, false)) {
+//            switcher.setChecked(true);
+//        } else {
+//            switcher.setChecked(false);
+//        }
+//        switcher.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+//                if (isChecked) {
+//                    PreferencesUtils.putBoolean(MainActivity.this, Constants.THEME_MODE, true);
+//                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+//
+//                } else {
+//                    PreferencesUtils.putBoolean(MainActivity.this, Constants.THEME_MODE, false);
+//                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+//                }
+//                getWindow().setWindowAnimations(R.style.WindowAnimationFadeInOut);
+//                recreate();
+//            }
+//        });
+        if (null != savedInstanceState) {
+            fragments[0] = fragmentManager.getFragment(savedInstanceState, "ZhihuFragment");
+            if (fragments[0] == null) {
+                fragments[0] = ZhihuFragment.newInstance();
+            }
+            fragments[1] = fragmentManager.getFragment(savedInstanceState, "MeiziFragment");
+            if (fragments[1] == null) {
+                fragments[1] = MeiziFragment.newInstance();
+            }
+            fragments[2] = fragmentManager.getFragment(savedInstanceState, "CleanerFragment");
+            if (fragments[2] == null) {
+                fragments[2] = CleanerFragment.newInstance();
+            }
+            fragments[3] = fragmentManager.getFragment(savedInstanceState, "MovieFragment");
+            if (fragments[3] == null) {
+                fragments[3] = MovieFragment.newInstance();
+            }
+            fragments[4] = fragmentManager.getFragment(savedInstanceState, "MineFragment");
+            if (fragments[4] == null) {
+                fragments[4] = MineFragment.newInstance();
+            }
+        } else {
+            fragments[0] = ZhihuFragment.newInstance();
+            fragments[1] = MeiziFragment.newInstance();
+            fragments[2] = CleanerFragment.newInstance();
+            fragments[3] = MovieFragment.newInstance();
+            fragments[4] = MineFragment.newInstance();
+        }
+
+        tabFragmentManager = new TabFragmentManager(this, fragments, R.id.content);
+        bottomNavi.setOnNavigationItemSelectedListener(new BottomNavigationView
+                .OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.navi1:
+                        tabFragmentManager.setCurrentItem(0);
+                        break;
+                    case R.id.navi2:
+                        tabFragmentManager.setCurrentItem(1);
+                        break;
+                    case R.id.navi3:
+                        tabFragmentManager.setCurrentItem(2);
+                        break;
+                    case R.id.navi4:
+                        tabFragmentManager.setCurrentItem(3);
+                        break;
+                    case R.id.navi5:
+                        tabFragmentManager.setCurrentItem(4);
+                        break;
+                }
+                return true;
+            }
+        });
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        fixInputMethodManagerLeak(this);
     }
 
     @Override
