@@ -1,7 +1,10 @@
 package me.looorielovbb.boom.ui.zhihucomments.conmentlist;
 
+import java.util.List;
+
 import me.looorielovbb.boom.base.BasePresenter;
 import me.looorielovbb.boom.base.BaseView;
+import me.looorielovbb.boom.data.bean.zhihu.Comment;
 
 /**
  * Created by Lulei on 2017/5/22.
@@ -13,10 +16,12 @@ import me.looorielovbb.boom.base.BaseView;
 public interface CommentConstract {
 
     interface View extends BaseView<CommentConstract.Presenter> {
-
+        void showList(List<Comment> comments);
     }
 
     interface Presenter extends BasePresenter {
+        void fetchShortCommentInfo(int id);
 
+        void fetchLongCommentInfo(int id);
     }
 }

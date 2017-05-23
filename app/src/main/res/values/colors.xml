@@ -9,6 +9,12 @@
 
     <color name="textColorPrimary">#212121</color>
     <color name="textColorSecondary">#757575</color>
+
+    <color name="comment_text">#5b5d5c</color>
+    <color name="comment_reply">#9ba4a3</color>
+    <color name="comment_btn">#bfbfbf</color>
+    <color name="comment_line">#dddddd</color>
+
     <color name="colorDivider">#BDBDBD</color>
 
     <color name="viewBackground">@android:color/white</color>
@@ -314,4 +320,5 @@
     <color name="md_blue_grey_700">#455a64</color>
     <color name="md_blue_grey_800">#37474f</color>
     <color name="md_blue_grey_900">#263238</color>
+    <color name="comment_at">#5d8698</color>
 </resources>

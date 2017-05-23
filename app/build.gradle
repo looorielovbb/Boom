@@ -58,10 +58,6 @@ dependencies {
     compile('com.squareup.retrofit2:adapter-rxjava:2.2.0', {
         exclude group: 'io.reactivex', module: 'rxjava'
     })
-    //leakcanary
-//    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5.1'
-//    releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.1'
-//    testCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.1'
     //stateView
 //    compile 'com.github.nukc.stateview:library:1.1.0'
     compile 'me.solidev.library:status-view-layout:0.2.2'
@@ -72,6 +68,8 @@ dependencies {
     //banner
     compile 'com.bigkoo:convenientbanner:2.0.5'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    //圆形图片加载库
+    compile 'de.hdodenhof:circleimageview:2.1.0'
 }
 
 //aar 引用

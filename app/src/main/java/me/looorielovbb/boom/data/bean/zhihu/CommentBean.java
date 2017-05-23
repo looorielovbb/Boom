@@ -16,13 +16,13 @@ public class CommentBean {
      * likes : 2
      */
 
-    private List<CommentsBean> comments;
+    private List<Comment> comments;
 
-    public List<CommentsBean> getComments() {
+    public List<Comment> getComments() {
         return comments;
     }
 
-    public void setComments(List<CommentsBean> comments) {
+    public void setComments(List<Comment> comments) {
         this.comments = comments;
     }
 

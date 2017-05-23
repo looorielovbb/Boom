@@ -33,7 +33,7 @@ public class ApiFactory {
     private static void initOkHttpClient() {
         if (client == null) {
             HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
-            interceptor.setLevel(HttpLoggingInterceptor.Level.HEADERS);
+            interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
             client = new OkHttpClient.Builder()
                     .addInterceptor(interceptor)
                     .retryOnConnectionFailure(true)

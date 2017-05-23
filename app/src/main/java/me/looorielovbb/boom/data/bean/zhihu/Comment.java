@@ -6,7 +6,7 @@ package me.looorielovbb.boom.data.bean.zhihu;
  * date : 2017/4/17
  * mail to lulei4461@gmail.com
  */
-public class CommentsBean {
+public class Comment {
     private String author;
     private String content;
     private String avatar;

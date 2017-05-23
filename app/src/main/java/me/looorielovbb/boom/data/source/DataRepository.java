@@ -7,6 +7,7 @@ import java.util.List;
 import me.looorielovbb.boom.data.bean.gank.Meizi;
 import me.looorielovbb.boom.data.bean.others.ZhuangbiImage;
 import me.looorielovbb.boom.data.bean.zhihu.BeforeDailyBean;
+import me.looorielovbb.boom.data.bean.zhihu.CommentBean;
 import me.looorielovbb.boom.data.bean.zhihu.DailyListBean;
 import me.looorielovbb.boom.data.bean.zhihu.DetailExtraBean;
 import me.looorielovbb.boom.data.bean.zhihu.ZhihuDetailBean;
@@ -75,6 +76,14 @@ public class DataRepository implements DataSource {
 
     public Observable<DetailExtraBean> getDetailExtra(int id){
         return ApiFactory.getZhihuApi().getDetailExtraInfo(id);
+    }
+
+    public Observable<CommentBean> getLongComments(int id){
+        return ApiFactory.getZhihuApi().getLongCommentInfo(id);
+    }
+
+    public Observable<CommentBean> getShortComments(int id ){
+        return ApiFactory.getZhihuApi().getShortCommentInfo(id);
     }
 
 }

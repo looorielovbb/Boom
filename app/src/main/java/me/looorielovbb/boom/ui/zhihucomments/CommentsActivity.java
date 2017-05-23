@@ -27,7 +27,6 @@ public class CommentsActivity extends AppCompatActivity {
     private Fragment[] fragments = new Fragment[2];
     private String[] titles = new String[2];
     private int shortNum, longNum;
-    private int id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +37,6 @@ public class CommentsActivity extends AppCompatActivity {
 
         shortNum = getIntent().getExtras().getInt("shortNum");
         longNum = getIntent().getExtras().getInt("longNum");
-        id = getIntent().getExtras().getInt("id");
         titles[0] = String.format(Locale.CHINESE, "短评论(%d)", shortNum);
         titles[1] = String.format(Locale.CHINESE, "长评论(%d)", longNum);
         fragments[0] =  CommentListFragment.newInstance(true);
@@ -47,8 +45,5 @@ public class CommentsActivity extends AppCompatActivity {
         vpZhihuComment.setAdapter(fpAdapter);
         tabZhihuComment.setupWithViewPager(vpZhihuComment);
 
-    }
-    public int getId(){
-        return id;
     }
 }

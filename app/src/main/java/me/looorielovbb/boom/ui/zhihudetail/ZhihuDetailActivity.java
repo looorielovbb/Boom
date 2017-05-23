@@ -14,7 +14,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -90,14 +89,6 @@ public class ZhihuDetailActivity extends AppCompatActivity implements ZdetailCon
         settings.setLoadWithOverviewMode(true);
         settings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
         settings.setSupportZoom(true);
-        wvDetailContent.setWebViewClient(new WebViewClient() {
-            @Override
-            public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                view.loadUrl(url);
-                return true;
-            }
-        });
-
         //加载
         id = getIntent().getIntExtra("id", 0);
         isNotTransition = getIntent().getBooleanExtra("isNotTransition", false);
