@@ -9,12 +9,16 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
+import java.util.Locale;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import me.looorielovbb.boom.R;
 import me.looorielovbb.boom.data.bean.gank.Meizi;
 import me.looorielovbb.boom.ui.picture.PicActivity;
 import me.looorielovbb.boom.ui.uitools.loadmore.LoadMoreAdapter;
+import me.looorielovbb.boom.utils.DateUtils;
 import me.looorielovbb.boom.utils.ImgUtils;
 
 /**
@@ -27,7 +31,7 @@ import me.looorielovbb.boom.utils.ImgUtils;
 public class MeiziAdapter extends LoadMoreAdapter<Meizi> {
     private Activity context;
 
-    public MeiziAdapter(Activity activity){
+    public MeiziAdapter(Activity activity) {
         this.context = activity;
     }
 
@@ -37,19 +41,19 @@ public class MeiziAdapter extends LoadMoreAdapter<Meizi> {
             final ViewHolder itemholder = (ViewHolder) holder;
             final Meizi meizi = items.get(position);
             ImgUtils.LoadNetImg(context, meizi.getUrl(), itemholder.imageView);
-            itemholder.tvDate.setText(items
-                                              .get(position)
-                                              .getDate());
+            itemholder.tvDate.setText(meizi.getDate());
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("", Locale.CHINA);
             itemholder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = PicActivity.newIntent(context, meizi.getUrl(), meizi.getDesc());
+                    Intent intent = PicActivity.newIntent(context, meizi.getUrl(),
+                            DateUtils.getDateS(meizi.getDate()));
                     ActivityOptionsCompat options = ActivityOptionsCompat.makeScaleUpAnimation(
-                            itemholder.itemView,
-                            itemholder.itemView.getWidth() ,
-                            itemholder.itemView.getHeight() ,
-                            0,
-                            0);
+                            v,
+                            v.getWidth(),
+                            v.getHeight(),
+                            v.getWidth(),
+                            v.getHeight());
                     context.startActivity(intent, options.toBundle());
                 }
             });
@@ -68,8 +72,10 @@ public class MeiziAdapter extends LoadMoreAdapter<Meizi> {
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.iv_img) ImageView imageView;
-        @BindView(R.id.tv_date) TextView tvDate;
+        @BindView(R.id.iv_img)
+        ImageView imageView;
+        @BindView(R.id.tv_date)
+        TextView tvDate;
 
         public ViewHolder(View itemView) {
             super(itemView);

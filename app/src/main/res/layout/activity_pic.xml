@@ -1,23 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/md_black_1000">
 
     <ImageView
-        android:visibility="gone"
         android:id="@+id/picture"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_centerInParent="true"
-        android:contentDescription="ImageView"/>
+        android:contentDescription="ImageView"
+        android:transitionName="@string/meizi"
+        android:visibility="gone"
+        tools:targetApi="lollipop" />
 
     <uk.co.senab.photoview.PhotoView
         android:id="@+id/photo"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent" />
 
-    <include
-        layout="@layout/layout_toolbar"/>
+    <include layout="@layout/layout_toolbar" />
 </RelativeLayout>

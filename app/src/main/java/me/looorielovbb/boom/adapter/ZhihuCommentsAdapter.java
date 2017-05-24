@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -56,9 +57,8 @@ public class ZhihuCommentsAdapter extends RecyclerView.Adapter<ZhihuCommentsAdap
         ImgUtils.LoadNetImg(mContext, item.getAvatar(), viewHolder.civCommentFace);
         viewHolder.tvCommentName.setText(item.getAuthor());
         viewHolder.tvCommentContent.setText(item.getContent());
-//        viewHolder.tvCommentReply.setText(item.getReply_to());
         viewHolder.tvCommentTime.setText(DateUtils.formatTime2String(item.getTime()));
-        viewHolder.tvCommentLike.setText(item.getLikes() + "");
+        viewHolder.tvCommentLike.setText(String.format(Locale.CHINESE, "%d", item.getLikes()));
         final TextView tvCommentReply = viewHolder.tvCommentReply;
         final TextView tvCommentExpand = viewHolder.tvCommentExpand;
         if (item.getReply_to() != null && item.getReply_to().getId() != 0) {

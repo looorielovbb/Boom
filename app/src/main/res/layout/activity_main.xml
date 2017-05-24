@@ -33,6 +33,7 @@
     <!--
         <include layout="@layout/layout_toolbar"/>
     -->
+
     <FrameLayout
         android:id="@+id/content"
         android:layout_width="match_parent"
@@ -49,7 +50,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:background="@color/navibottombackgroud"
-        app:elevation="4dp"
+        app:elevation="2dp"
         app:layout_behavior="@string/ByeBurgerBottomBehavior"
         app:menu="@menu/navigation" />
 </android.support.design.widget.CoordinatorLayout>

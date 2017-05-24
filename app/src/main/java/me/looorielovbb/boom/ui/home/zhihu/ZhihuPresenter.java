@@ -69,13 +69,14 @@ public class ZhihuPresenter implements ZhihuContract.Presenter {
                     public void onNext(DailyListBean dailyListBean) {
                         mView.dismissLoading();
                         if (dailyListBean != null) {
-                            if (mItems.containsAll(dailyListBean.getStories())){
+                            if (mItems.containsAll(dailyListBean.getStories())) {
                                 return;
                             }
                             mDate = dailyListBean.getDate();
                             mItems.add(new Banner(dailyListBean.getTop_stories()));
                             mItems.add(new SubTitle(dailyListBean.getDate()));
                             mItems.addAll(dailyListBean.getStories());
+                            mView.showBanner(dailyListBean.getTop_stories());
                             mView.showList(mItems);
                         }
                     }
@@ -128,7 +129,7 @@ public class ZhihuPresenter implements ZhihuContract.Presenter {
     }
 
     @Override
-    public void clear(){
+    public void clear() {
         mItems.clear();
     }
 }

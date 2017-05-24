@@ -12,7 +12,6 @@ import java.util.Locale;
 import static java.lang.System.currentTimeMillis;
 
 
-
 public class DateUtils {
 
     public static final String PATTERN_DATE = "MM月dd日";
@@ -36,9 +35,8 @@ public class DateUtils {
     public static Date str2date(String str, String format) {
         Date date = null;
         try {
-            if (str != null)
-            {
-                SimpleDateFormat sdf = new SimpleDateFormat(format,Locale.CHINESE);
+            if (str != null) {
+                SimpleDateFormat sdf = new SimpleDateFormat(format, Locale.CHINESE);
                 date = sdf.parse(str);
             }
         } catch (ParseException e) {
@@ -49,38 +47,39 @@ public class DateUtils {
 
     /**
      * 将时间戳转化为字符串
+     *
      * @param showTime
      * @return
      */
     public static String formatTime2String(long showTime) {
-        return formatTime2String(showTime,false);
+        return formatTime2String(showTime, false);
     }
 
-    public static String formatTime2String(long showTime , boolean haveYear) {
+    public static String formatTime2String(long showTime, boolean haveYear) {
         String str = "";
-        long distance = currentTimeMillis()/1000 - showTime;
-        if(distance < 300){
+        long distance = currentTimeMillis() / 1000 - showTime;
+        if (distance < 300) {
             str = "刚刚";
-        }else if(distance >= 300 && distance < 600){
+        } else if (distance >= 300 && distance < 600) {
             str = "5分钟前";
-        }else if(distance >= 600 && distance < 1200){
+        } else if (distance >= 600 && distance < 1200) {
             str = "10分钟前";
-        }else if(distance >= 1200 && distance < 1800){
+        } else if (distance >= 1200 && distance < 1800) {
             str = "20分钟前";
-        }else if(distance >= 1800 && distance < 2700){
+        } else if (distance >= 1800 && distance < 2700) {
             str = "半小时前";
-        }else if(distance >= 2700){
+        } else if (distance >= 2700) {
             Date date = new Date(showTime * 1000);
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA);
-            str = formatDateTime(sdf.format(date) , haveYear);
+            str = formatDateTime(sdf.format(date), haveYear);
         }
         return str;
     }
 
     @SuppressLint("WrongConstant")
-    public static String formatDateTime(String time , boolean haveYear) {
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss",Locale.CHINA);
-        if(time == null){
+    public static String formatDateTime(String time, boolean haveYear) {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA);
+        if (time == null) {
             return "";
         }
         Date date;
@@ -102,25 +101,38 @@ public class DateUtils {
         Calendar yesterday = Calendar.getInstance();
         yesterday.set(Calendar.YEAR, current.get(Calendar.YEAR));
         yesterday.set(Calendar.MONTH, current.get(Calendar.MONTH));
-        yesterday.set(Calendar.DAY_OF_MONTH, current.get(Calendar.DAY_OF_MONTH)-1);
+        yesterday.set(Calendar.DAY_OF_MONTH, current.get(Calendar.DAY_OF_MONTH) - 1);
         yesterday.set(Calendar.HOUR_OF_DAY, 0);
         yesterday.set(Calendar.MINUTE, 0);
         yesterday.set(Calendar.SECOND, 0);
 
         current.setTime(date);
-        if(current.after(today)){
-            return "今天 "+time.split(" ")[1];
-        }else if(current.before(today) && current.after(yesterday)){
-            return "昨天 "+time.split(" ")[1];
-        }else{
-            if(haveYear) {
+        if (current.after(today)) {
+            return "今天 " + time.split(" ")[1];
+        } else if (current.before(today) && current.after(yesterday)) {
+            return "昨天 " + time.split(" ")[1];
+        } else {
+            if (haveYear) {
                 int index = time.indexOf(" ");
-                return time.substring(0,index);
-            }else {
-                int yearIndex = time.indexOf("-")+1;
+                return time.substring(0, index);
+            } else {
+                int yearIndex = time.indexOf("-") + 1;
                 int index = time.indexOf(" ");
-                return time.substring(yearIndex,time.length()).substring(0,index);
+                return time.substring(yearIndex, time.length()).substring(0, index);
             }
         }
     }
+
+    public static String getDateS(String s) {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.CHINA);
+        SimpleDateFormat format1 = new SimpleDateFormat("yyyy年MM月dd日", Locale.CHINA);
+        try {
+            Date date = format.parse(s);
+            return format1.format(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return "";
+        }
+    }
+
 }

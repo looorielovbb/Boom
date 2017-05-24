@@ -4,6 +4,7 @@ import java.util.List;
 
 import me.looorielovbb.boom.base.BasePresenter;
 import me.looorielovbb.boom.base.BaseView;
+import me.looorielovbb.boom.data.bean.zhihu.TopStoriesBean;
 
 /**
  * Created by Lulei on 2017/4/18.
@@ -20,6 +21,8 @@ public interface ZhihuContract {
         void dismissLoading();
 
         void showerror(String error);
+
+        void showBanner(List<TopStoriesBean> storiesBeen);
 
         void showList(List<Object> listdata);
 

@@ -28,13 +28,13 @@ public class NetworkImageHolder implements Holder<String> {
 
     private ImageView imageView;
     private TextView tvTitle;
-    private List<TopStoriesBean> banner;
+    private List<TopStoriesBean> topStoriesBeans;
     private View convertView;
 
 
     public NetworkImageHolder(List<TopStoriesBean> banner) {
         super();
-        this.banner = banner;
+        this.topStoriesBeans = banner;
     }
 
     @Override
@@ -49,13 +49,13 @@ public class NetworkImageHolder implements Holder<String> {
     @Override
     public void UpdateUI(final Context context, final int position, String data) {
         ImgUtils.LoadNetImg(context, data, imageView);
-        tvTitle.setText(banner.get(position).getTitle());
+        tvTitle.setText(topStoriesBeans.get(position).getTitle());
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
                 intent.setClass(context, ZhihuDetailActivity.class);
-                intent.putExtra("id", banner.get(position).getId());
+                intent.putExtra("id", topStoriesBeans.get(position).getId());
                 intent.putExtra("isNotTransition", true);
                 ActivityOptionsCompat options = ActivityOptionsCompat.makeScaleUpAnimation(
                         v,

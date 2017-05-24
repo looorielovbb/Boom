@@ -18,6 +18,7 @@ import butterknife.ButterKnife;
 import me.drakeet.multitype.MultiTypeAdapter;
 import me.looorielovbb.boom.R;
 import me.looorielovbb.boom.data.bean.zhihu.StoriesBean;
+import me.looorielovbb.boom.data.bean.zhihu.TopStoriesBean;
 import me.looorielovbb.boom.multitype.BannerViewBinder;
 import me.looorielovbb.boom.multitype.DailyNewsViewBinder;
 import me.looorielovbb.boom.multitype.SubTitleViewBinder;
@@ -28,13 +29,14 @@ import me.looorielovbb.boom.utils.ToastUtils;
 
 public class ZhihuFragment extends Fragment implements  SwipeRefreshLayout.OnRefreshListener,
         ZhihuContract.View {
-
+    //    @BindView(R.id.convenientBanner)
+//    ConvenientBanner convenientBanner;
     @BindView(R.id.recyclerView)
     RecyclerView rvMain;
     @BindView(R.id.refreshLayout)
     SwipeRefreshLayout refreshLayout;
-    private MultiTypeAdapter adapter;
     ZhihuContract.Presenter mPresenter;
+    private MultiTypeAdapter adapter;
 
 
     public ZhihuFragment() {
@@ -75,6 +77,8 @@ public class ZhihuFragment extends Fragment implements  SwipeRefreshLayout.OnRef
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
                 View lastchildView = recyclerView.getLayoutManager().getChildAt(recyclerView.getLayoutManager().getChildCount() - 1);
+                if (lastchildView == null)
+                    return;
                 int lastChildBottomY = lastchildView.getBottom();
                 int recyclerBottomY = recyclerView.getBottom() - recyclerView.getPaddingBottom();
                 int lastPosition = recyclerView.getLayoutManager().getPosition(lastchildView);
@@ -120,6 +124,27 @@ public class ZhihuFragment extends Fragment implements  SwipeRefreshLayout.OnRef
     @Override
     public void showerror(String error) {
         ToastUtils.show(error);
+    }
+
+    @Override
+    public void showBanner(final List<TopStoriesBean> storiesBeen) {
+//        final List<String> imgurls = new ArrayList<>();
+//        for (TopStoriesBean img : storiesBeen) {
+//            imgurls.add(img.getImage());
+//        }
+//        convenientBanner
+//                .setPages(new CBViewHolderCreator<NetworkImageHolder>() {
+//                    @Override
+//                    public NetworkImageHolder createHolder() {
+//                        return new NetworkImageHolder(storiesBeen);
+//                    }
+//                }, imgurls)
+//                .setPageIndicator(new int[]{R.drawable.indicator_unselected,
+//                        R.drawable.indicator_selected})
+//                .setPageIndicatorAlign(ConvenientBanner.PageIndicatorAlign.CENTER_HORIZONTAL);
+//        if (!convenientBanner.isTurning()) {
+//            convenientBanner.startTurning(10 * 1000);
+//        }
     }
 
     @Override
