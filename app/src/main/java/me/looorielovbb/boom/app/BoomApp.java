@@ -9,6 +9,7 @@ import com.elvishew.xlog.LogLevel;
 import com.elvishew.xlog.XLog;
 
 import me.looorielovbb.boom.config.Constants;
+import me.looorielovbb.boom.utils.CrashHandler;
 import me.looorielovbb.boom.utils.PreferencesUtils;
 
 /**
@@ -25,16 +26,15 @@ public class BoomApp extends MultiDexApplication {
     @Override
     public void onCreate() {
         super.onCreate();
-//        if (LeakCanary.isInAnalyzerProcess(this)) {
-//            return;
-//        }
-//        LeakCanary.install(this);
         appCtx = getApplicationContext();
         XLog.init(LogLevel.ALL);
+
         if (PreferencesUtils.getBoolean(this, Constants.THEME_MODE, false)) {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
         } else {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         }
+        CrashHandler crashHandler = CrashHandler.getInstance();
+        crashHandler.init(this);
     }
 }

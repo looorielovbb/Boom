@@ -12,6 +12,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
+import com.elvishew.xlog.XLog;
+
 import java.lang.reflect.Field;
 
 import butterknife.BindView;
@@ -102,23 +104,23 @@ public class MainActivity extends AppCompatActivity {
 //            }
 //        });
         if (null != savedInstanceState) {
-            fragments[0] = fragmentManager.getFragment(savedInstanceState, "ZhihuFragment");
+            fragments[0] = fragmentManager.getFragment(savedInstanceState, ZhihuFragment.class.getCanonicalName());
             if (fragments[0] == null) {
                 fragments[0] = ZhihuFragment.newInstance();
             }
-            fragments[1] = fragmentManager.getFragment(savedInstanceState, "MeiziFragment");
+            fragments[1] = fragmentManager.getFragment(savedInstanceState, MeiziFragment.class.getCanonicalName());
             if (fragments[1] == null) {
                 fragments[1] = MeiziFragment.newInstance();
             }
-            fragments[2] = fragmentManager.getFragment(savedInstanceState, "CleanerFragment");
+            fragments[2] = fragmentManager.getFragment(savedInstanceState, CleanerFragment.class.getCanonicalName());
             if (fragments[2] == null) {
                 fragments[2] = CleanerFragment.newInstance();
             }
-            fragments[3] = fragmentManager.getFragment(savedInstanceState, "MovieFragment");
+            fragments[3] = fragmentManager.getFragment(savedInstanceState, MovieFragment.class.getCanonicalName());
             if (fragments[3] == null) {
                 fragments[3] = MovieFragment.newInstance();
             }
-            fragments[4] = fragmentManager.getFragment(savedInstanceState, "MineFragment");
+            fragments[4] = fragmentManager.getFragment(savedInstanceState, MineFragment.class.getCanonicalName());
             if (fragments[4] == null) {
                 fragments[4] = MineFragment.newInstance();
             }
@@ -166,6 +168,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
         super.onSaveInstanceState(outState, outPersistentState);
+        XLog.e("onSaveInstanceState");
         for (Fragment fragment : fragments) {
             if (fragment != null && fragment.isAdded()) {
                 getSupportFragmentManager().putFragment(outState,
@@ -175,4 +178,9 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        XLog.e("onRestoreInstanceState");
+    }
 }

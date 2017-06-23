@@ -2,6 +2,7 @@ package me.looorielovbb.boom.ui.home.zhihu;
 
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -118,7 +119,12 @@ public class ZhihuFragment extends Fragment implements  SwipeRefreshLayout.OnRef
 
     @Override
     public void dismissLoading() {
-        refreshLayout.setRefreshing(false);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                refreshLayout.setRefreshing(false);
+            }
+        }, 1000);
     }
 
     @Override
