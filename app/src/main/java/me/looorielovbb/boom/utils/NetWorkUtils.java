@@ -6,8 +6,6 @@ import android.net.NetworkInfo;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 
-import me.looorielovbb.boom.app.BoomApp;
-
 
 /**
  * NetWork Utils
@@ -119,8 +117,8 @@ public class NetWorkUtils {
         }
     }
 
-    public static boolean isNetworkAvailable() {
-        ConnectivityManager cm = (ConnectivityManager) BoomApp.appCtx
+    public static boolean isNetworkAvailable(Context context) {
+        ConnectivityManager cm = (ConnectivityManager) context.getApplicationContext()
                                                           .getSystemService(Context.CONNECTIVITY_SERVICE);
         if (cm != null) {
             //如果仅仅是用来判断网络连接

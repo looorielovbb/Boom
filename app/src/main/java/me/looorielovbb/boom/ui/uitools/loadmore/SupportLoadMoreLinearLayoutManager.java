@@ -24,8 +24,8 @@ public class SupportLoadMoreLinearLayoutManager extends LinearLayoutManager {
             }
 
             final boolean allVisible = firstCompletelyVisibleItemPosition == 0 &&
-                                       lastCompletelyVisibleItemPosition ==
-                                       adapter.getItemCount() - 1;
+                    lastCompletelyVisibleItemPosition ==
+                            adapter.getItemCount() - 1;
             adapter.setEnableLoadMore(!allVisible);
         }
     };

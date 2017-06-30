@@ -1,48 +1,56 @@
 package me.looorielovbb.boom.data.bean.douban;
 
-
-import java.io.Serializable;
 import java.util.List;
 
-import me.looorielovbb.boom.data.bean.douban.moviechild.SubjectsBean;
-
-
-
-
-public class HotMovieBean  implements Serializable {
-
+/**
+ * Created by Long
+ * on 2016/9/9.
+ */
+public class MovieListResponse {
     private int count;
     private int start;
     private int total;
     private String title;
-    private List<SubjectsBean> subjects;
+    private List<MovieInfo> subjects;
+
 
     public int getCount() {
         return count;
     }
+
+    public void setCount(int count) {
+        this.count = count;
+    }
+
     public int getStart() {
         return start;
     }
-    public int getTotal() {
-        return total;
-    }
-    public String getTitle() {
-        return title;
-    }
-    public List<SubjectsBean> getSubjects() {
-        return subjects;
-    }
+
     public void setStart(int start) {
         this.start = start;
     }
+
+    public int getTotal() {
+        return total;
+    }
+
     public void setTotal(int total) {
         this.total = total;
     }
+
+    public String getTitle() {
+        return title;
+    }
+
     public void setTitle(String title) {
         this.title = title;
     }
-    public void setSubjects(List<SubjectsBean> subjects) {
-        this.subjects = subjects;
+
+    public List<MovieInfo> getSubjects() {
+        return subjects;
     }
 
+    public void setSubjects(List<MovieInfo> subjects) {
+        this.subjects = subjects;
+    }
 }

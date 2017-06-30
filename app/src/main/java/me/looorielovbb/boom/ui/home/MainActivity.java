@@ -12,17 +12,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
-import com.elvishew.xlog.XLog;
-
 import java.lang.reflect.Field;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import me.looorielovbb.boom.R;
-import me.looorielovbb.boom.ui.home.cleaner.CleanerFragment;
 import me.looorielovbb.boom.ui.home.meizi.MeiziFragment;
 import me.looorielovbb.boom.ui.home.mine.MineFragment;
-import me.looorielovbb.boom.ui.home.movie.MovieFragment;
+import me.looorielovbb.boom.ui.home.movieandbooks.MBFragment;
 import me.looorielovbb.boom.ui.home.zhihu.ZhihuFragment;
 import me.looorielovbb.boom.ui.uitools.BottomNavigationViewHelper;
 import me.looorielovbb.boom.ui.uitools.TabFragmentManager;
@@ -32,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.bottomnavi)
     BottomNavigationView bottomNavi;
 
-    Fragment[] fragments = new Fragment[5];
+    Fragment[] fragments = new Fragment[4];
     FragmentManager fragmentManager;
     TabFragmentManager tabFragmentManager;
 
@@ -112,24 +109,19 @@ public class MainActivity extends AppCompatActivity {
             if (fragments[1] == null) {
                 fragments[1] = MeiziFragment.newInstance();
             }
-            fragments[2] = fragmentManager.getFragment(savedInstanceState, CleanerFragment.class.getCanonicalName());
+            fragments[2] = fragmentManager.getFragment(savedInstanceState, MBFragment.class.getCanonicalName());
             if (fragments[2] == null) {
-                fragments[2] = CleanerFragment.newInstance();
+                fragments[2] = MBFragment.newInstance();
             }
-            fragments[3] = fragmentManager.getFragment(savedInstanceState, MovieFragment.class.getCanonicalName());
+            fragments[3] = fragmentManager.getFragment(savedInstanceState, MineFragment.class.getCanonicalName());
             if (fragments[3] == null) {
-                fragments[3] = MovieFragment.newInstance();
-            }
-            fragments[4] = fragmentManager.getFragment(savedInstanceState, MineFragment.class.getCanonicalName());
-            if (fragments[4] == null) {
-                fragments[4] = MineFragment.newInstance();
+                fragments[3] = MineFragment.newInstance();
             }
         } else {
             fragments[0] = ZhihuFragment.newInstance();
             fragments[1] = MeiziFragment.newInstance();
-            fragments[2] = CleanerFragment.newInstance();
-            fragments[3] = MovieFragment.newInstance();
-            fragments[4] = MineFragment.newInstance();
+            fragments[2] = MBFragment.newInstance();
+            fragments[3] = MineFragment.newInstance();
         }
 
         tabFragmentManager = new TabFragmentManager(this, fragments, R.id.content);
@@ -150,9 +142,6 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.navi4:
                         tabFragmentManager.setCurrentItem(3);
                         break;
-                    case R.id.navi5:
-                        tabFragmentManager.setCurrentItem(4);
-                        break;
                 }
                 return true;
             }
@@ -168,19 +157,13 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
         super.onSaveInstanceState(outState, outPersistentState);
-        XLog.e("onSaveInstanceState");
         for (Fragment fragment : fragments) {
             if (fragment != null && fragment.isAdded()) {
                 getSupportFragmentManager().putFragment(outState,
-                        fragment.getClass().getSimpleName(),
+                        fragment.getClass().getCanonicalName(),
                         fragment);
             }
         }
     }
 
-    @Override
-    protected void onRestoreInstanceState(Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
-        XLog.e("onRestoreInstanceState");
-    }
 }

@@ -22,7 +22,7 @@ import me.looorielovbb.boom.data.bean.zhihu.Comment;
 public class CommentListFragment extends Fragment implements CommentConstract.View {
     private static final String ISHORT = "ishort";
     @BindView(R.id.list)
-    RecyclerView list;
+    RecyclerView rvCommentList;
     Unbinder unbinder;
 
     private boolean ishort;
@@ -53,9 +53,9 @@ public class CommentListFragment extends Fragment implements CommentConstract.Vi
     }
 
     private void initView() {
-        list.setLayoutManager(new LinearLayoutManager(getContext()));
+        rvCommentList.setLayoutManager(new LinearLayoutManager(getContext()));
         adapter = new ZhihuCommentsAdapter();
-        list.setAdapter(adapter);
+        rvCommentList.setAdapter(adapter);
         if (ishort) {
             mPresenter.fetchShortCommentInfo(id);
         } else {

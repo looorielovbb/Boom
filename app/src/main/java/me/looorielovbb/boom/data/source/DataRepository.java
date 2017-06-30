@@ -4,6 +4,7 @@ import android.support.annotation.NonNull;
 
 import java.util.List;
 
+import me.looorielovbb.boom.data.bean.douban.MovieListResponse;
 import me.looorielovbb.boom.data.bean.gank.Meizi;
 import me.looorielovbb.boom.data.bean.others.ZhuangbiImage;
 import me.looorielovbb.boom.data.bean.zhihu.BeforeDailyBean;
@@ -85,5 +86,14 @@ public class DataRepository implements DataSource {
     public Observable<CommentBean> getShortComments(int id ){
         return ApiFactory.getZhihuApi().getShortCommentInfo(id);
     }
+
+     /*
+    * 豆瓣
+    * */
+
+    public Observable<MovieListResponse> getInTheatersMovie(String city) {
+        return ApiFactory.getDoubanApi().getInTheatersMovie(city);
+    }
+
 
 }

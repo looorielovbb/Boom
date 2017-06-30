@@ -3,8 +3,7 @@
     <string name="navi_1">首页</string>
     <string name="navi_2">妹子</string>
     <string name="navi_3">精选</string>
-    <string name="navi_4">电影</string>
-    <string name="navi_5">我的</string>
+    <string name="navi_4">我的</string>
     <string name="night_mode">夜间模式</string>
 
     <string name="advertisement">广告</string>
@@ -14,20 +13,21 @@
     <string name="text_retry">点击重试~喵</string>
     <string name="beauty">妹子图</string>
 
-
     <string name="image_transition">image_trans_name</string>
-    <!--Behavior-->
-
-    <string name="ByeBurgerBottomBehavior">me.looorielovbb.boom.ui.uitools.behavior.byeburgernavigationview.ByeBurgerBottomBehavior</string>
-    <string name="ByeBurgerTitleBehavior">me.looorielovbb.boom.ui.uitools.behavior.byeburgernavigationview.ByeBurgerTitleBehavior</string>
-    <string name="ByeBurgerToolbarBehavior">me.looorielovbb.boom.ui.uitools.behavior.byeburgernavigationview.ToolbarAlphaBehavior</string>
     <string name="zhihu_detail_title">文章详情</string>
     <string name="comments">评论</string>
     <string name="share">分享</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="comment_expand">收起</string>
-    <string name="meizi">meizi</string>
+    <string name="meizi">妹子</string>
+    <string name="save">保存</string>
 
+    <!--APPID-->
+    <string name="BUGLY_APPID">3e48dd529f</string>
+
+    <!--Behavior-->
+    <string name="ByeBurgerBottomBehavior">me.looorielovbb.boom.ui.uitools.behavior.byeburgernavigationview.ByeBurgerBottomBehavior</string>
+    <string name="ByeBurgerTitleBehavior">me.looorielovbb.boom.ui.uitools.behavior.byeburgernavigationview.ByeBurgerTitleBehavior</string>
+    <string name="ByeBurgerToolbarBehavior">me.looorielovbb.boom.ui.uitools.behavior.byeburgernavigationview.ToolbarAlphaBehavior</string>
 </resources>

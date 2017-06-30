@@ -4,6 +4,9 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_LOGS" />
 
     <application
         android:name=".app.BoomApp"
@@ -53,6 +56,11 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity android:name=".ui.zhihucomments.CommentsActivity" />
+
+        <!-- 配置腾讯Bugly APP ID -->
+        <meta-data
+            android:name="BUGLY_APPID"
+            android:value="@string/BUGLY_APPID" />
     </application>
 
 </manifest>

@@ -7,9 +7,10 @@ import android.support.v7.app.AppCompatDelegate;
 
 import com.elvishew.xlog.LogLevel;
 import com.elvishew.xlog.XLog;
+import com.tencent.bugly.crashreport.CrashReport;
 
+import me.looorielovbb.boom.BuildConfig;
 import me.looorielovbb.boom.config.Constants;
-import me.looorielovbb.boom.utils.CrashHandler;
 import me.looorielovbb.boom.utils.PreferencesUtils;
 
 /**
@@ -28,13 +29,18 @@ public class BoomApp extends MultiDexApplication {
         super.onCreate();
         appCtx = getApplicationContext();
         XLog.init(LogLevel.ALL);
-
+        //当前主题读取
         if (PreferencesUtils.getBoolean(this, Constants.THEME_MODE, false)) {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
         } else {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         }
-        CrashHandler crashHandler = CrashHandler.getInstance();
-        crashHandler.init(this);
+
+        //腾讯bugly 初始化
+        CrashReport.initCrashReport(getApplicationContext(), Constants.ID.BUGLY, BuildConfig.DEBUG);
+        CrashReport.setIsDevelopmentDevice(getApplicationContext(), BuildConfig.DEBUG);
+        //异常配置
+//        CrashHandler crashHandler = CrashHandler.getInstance();
+//        crashHandler.init(this);
     }
 }

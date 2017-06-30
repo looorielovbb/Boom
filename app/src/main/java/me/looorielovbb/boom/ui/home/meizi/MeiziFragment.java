@@ -1,10 +1,7 @@
 package me.looorielovbb.boom.ui.home.meizi;
 
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -19,16 +16,16 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import me.looorielovbb.boom.R;
 import me.looorielovbb.boom.adapter.MeiziAdapter;
+import me.looorielovbb.boom.base.LazyLoadFragment;
 import me.looorielovbb.boom.config.Constants;
 import me.looorielovbb.boom.data.bean.gank.Meizi;
-import me.looorielovbb.boom.ui.picture.PicActivity;
 import me.looorielovbb.boom.ui.uitools.loadmore.OnVerticalScrollListener;
 import me.looorielovbb.boom.ui.uitools.loadmore.SupportLoadMoreLinearLayoutManager;
 import me.looorielovbb.boom.utils.ToastUtils;
 import me.solidev.statusviewlayout.StatusViewLayout;
 
 
-public class MeiziFragment extends Fragment
+public class MeiziFragment extends LazyLoadFragment
         implements MeiziContract.View, SwipeRefreshLayout.OnRefreshListener {
 
     @BindView(R.id.stateview) StatusViewLayout mStatusView;
@@ -40,6 +37,7 @@ public class MeiziFragment extends Fragment
     private int mCurrentPage;
 
     public MeiziFragment() {
+
     }
 
     public static Fragment newInstance() {
@@ -145,19 +143,9 @@ public class MeiziFragment extends Fragment
         meiziAdapter.updateLoadingStatus(true);
     }
 
-
-    private void startPictureActivity(Meizi meizhi, View transitView) {
-        Intent intent = PicActivity.newIntent(getActivity(), meizhi.getUrl(), meizhi.getDesc());
-        ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(
-                getActivity(),
-                transitView,
-                PicActivity.TRANSIT_PIC);
-        try {
-            ActivityCompat.startActivity(getActivity(), intent, optionsCompat.toBundle());
-        } catch (IllegalArgumentException e) {
-            e.printStackTrace();
-            startActivity(intent);
-        }
+    @Override
+    public void requestData() {
+        mCurrentPage = 1;
+        mPresenter.loaddata(mCurrentPage);
     }
-
 }

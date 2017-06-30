@@ -19,6 +19,7 @@
 
     <color name="viewBackground">@android:color/white</color>
     <color name="white">#FFFFFF</color>
+    <color name="whitetrans">#80FFFFFF</color>
     <color name="black">#000000</color>
     <color name="transparent">#00000000</color>
 

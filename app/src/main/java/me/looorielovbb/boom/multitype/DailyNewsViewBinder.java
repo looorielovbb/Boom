@@ -53,7 +53,7 @@ public class DailyNewsViewBinder extends ItemViewBinder<StoriesBean, DailyNewsVi
             ImgUtils.LoadNetImg(context,
                     story.getImages().get(0),
                     holder.storyIv);
-            if (story.getImages().size() > 1) {
+            if (story.isMultipic()) {
                 holder.multiPicIv.setVisibility(View.VISIBLE);
             } else {
                 holder.multiPicIv.setVisibility(View.GONE);
