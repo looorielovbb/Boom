@@ -1,4 +1,4 @@
-package me.looorielovbb.boom.ui.home.movieandbooks.comingsoon;
+package me.looorielovbb.boom.ui.home.movieandbooks.top250;
 
 import android.os.Handler;
 import android.support.annotation.NonNull;
@@ -23,15 +23,15 @@ import static me.looorielovbb.boom.utils.Preconditions.checkNotNull;
  * Created by Lulei on 2017/7/3.
  */
 
-public class ComingPresenter implements ComingContract.Presenter {
+public class Top250Presenter implements Top250Contract.Presenter {
     CompositeSubscription mSubscriptions = new CompositeSubscription();
     @NonNull
     private DataRepository mRepository = DataRepository.getInstance();
     @NonNull
-    private ComingContract.View mView;
+    private Top250Contract.View mView;
     private List<MovieInfo> movieInfoList = new ArrayList<>();
 
-    public ComingPresenter(@NonNull ComingContract.View mView) {
+    public Top250Presenter(@NonNull Top250Contract.View mView) {
         this.mView = checkNotNull(mView, "mView can not be null");
     }
 
@@ -47,7 +47,7 @@ public class ComingPresenter implements ComingContract.Presenter {
 
     @Override
     public void loaddata(int page) {
-        Subscription subscription = mRepository.getComingSoonMovie(page)
+        Subscription subscription = mRepository.getTop250Movie(page)
                 .subscribeOn(Schedulers.io())
                 .doOnSubscribe(new Action0() {
                     @Override
@@ -85,6 +85,7 @@ public class ComingPresenter implements ComingContract.Presenter {
                                 mView.loadComplete();
                             }
                         } else {
+
                             movieInfoList.addAll(list);
                             mView.showList(movieInfoList);
                             if (list.size() < Constants.PAGE_COUNT) {

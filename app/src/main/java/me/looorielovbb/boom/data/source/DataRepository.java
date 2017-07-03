@@ -103,4 +103,9 @@ public class DataRepository implements DataSource {
                 Constants.PAGE_COUNT);
     }
 
+    public Observable<MovieListResponse> getTop250Movie(int page) {
+        return ApiFactory.getDoubanApi().getTop250Movie(Constants.PAGE_COUNT * (page - 1),
+                Constants.PAGE_COUNT);
+    }
+
 }

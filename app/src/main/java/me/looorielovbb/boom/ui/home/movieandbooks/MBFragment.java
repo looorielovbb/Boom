@@ -20,6 +20,7 @@ import me.looorielovbb.boom.base.LazyLoadFragment;
 import me.looorielovbb.boom.ui.home.meizi.MeiziFragment;
 import me.looorielovbb.boom.ui.home.movieandbooks.Intheaters.InTheatersMovieListFragment;
 import me.looorielovbb.boom.ui.home.movieandbooks.comingsoon.ComingFragment;
+import me.looorielovbb.boom.ui.home.movieandbooks.top250.Top250Fragment;
 
 public class MBFragment extends LazyLoadFragment {
 
@@ -51,7 +52,7 @@ public class MBFragment extends LazyLoadFragment {
     private void initView() {
         fragments[0] = InTheatersMovieListFragment.newInstance();
         fragments[1] = ComingFragment.newInstance();
-        fragments[2] = MeiziFragment.newInstance();
+        fragments[2] = Top250Fragment.newInstance();
         fragments[3] = MeiziFragment.newInstance();
         VpAdapter adapter = new VpAdapter(getChildFragmentManager(), fragments);
         vpDouban.setAdapter(adapter);

@@ -1,4 +1,4 @@
-package me.looorielovbb.boom.ui.home.movieandbooks.comingsoon;
+package me.looorielovbb.boom.ui.home.movieandbooks.top250;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -15,7 +15,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import me.looorielovbb.boom.R;
-import me.looorielovbb.boom.adapter.MovieComingAdapter;
+import me.looorielovbb.boom.adapter.MovieTop250Adapter;
 import me.looorielovbb.boom.base.LazyLoadFragment;
 import me.looorielovbb.boom.config.Constants;
 import me.looorielovbb.boom.data.bean.douban.MovieInfo;
@@ -28,7 +28,7 @@ import me.solidev.statusviewlayout.StatusViewLayout;
  * Created by Lulei on 2017/7/3.
  */
 
-public class ComingFragment extends LazyLoadFragment implements ComingContract.View, SwipeRefreshLayout.OnRefreshListener {
+public class Top250Fragment extends LazyLoadFragment implements Top250Contract.View, SwipeRefreshLayout.OnRefreshListener {
 
 
     @BindView(R.id.recyclerView)
@@ -39,25 +39,23 @@ public class ComingFragment extends LazyLoadFragment implements ComingContract.V
     StatusViewLayout stateview;
 
     Unbinder unbinder;
-    MovieComingAdapter adapter;
-    private ComingContract.Presenter mPresenter;
+    MovieTop250Adapter adapter;
+    private Top250Contract.Presenter mPresenter;
     private int mCurrentPage;
 
-    public static ComingFragment newInstance() {
+    public static Top250Fragment newInstance() {
         Bundle args = new Bundle();
-        ComingFragment fragment = new ComingFragment();
+        Top250Fragment fragment = new Top250Fragment();
         fragment.setArguments(args);
         return fragment;
     }
 
-
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_list, container, false);
         unbinder = ButterKnife.bind(this, v);
-        setPresenter(new ComingPresenter(this));
+        setPresenter(new Top250Presenter(this));
         initView();
         return v;
     }
@@ -70,7 +68,7 @@ public class ComingFragment extends LazyLoadFragment implements ComingContract.V
                 onRefresh();
             }
         });
-        adapter = new MovieComingAdapter(getActivity());
+        adapter = new MovieTop250Adapter(getActivity());
         //设置图片
         SupportLoadMoreLinearLayoutManager layout = new SupportLoadMoreLinearLayoutManager(
                 getContext(),
@@ -105,6 +103,12 @@ public class ComingFragment extends LazyLoadFragment implements ComingContract.V
     }
 
     @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
+    }
+
+    @Override
     public void showloading() {
         refreshLayout.setRefreshing(true);
     }
@@ -131,7 +135,7 @@ public class ComingFragment extends LazyLoadFragment implements ComingContract.V
     }
 
     @Override
-    public void setPresenter(ComingContract.Presenter presenter) {
+    public void setPresenter(Top250Contract.Presenter presenter) {
         if (presenter != null) {
             this.mPresenter = presenter;
         } else {
@@ -149,12 +153,6 @@ public class ComingFragment extends LazyLoadFragment implements ComingContract.V
     public void onPause() {
         super.onPause();
         mPresenter.unsubscribe();
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        unbinder.unbind();
     }
 
     @Override

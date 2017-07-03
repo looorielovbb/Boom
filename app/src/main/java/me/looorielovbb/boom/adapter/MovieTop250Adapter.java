@@ -20,22 +20,38 @@ import me.looorielovbb.boom.utils.ImgUtils;
  * Created by Lulei on 2017/7/3.
  */
 
-public class MovieComingAdapter extends LoadMoreAdapter<MovieInfo> {
+public class MovieTop250Adapter extends LoadMoreAdapter<MovieInfo> {
     private Activity context;
 
-    public MovieComingAdapter(Activity activity) {
+    public MovieTop250Adapter(Activity activity) {
         this.context = activity;
     }
 
     @SuppressLint("SetTextI18n")
     @Override
     public void onBindItemViewHolder(final RecyclerView.ViewHolder holder, final int position) {
-        if (holder instanceof MovieComingAdapter.ViewHolder) {
-            final MovieComingAdapter.ViewHolder itemholder = (MovieComingAdapter.ViewHolder) holder;
+        if (holder instanceof MovieTop250Adapter.ViewHolder) {
+            final MovieTop250Adapter.ViewHolder itemholder = (MovieTop250Adapter.ViewHolder) holder;
             final MovieInfo movieInfo = items.get(position);
-            ImgUtils.LoadNetImg(context, movieInfo.getImages().getLarge(), itemholder.comingSoonMoviePic);
-            itemholder.comingSoonMovieName.setText(movieInfo.getTitle());
-            itemholder.comingSoonMovieType.setText("类别：" + movieInfo.getGenres().toString());
+            ImgUtils.LoadNetImg(context, movieInfo.getImages().getLarge(), itemholder.topMovieItemIcon);
+            itemholder.topMovieItemName.setText(movieInfo.getTitle());
+            itemholder.topMovieItemOriginalName.setText(movieInfo.getOriginal_title());
+            itemholder.topMovieItemDate.setText(context.getResources().getString(R.string.start_data) + movieInfo.getYear());
+            itemholder.topMovieItemScore.setText(context.getResources().getString(R.string.score) + movieInfo.getRating().getAverage());
+            if (position == 0) {
+                itemholder.ranking.setTextColor(context.getResources().getColor(R.color.md_orange_A700));
+            } else if (position == 1) {
+                itemholder.ranking.setTextColor(context.getResources().getColor(R.color.md_orange_A200));
+
+            } else if (position == 2) {
+                itemholder.ranking.setTextColor(context.getResources().getColor(R.color.md_orange_A100));
+
+            } else {
+                itemholder.ranking.setTextColor(context.getResources().getColor(android.R.color.darker_gray));
+
+            }
+
+            itemholder.ranking.setText(position + 1 + "");
             StringBuffer sb = new StringBuffer();
             sb.append("主演：");
             for (int i = 0; i < movieInfo.getCasts().size(); i++) {
@@ -44,13 +60,6 @@ public class MovieComingAdapter extends LoadMoreAdapter<MovieInfo> {
                 } else {
                     sb.append(movieInfo.getCasts().get(i).getName());
                 }
-            }
-            if (movieInfo.getCasts() != null && movieInfo.getCasts().size() > 0) {
-                itemholder.comingSoonMoviePerformer.setText(sb.toString());
-            }
-
-            if (movieInfo.getDirectors() != null && movieInfo.getDirectors().size() > 0) {
-                itemholder.comingSoonMovieDirectors.setText("导演：" + movieInfo.getDirectors().get(0).getName());
             }
 
 
@@ -73,8 +82,8 @@ public class MovieComingAdapter extends LoadMoreAdapter<MovieInfo> {
 
     @Override
     public RecyclerView.ViewHolder onCreateItemViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.item_coming_movie, parent, false);
-        return new MovieComingAdapter.ViewHolder(view);
+        View view = LayoutInflater.from(context).inflate(R.layout.item_top250_movie, parent, false);
+        return new MovieTop250Adapter.ViewHolder(view);
     }
 
 
@@ -85,16 +94,18 @@ public class MovieComingAdapter extends LoadMoreAdapter<MovieInfo> {
     class ViewHolder extends RecyclerView.ViewHolder {
 
 
-        @BindView(R.id.coming_soon_movie_pic)
-        ImageView comingSoonMoviePic;
-        @BindView(R.id.coming_soon_movie_name)
-        TextView comingSoonMovieName;
-        @BindView(R.id.coming_soon_movie_type)
-        TextView comingSoonMovieType;
-        @BindView(R.id.coming_soon_movie_directors)
-        TextView comingSoonMovieDirectors;
-        @BindView(R.id.coming_soon_movie_performer)
-        TextView comingSoonMoviePerformer;
+        @BindView(R.id.ranking)
+        TextView ranking;
+        @BindView(R.id.top_movie_item_icon)
+        ImageView topMovieItemIcon;
+        @BindView(R.id.top_movie_item_name)
+        TextView topMovieItemName;
+        @BindView(R.id.top_movie_item_original_name)
+        TextView topMovieItemOriginalName;
+        @BindView(R.id.top_movie_item_date)
+        TextView topMovieItemDate;
+        @BindView(R.id.top_movie_item_score)
+        TextView topMovieItemScore;
 
         public ViewHolder(View itemView) {
             super(itemView);
