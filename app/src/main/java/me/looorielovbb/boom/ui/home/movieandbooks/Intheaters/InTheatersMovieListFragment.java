@@ -16,6 +16,7 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import me.looorielovbb.boom.R;
 import me.looorielovbb.boom.adapter.IntheaterMovieAdapter;
+import me.looorielovbb.boom.adapter.decoration.GridMarginDecoration;
 import me.looorielovbb.boom.base.LazyLoadFragment;
 import me.looorielovbb.boom.data.bean.douban.MovieInfo;
 import me.looorielovbb.boom.utils.ToastUtils;
@@ -62,6 +63,7 @@ public class InTheatersMovieListFragment extends LazyLoadFragment
         adapter = new IntheaterMovieAdapter();
         GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), 3);
         rvMovies.setLayoutManager(layoutManager);
+        rvMovies.addItemDecoration(new GridMarginDecoration(getContext().getResources().getDimensionPixelOffset(R.dimen.gridlayout_margin_decoration)));
         rvMovies.setAdapter(adapter);
     }
 

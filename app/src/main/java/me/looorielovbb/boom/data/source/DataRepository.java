@@ -4,6 +4,7 @@ import android.support.annotation.NonNull;
 
 import java.util.List;
 
+import me.looorielovbb.boom.config.Constants;
 import me.looorielovbb.boom.data.bean.douban.MovieListResponse;
 import me.looorielovbb.boom.data.bean.gank.Meizi;
 import me.looorielovbb.boom.data.bean.others.ZhuangbiImage;
@@ -27,8 +28,10 @@ import rx.Observable;
 public class DataRepository implements DataSource {
     private static DataRepository INSTANCE;
 
-    @NonNull private LocalDataSource mLocalDataSource;
-    @NonNull private RemoteDataSource mRemoteDataSource;
+    @NonNull
+    private LocalDataSource mLocalDataSource;
+    @NonNull
+    private RemoteDataSource mRemoteDataSource;
 
     private DataRepository(@NonNull LocalDataSource mLocalDataSource,
                            @NonNull RemoteDataSource mRemoteDataSource) {
@@ -39,7 +42,7 @@ public class DataRepository implements DataSource {
     public static DataRepository getInstance() {
         if (null == INSTANCE) {
             INSTANCE = new DataRepository(LocalDataSource.getInstance(),
-                                          RemoteDataSource.getInstance());
+                    RemoteDataSource.getInstance());
         }
         return INSTANCE;
     }
@@ -63,27 +66,27 @@ public class DataRepository implements DataSource {
     /*
     * 知乎
     * */
-    public Observable<DailyListBean> getLatestDaily(){
+    public Observable<DailyListBean> getLatestDaily() {
         return ApiFactory.getZhihuApi().getDailyList();
     }
 
-    public Observable<BeforeDailyBean> getBeforeDaily(String date){
+    public Observable<BeforeDailyBean> getBeforeDaily(String date) {
         return ApiFactory.getZhihuApi().getBeforeDaily(date);
     }
 
-    public Observable<ZhihuDetailBean> getZhihuDetail(int id){
+    public Observable<ZhihuDetailBean> getZhihuDetail(int id) {
         return ApiFactory.getZhihuApi().getDetailInfo(id);
     }
 
-    public Observable<DetailExtraBean> getDetailExtra(int id){
+    public Observable<DetailExtraBean> getDetailExtra(int id) {
         return ApiFactory.getZhihuApi().getDetailExtraInfo(id);
     }
 
-    public Observable<CommentBean> getLongComments(int id){
+    public Observable<CommentBean> getLongComments(int id) {
         return ApiFactory.getZhihuApi().getLongCommentInfo(id);
     }
 
-    public Observable<CommentBean> getShortComments(int id ){
+    public Observable<CommentBean> getShortComments(int id) {
         return ApiFactory.getZhihuApi().getShortCommentInfo(id);
     }
 
@@ -95,5 +98,9 @@ public class DataRepository implements DataSource {
         return ApiFactory.getDoubanApi().getInTheatersMovie(city);
     }
 
+    public Observable<MovieListResponse> getComingSoonMovie(int page) {
+        return ApiFactory.getDoubanApi().getComingSoonMovie(Constants.PAGE_COUNT * (page - 1),
+                Constants.PAGE_COUNT);
+    }
 
 }

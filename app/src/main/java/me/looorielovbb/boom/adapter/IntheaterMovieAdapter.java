@@ -1,7 +1,7 @@
 package me.looorielovbb.boom.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
-import android.support.v7.widget.AppCompatRatingBar;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -39,10 +39,11 @@ public class IntheaterMovieAdapter extends RecyclerView.Adapter<IntheaterMovieAd
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         context = viewGroup.getContext();
-        View view = LayoutInflater.from(context).inflate(R.layout.item_movie, viewGroup, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.item_movie_grid, viewGroup, false);
         return new ViewHolder(view);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int i) {
         if (movieInfoList == null || movieInfoList.isEmpty())
@@ -51,8 +52,8 @@ public class IntheaterMovieAdapter extends RecyclerView.Adapter<IntheaterMovieAd
         final MovieInfo movieInfo = movieInfoList.get(i);
         ImgUtils.LoadNetImg(context, movieInfo.getImages().getLarge(), viewHolder.movieItemPhoto);
         viewHolder.movieItemName.setText(movieInfo.getTitle());
-        viewHolder.topMovieItemScore.setText("" + movieInfo.getRating().getAverage());
-        viewHolder.ratingBarHots.setRating((float) movieInfo.getRating().getAverage());
+        viewHolder.topMovieItemScore.setText("评分：" + movieInfo.getRating().getAverage() + "分");
+//        viewHolder.ratingBarHots.setRating((float) movieInfo.getRating().getAverage());
 
         final int[] x = new int[1];
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -91,8 +92,8 @@ public class IntheaterMovieAdapter extends RecyclerView.Adapter<IntheaterMovieAd
         ImageView movieItemPhoto;
         @BindView(R.id.movie_item_name)
         TextView movieItemName;
-        @BindView(R.id.ratingBar_hots)
-        AppCompatRatingBar ratingBarHots;
+        //        @BindView(R.id.ratingBar_hots)
+//        RatingBar ratingBarHots;
         @BindView(R.id.top_movie_item_score)
         TextView topMovieItemScore;
 

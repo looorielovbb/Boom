@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -62,7 +63,7 @@ public class MeiziAdapter extends LoadMoreAdapter<Meizi> {
 
     @Override
     public RecyclerView.ViewHolder onCreateItemViewHolder(ViewGroup parent, int viewType) {
-        View view = View.inflate(context, R.layout.item_meizi, null);
+        View view = LayoutInflater.from(context).inflate(R.layout.item_meizi, parent, false);
         return new ViewHolder(view);
     }
 

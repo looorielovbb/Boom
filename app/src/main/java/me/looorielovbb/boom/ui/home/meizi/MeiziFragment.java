@@ -76,10 +76,12 @@ public class MeiziFragment extends LazyLoadFragment
                 super.onScrolledDownToLastItem();
                 if (mCurrentPage == 1) {
                     mCurrentPage++;
+                    meiziAdapter.updateLoadingStatus(false);
                     mPresenter.loaddata(mCurrentPage);
                     //Count 为item数量加上Bottom Item 若为其他值 最后一页没有加载10条
                 } else if (meiziAdapter.getItemCount() % Constants.PAGE_COUNT == 1) {
                     mCurrentPage++;
+                    meiziAdapter.updateLoadingStatus(false);
                     mPresenter.loaddata(mCurrentPage);
                 } else {
                     meiziAdapter.updateLoadingStatus(true);

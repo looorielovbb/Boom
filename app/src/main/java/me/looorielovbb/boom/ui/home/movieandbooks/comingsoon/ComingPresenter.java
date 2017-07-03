@@ -1,4 +1,4 @@
-package me.looorielovbb.boom.ui.home.movieandbooks.Intheaters;
+package me.looorielovbb.boom.ui.home.movieandbooks.comingsoon;
 
 import android.os.Handler;
 import android.support.annotation.NonNull;
@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import java.util.ArrayList;
 import java.util.List;
 
+import me.looorielovbb.boom.config.Constants;
 import me.looorielovbb.boom.data.bean.douban.MovieInfo;
 import me.looorielovbb.boom.data.bean.douban.MovieListResponse;
 import me.looorielovbb.boom.data.source.DataRepository;
@@ -19,21 +20,18 @@ import rx.subscriptions.CompositeSubscription;
 import static me.looorielovbb.boom.utils.Preconditions.checkNotNull;
 
 /**
- * Created by Lulei on 2017/6/30.
- * time : 16:44
- * date : 2017/6/30
- * mail to lulei4461@gmail.com
+ * Created by Lulei on 2017/7/3.
  */
 
-public class InTheatersPresenter implements InTheatersContract.Presenter {
+public class ComingPresenter implements ComingContract.Presenter {
     CompositeSubscription mSubscriptions = new CompositeSubscription();
     @NonNull
     private DataRepository mRepository = DataRepository.getInstance();
     @NonNull
-    private InTheatersContract.View mView;
+    private ComingContract.View mView;
     private List<MovieInfo> movieInfoList = new ArrayList<>();
 
-    public InTheatersPresenter(@NonNull InTheatersContract.View mView) {
+    public ComingPresenter(@NonNull ComingContract.View mView) {
         this.mView = checkNotNull(mView, "mView can not be null");
     }
 
@@ -44,14 +42,12 @@ public class InTheatersPresenter implements InTheatersContract.Presenter {
 
     @Override
     public void unsubscribe() {
-        mView.dismissLoading();
-        mSubscriptions.clear();
+
     }
 
     @Override
-    public void loaddata(String city) {
-        Subscription subscription = mRepository
-                .getInTheatersMovie(city)
+    public void loaddata(int page) {
+        Subscription subscription = mRepository.getComingSoonMovie(page)
                 .subscribeOn(Schedulers.io())
                 .doOnSubscribe(new Action0() {
                     @Override
@@ -73,19 +69,29 @@ public class InTheatersPresenter implements InTheatersContract.Presenter {
 
                     @Override
                     public void onError(Throwable e) {
+                        mView.showloading();
                         mView.showerror(e.getMessage());
-                        new Handler().postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                mView.dismissLoading();
-                            }
-                        }, 500);
                     }
 
                     @Override
                     public void onNext(MovieListResponse movieListResponse) {
-                        movieInfoList = movieListResponse.getSubjects();
-                        mView.showList(movieInfoList);
+                        List<MovieInfo> list = movieListResponse.getSubjects();
+                        if (list == null) {
+                            mView.showerror("没有数据~ 喵");
+                        } else if (list.size() == 0) {
+                            mView.showerror("没有数据~ 喵");
+                            if (!movieInfoList.isEmpty()) {
+                                mView.showList(movieInfoList);
+                                mView.loadComplete();
+                            }
+                        } else {
+
+                            movieInfoList.addAll(list);
+                            mView.showList(movieInfoList);
+                            if (list.size() < Constants.PAGE_COUNT) {
+                                mView.loadComplete();
+                            }
+                        }
                     }
                 });
         mSubscriptions.add(subscription);

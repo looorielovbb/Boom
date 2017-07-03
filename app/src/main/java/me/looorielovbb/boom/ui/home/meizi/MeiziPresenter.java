@@ -65,7 +65,7 @@ public class MeiziPresenter implements MeiziContract.Presenter {
                             public void run() {
                                 mView.dismissLoading();
                             }
-                        }, 1000);
+                        }, 500);
                     }
 
                     @Override
@@ -77,7 +77,7 @@ public class MeiziPresenter implements MeiziContract.Presenter {
                             public void run() {
                                 mView.dismissLoading();
                             }
-                        }, 1000);
+                        }, 500);
                     }
 
                     @Override

@@ -99,7 +99,7 @@ public class ZhihuPresenter implements ZhihuContract.Presenter {
                 .subscribe(new Subscriber<BeforeDailyBean>() {
                     @Override
                     public void onCompleted() {
-
+                        mView.dismissLoading();
                     }
 
                     @Override
@@ -110,7 +110,6 @@ public class ZhihuPresenter implements ZhihuContract.Presenter {
 
                     @Override
                     public void onNext(BeforeDailyBean beforeDailyBean) {
-                        mView.dismissLoading();
                         if (beforeDailyBean != null) {
                             mDate = beforeDailyBean.getDate();
                             mItems.add(new SubTitle(beforeDailyBean.getDate()));
