@@ -42,10 +42,7 @@ public class RemoteDataSource implements DataSource {
 
                     @Override
                     public List<Meizi> call(Base<Meizi> meiziBase) {
-                        if (meiziBase != null) {
-                            return meiziBase.getList();
-                        }
-                        return null;
+                        return meiziBase == null ? null : meiziBase.getList();
                     }
                 });
     }

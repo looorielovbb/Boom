@@ -1,4 +1,4 @@
-package me.looorielovbb.boom.ui.uitools.loadmore;
+package me.looorielovbb.boom.ui.widgets.loadmore;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -21,8 +21,8 @@ public abstract class LoadMoreAdapter<T> extends RecyclerView.Adapter<RecyclerVi
     public static final int VIEW_TYPE_LOAD_MORE = 1;
 
     protected List<T> items = new ArrayList<>();
-    private boolean enableLoadMore;
     protected boolean isLoadcomplete = false;
+    private boolean enableLoadMore;
 
     public void setList(List<T> items) {
         this.items.clear();
@@ -86,6 +86,8 @@ public abstract class LoadMoreAdapter<T> extends RecyclerView.Adapter<RecyclerVi
     public abstract void onBindItemViewHolder(RecyclerView.ViewHolder holder, int position);
 
     public abstract RecyclerView.ViewHolder onCreateItemViewHolder(ViewGroup parent, int viewType);
+
+    public abstract void updateLoadingStatus(boolean isLoadcomplete);
 
     public boolean isEnableLoadMore() {
         return enableLoadMore;

@@ -13,7 +13,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import me.looorielovbb.boom.R;
 import me.looorielovbb.boom.data.bean.douban.MovieInfo;
-import me.looorielovbb.boom.ui.uitools.loadmore.LoadMoreAdapter;
+import me.looorielovbb.boom.ui.widgets.loadmore.LoadMoreAdapter;
 import me.looorielovbb.boom.utils.ImgUtils;
 
 /**

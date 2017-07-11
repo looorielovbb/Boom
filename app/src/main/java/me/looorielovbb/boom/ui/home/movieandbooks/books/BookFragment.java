@@ -1,9 +1,8 @@
-package me.looorielovbb.boom.ui.home.movieandbooks.comingsoon;
+package me.looorielovbb.boom.ui.home.movieandbooks.books;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,51 +14,56 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import me.looorielovbb.boom.R;
-import me.looorielovbb.boom.adapter.MovieComingAdapter;
+import me.looorielovbb.boom.adapter.BookAdapter;
 import me.looorielovbb.boom.base.LazyLoadFragment;
 import me.looorielovbb.boom.config.Constants;
-import me.looorielovbb.boom.data.bean.douban.MovieInfo;
+import me.looorielovbb.boom.data.bean.douban.book.BooksBean;
 import me.looorielovbb.boom.ui.widgets.loadmore.OnVerticalScrollListener;
-import me.looorielovbb.boom.ui.widgets.loadmore.SupportLoadMoreLinearLayoutManager;
+import me.looorielovbb.boom.ui.widgets.loadmore.SupportLoadMoreGridLayoutManager;
 import me.looorielovbb.boom.utils.ToastUtils;
 import me.solidev.statusviewlayout.StatusViewLayout;
 
 /**
- * Created by Lulei on 2017/7/3.
+ * Created by Lulei on 2017/7/10.
+ * time : 14:32
+ * date : 2017/7/10
+ * mail to lulei4461@gmail.com
  */
 
-public class ComingFragment extends LazyLoadFragment implements ComingContract.View, SwipeRefreshLayout.OnRefreshListener {
-
-
+public class BookFragment extends LazyLoadFragment implements BookContract.View, SwipeRefreshLayout.OnRefreshListener {
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
     @BindView(R.id.refreshLayout)
     SwipeRefreshLayout refreshLayout;
     @BindView(R.id.stateview)
     StatusViewLayout stateview;
-
     Unbinder unbinder;
-    MovieComingAdapter adapter;
-    private ComingContract.Presenter mPresenter;
+    BookAdapter adapter;
+    private BookContract.Presenter mPresenter;
     private int mCurrentPage;
 
-    public static ComingFragment newInstance() {
+    public static BookFragment newInstance() {
         Bundle args = new Bundle();
-        ComingFragment fragment = new ComingFragment();
+        BookFragment fragment = new BookFragment();
         fragment.setArguments(args);
         return fragment;
     }
 
+    @Override
+    public void requestData() {
+        mCurrentPage = 1;
+        mPresenter.loaddata(Constants.DEFAULT_BOOKS, mCurrentPage);
+    }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_list, container, false);
-        unbinder = ButterKnife.bind(this, v);
-        setPresenter(new ComingPresenter(this));
+        View view = inflater.inflate(R.layout.fragment_list, container, false);
+        unbinder = ButterKnife.bind(this, view);
+        setPresenter(new BookPresenter(this));
         initView();
-        return v;
+        return view;
     }
 
     private void initView() {
@@ -70,12 +74,10 @@ public class ComingFragment extends LazyLoadFragment implements ComingContract.V
                 onRefresh();
             }
         });
-        adapter = new MovieComingAdapter(getActivity());
+        adapter = new BookAdapter(getActivity());
         //设置图片
-        SupportLoadMoreLinearLayoutManager layout = new SupportLoadMoreLinearLayoutManager(
-                getContext(),
-                LinearLayoutManager.VERTICAL,
-                false);
+        SupportLoadMoreGridLayoutManager layout = new SupportLoadMoreGridLayoutManager(
+                getContext(), 3);
         recyclerView.setLayoutManager(layout);
         recyclerView.setAdapter(adapter);
         recyclerView.addOnScrollListener(new OnVerticalScrollListener() {
@@ -85,23 +87,24 @@ public class ComingFragment extends LazyLoadFragment implements ComingContract.V
                 if (mCurrentPage == 1) {
                     mCurrentPage++;
                     adapter.updateLoadingStatus(false);
-                    mPresenter.loaddata(mCurrentPage);
+                    mPresenter.loaddata(Constants.DEFAULT_BOOKS, mCurrentPage);
                     //Count 为item数量加上Bottom Item 若为其他值 最后一页没有加载10条
                 } else if (adapter.getItemCount() % Constants.PAGE_COUNT == 1) {
                     mCurrentPage++;
                     adapter.updateLoadingStatus(false);
-                    mPresenter.loaddata(mCurrentPage);
+                    mPresenter.loaddata(Constants.DEFAULT_BOOKS, mCurrentPage);
                 } else {
                     adapter.updateLoadingStatus(true);
                 }
             }
         });
+
     }
 
     @Override
-    public void requestData() {
-        mCurrentPage = 1;
-        mPresenter.loaddata(mCurrentPage);
+    public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
     }
 
     @Override
@@ -120,7 +123,7 @@ public class ComingFragment extends LazyLoadFragment implements ComingContract.V
     }
 
     @Override
-    public void showList(List<MovieInfo> list) {
+    public void showList(List<BooksBean> list) {
         adapter.setList(list);
         adapter.notifyDataSetChanged();
     }
@@ -131,7 +134,7 @@ public class ComingFragment extends LazyLoadFragment implements ComingContract.V
     }
 
     @Override
-    public void setPresenter(ComingContract.Presenter presenter) {
+    public void setPresenter(BookContract.Presenter presenter) {
         if (presenter != null) {
             this.mPresenter = presenter;
         } else {
@@ -140,27 +143,9 @@ public class ComingFragment extends LazyLoadFragment implements ComingContract.V
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-        mPresenter.subscribe();
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        mPresenter.unsubscribe();
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        unbinder.unbind();
-    }
-
-    @Override
     public void onRefresh() {
         mPresenter.clear();
         mCurrentPage = 1;
-        mPresenter.loaddata(mCurrentPage);
+        mPresenter.loaddata(Constants.DEFAULT_BOOKS, mCurrentPage);
     }
 }

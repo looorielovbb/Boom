@@ -4,7 +4,6 @@ package me.looorielovbb.boom.ui.home.zhihu;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -18,6 +17,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import me.drakeet.multitype.MultiTypeAdapter;
 import me.looorielovbb.boom.R;
+import me.looorielovbb.boom.base.LazyLoadFragment;
 import me.looorielovbb.boom.data.bean.zhihu.StoriesBean;
 import me.looorielovbb.boom.data.bean.zhihu.TopStoriesBean;
 import me.looorielovbb.boom.multitype.BannerViewBinder;
@@ -28,10 +28,8 @@ import me.looorielovbb.boom.multitype.bean.SubTitle;
 import me.looorielovbb.boom.utils.ToastUtils;
 
 
-public class ZhihuFragment extends Fragment implements  SwipeRefreshLayout.OnRefreshListener,
+public class ZhihuFragment extends LazyLoadFragment implements SwipeRefreshLayout.OnRefreshListener,
         ZhihuContract.View {
-    //    @BindView(R.id.convenientBanner)
-//    ConvenientBanner convenientBanner;
     @BindView(R.id.recyclerView)
     RecyclerView rvMain;
     @BindView(R.id.refreshLayout)
@@ -51,6 +49,12 @@ public class ZhihuFragment extends Fragment implements  SwipeRefreshLayout.OnRef
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    public void requestData() {
+        mPresenter.clear();
+        mPresenter.loadLatestData();
     }
 
     @Override

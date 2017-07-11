@@ -1,4 +1,4 @@
-package me.looorielovbb.boom.ui.uitools.behavior.byeburgernavigationview;
+package me.looorielovbb.boom.ui.widgets.behavior.byeburgernavigationview;
 
 import android.view.View;
 import android.view.animation.TranslateAnimation;
@@ -9,12 +9,12 @@ import android.view.animation.TranslateAnimation;
  */
 
 public class TranslateAnimateHelper implements AnimateHelper{
+    public static int MODE_TITLE = 233;
+    public static int MODE_BOTTOM = 2333;
   public View mTarget;
   public float mStartY;
   public int mCurrentState = STATE_SHOW;
   public int mMode = MODE_TITLE;
-  public static int MODE_TITLE = 233;
-  public static int MODE_BOTTOM = 2333;
   private TranslateAnimateHelper(View view) {
     mTarget = view;
   }
@@ -88,11 +88,11 @@ public class TranslateAnimateHelper implements AnimateHelper{
     return mCurrentState;
   }
 
-  public void setMode(int mode) {
-    mMode = mode;
-  }
-
   private void setState(int state){
     mCurrentState = state;
+  }
+
+    public void setMode(int mode) {
+        mMode = mode;
   }
 }

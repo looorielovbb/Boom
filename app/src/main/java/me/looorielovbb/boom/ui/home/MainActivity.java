@@ -21,8 +21,8 @@ import me.looorielovbb.boom.ui.home.meizi.MeiziFragment;
 import me.looorielovbb.boom.ui.home.mine.MineFragment;
 import me.looorielovbb.boom.ui.home.movieandbooks.MBFragment;
 import me.looorielovbb.boom.ui.home.zhihu.ZhihuFragment;
-import me.looorielovbb.boom.ui.uitools.BottomNavigationViewHelper;
-import me.looorielovbb.boom.ui.uitools.TabFragmentManager;
+import me.looorielovbb.boom.ui.widgets.BottomNavigationViewHelper;
+import me.looorielovbb.boom.ui.widgets.TabFragmentManager;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -50,17 +50,15 @@ public class MainActivity extends AppCompatActivity {
         for (int i = 0; i < arr.length; i++) {
             String param = arr[i];
             try {
-                f = imm
-                        .getClass()
-                        .getDeclaredField(param);
+                f = imm.getClass().getDeclaredField(param);
                 if (!f.isAccessible()) {
                     f.setAccessible(true);
                 }
                 obj_get = f.get(imm);
                 if (obj_get != null && obj_get instanceof View) {
                     View v_get = (View) obj_get;
-                    if (v_get.getContext() ==
-                            destContext) { // 被InputMethodManager持有引用的context是想要目标销毁的
+                    if (v_get.getContext() == destContext) {
+                        // 被InputMethodManager持有引用的context是想要目标销毁的
                         f.set(imm, null); // 置空，破坏掉path to gc节点
                     } else {
                         // 不是想要目标销毁的，即为又进了另一层界面了，不要处理，避免影响原逻辑,也就不用继续for循环了
@@ -160,8 +158,7 @@ public class MainActivity extends AppCompatActivity {
         for (Fragment fragment : fragments) {
             if (fragment != null && fragment.isAdded()) {
                 getSupportFragmentManager().putFragment(outState,
-                        fragment.getClass().getCanonicalName(),
-                        fragment);
+                        fragment.getClass().getCanonicalName(), fragment);
             }
         }
     }

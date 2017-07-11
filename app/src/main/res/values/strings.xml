@@ -27,9 +27,9 @@
     <string name="BUGLY_APPID">3e48dd529f</string>
 
     <!--Behavior-->
-    <string name="ByeBurgerBottomBehavior">me.looorielovbb.boom.ui.uitools.behavior.byeburgernavigationview.ByeBurgerBottomBehavior</string>
-    <string name="ByeBurgerTitleBehavior">me.looorielovbb.boom.ui.uitools.behavior.byeburgernavigationview.ByeBurgerTitleBehavior</string>
-    <string name="ByeBurgerToolbarBehavior">me.looorielovbb.boom.ui.uitools.behavior.byeburgernavigationview.ToolbarAlphaBehavior</string>
+    <string name="ByeBurgerBottomBehavior">me.looorielovbb.boom.ui.widgets.behavior.byeburgernavigationview.ByeBurgerBottomBehavior</string>
+    <string name="ByeBurgerTitleBehavior">me.looorielovbb.boom.ui.widgets.behavior.byeburgernavigationview.ByeBurgerTitleBehavior</string>
+    <string name="ByeBurgerToolbarBehavior">me.looorielovbb.boom.ui.widgets.behavior.byeburgernavigationview.ToolbarAlphaBehavior</string>
 
     <!--内容-->
     <string name="start_data">上映时间：</string>

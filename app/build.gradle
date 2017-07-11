@@ -88,34 +88,26 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     //android support
+    compile 'com.android.support:multidex:1.0.1'
     compile "com.android.support:support-v4:${rootProject.ext.supportLibVersion}"
     compile "com.android.support:design:${rootProject.ext.supportLibVersion}"
     compile "com.android.support:percent:${rootProject.ext.supportLibVersion}"
     compile "com.android.support:appcompat-v7:${rootProject.ext.supportLibVersion}"
     compile "com.android.support:cardview-v7:${rootProject.ext.supportLibVersion}"
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+
     //图片加载
     compile('com.github.bumptech.glide:recyclerview-integration:4.0.0-RC1') {
         // Excludes the support library because it's already included by Glide.
         transitive = false
     }
-    //    compile 'com.facebook.fresco:fresco:0.12.0'
-    //    compile 'com.squareup.picasso:picasso:2.5.2'
-    //butterknife
-    //rxjava
-    //retrofit2
     compile('com.squareup.retrofit2:adapter-rxjava:2.2.0', {
         exclude group: 'io.reactivex', module: 'rxjava'
     })
-    //stateView
-    //    compile 'com.github.nukc.stateview:library:1.1.0'
-    //multitype
-    //photoview
-    //banner
-    //圆形图片加载库
-    //腾讯Bugly
-    compile 'com.android.support:multidex:1.0.1'
+    //glide
     compile 'com.github.bumptech.glide:glide:4.0.0-RC1'
     compile 'com.github.bumptech.glide:okhttp3-integration:4.0.0-RC1'
+    //butterknife
     compile 'com.jakewharton:butterknife:8.6.0'
     compile 'com.elvishew:xlog:1.3.0'
     compile 'me.wangyuwei:ParticleView:1.0.4'
@@ -123,6 +115,7 @@ dependencies {
     compile 'io.reactivex:rxjava:1.2.7'
     compile 'io.reactivex:rxandroid:1.2.1'
     compile 'com.squareup.okhttp3:logging-interceptor:3.7.0'
+    compile 'com.squareup.okhttp3:okhttp-urlconnection:3.4.1'
     compile 'com.squareup.okhttp3:okhttp:3.7.0'
     compile 'com.squareup.okio:okio:1.12.0'
     compile 'com.squareup.retrofit2:retrofit:2.2.0'
@@ -131,11 +124,9 @@ dependencies {
     compile 'me.drakeet.multitype:multitype:2.5.0'
     compile 'com.github.chrisbanes.photoview:library:1.2.4'
     compile 'com.bigkoo:convenientbanner:2.0.5'
-    compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'de.hdodenhof:circleimageview:2.1.0'
     compile 'com.tencent.bugly:crashreport:2.6.5'
     compile 'com.tencent.bugly:nativecrashreport:3.3.0'
-    compile 'com.android.support:support-v4:25.3.1'
     testCompile 'junit:junit:4.12'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.0.0-RC1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.6.0'

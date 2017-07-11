@@ -13,7 +13,6 @@ import me.looorielovbb.boom.data.source.DataRepository;
 import rx.Subscriber;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action0;
 import rx.schedulers.Schedulers;
 import rx.subscriptions.CompositeSubscription;
 
@@ -46,15 +45,11 @@ public class Top250Presenter implements Top250Contract.Presenter {
     }
 
     @Override
-    public void loaddata(int page) {
+    public void loaddata(final int page) {
+        if (page == 1)
+            mView.showloading();
         Subscription subscription = mRepository.getTop250Movie(page)
                 .subscribeOn(Schedulers.io())
-                .doOnSubscribe(new Action0() {
-                    @Override
-                    public void call() {
-                        mView.showloading();
-                    }
-                })
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<MovieListResponse>() {
                     @Override
@@ -69,7 +64,7 @@ public class Top250Presenter implements Top250Contract.Presenter {
 
                     @Override
                     public void onError(Throwable e) {
-                        mView.showloading();
+                        mView.dismissLoading();
                         mView.showerror(e.getMessage());
                     }
 

@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
 
-import me.looorielovbb.boom.ui.uitools.statusbar.StatusBarView;
+import me.looorielovbb.boom.ui.widgets.statusbar.StatusBarView;
 
 
 /**

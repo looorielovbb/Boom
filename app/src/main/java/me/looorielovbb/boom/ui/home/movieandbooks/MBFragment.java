@@ -17,8 +17,8 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import me.looorielovbb.boom.R;
 import me.looorielovbb.boom.base.LazyLoadFragment;
-import me.looorielovbb.boom.ui.home.meizi.MeiziFragment;
 import me.looorielovbb.boom.ui.home.movieandbooks.Intheaters.InTheatersMovieListFragment;
+import me.looorielovbb.boom.ui.home.movieandbooks.books.BookFragment;
 import me.looorielovbb.boom.ui.home.movieandbooks.comingsoon.ComingFragment;
 import me.looorielovbb.boom.ui.home.movieandbooks.top250.Top250Fragment;
 
@@ -53,7 +53,7 @@ public class MBFragment extends LazyLoadFragment {
         fragments[0] = InTheatersMovieListFragment.newInstance();
         fragments[1] = ComingFragment.newInstance();
         fragments[2] = Top250Fragment.newInstance();
-        fragments[3] = MeiziFragment.newInstance();
+        fragments[3] = BookFragment.newInstance();
         VpAdapter adapter = new VpAdapter(getChildFragmentManager(), fragments);
         vpDouban.setAdapter(adapter);
         tabDouban.setupWithViewPager(vpDouban);

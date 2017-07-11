@@ -1,4 +1,4 @@
-package me.looorielovbb.boom.ui.uitools.behavior.byeburgernavigationview;
+package me.looorielovbb.boom.ui.widgets.behavior.byeburgernavigationview;
 
 import android.content.Context;
 import android.support.design.widget.CoordinatorLayout;
@@ -6,17 +6,17 @@ import android.util.AttributeSet;
 import android.view.View;
 
 /**
- * Bye Bye Burger Navigation Bar Behavior
- *
- * Created by wing on 11/5/16.
+ * Behavior for Float Button
+ * Created by wing on 11/8/16.
  */
 
-public class ByeBurgerBottomBehavior extends ByeBurgerBehavior {
+public class ByeBurgerFloatButtonBehavior extends ByeBurgerBehavior {
 
-  private TranslateAnimateHelper mAnimateHelper;
+  private ScaleAnimateHelper mAnimateHelper;
 
-  public ByeBurgerBottomBehavior(Context context, AttributeSet attrs) {
+  public ByeBurgerFloatButtonBehavior(Context context, AttributeSet attrs) {
     super(context, attrs);
+
   }
 
 
@@ -27,13 +27,10 @@ public class ByeBurgerBottomBehavior extends ByeBurgerBehavior {
 
     if (isFirstMove) {
       isFirstMove = false;
-      mAnimateHelper = TranslateAnimateHelper.get(child);
-      mAnimateHelper.setStartY(child.getY());
-      mAnimateHelper.setMode(TranslateAnimateHelper.MODE_BOTTOM);
+      mAnimateHelper = ScaleAnimateHelper.get(child);
     }
     if (Math.abs(dy) > mTouchSlop) {
       if (dy < 0) {
-
         if (mAnimateHelper.getState() == TranslateAnimateHelper.STATE_HIDE) {
           mAnimateHelper.show();
         }

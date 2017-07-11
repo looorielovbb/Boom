@@ -19,8 +19,8 @@ import me.looorielovbb.boom.adapter.MovieTop250Adapter;
 import me.looorielovbb.boom.base.LazyLoadFragment;
 import me.looorielovbb.boom.config.Constants;
 import me.looorielovbb.boom.data.bean.douban.MovieInfo;
-import me.looorielovbb.boom.ui.uitools.loadmore.OnVerticalScrollListener;
-import me.looorielovbb.boom.ui.uitools.loadmore.SupportLoadMoreLinearLayoutManager;
+import me.looorielovbb.boom.ui.widgets.loadmore.OnVerticalScrollListener;
+import me.looorielovbb.boom.ui.widgets.loadmore.SupportLoadMoreLinearLayoutManager;
 import me.looorielovbb.boom.utils.ToastUtils;
 import me.solidev.statusviewlayout.StatusViewLayout;
 
@@ -75,6 +75,7 @@ public class Top250Fragment extends LazyLoadFragment implements Top250Contract.V
                 LinearLayoutManager.VERTICAL,
                 false);
         recyclerView.setLayoutManager(layout);
+        recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapter);
         recyclerView.addOnScrollListener(new OnVerticalScrollListener() {
             @Override

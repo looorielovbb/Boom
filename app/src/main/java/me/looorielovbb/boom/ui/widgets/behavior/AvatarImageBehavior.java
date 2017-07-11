@@ -1,4 +1,4 @@
-package me.looorielovbb.boom.ui.uitools.behavior;
+package me.looorielovbb.boom.ui.widgets.behavior;
 
 import android.content.Context;
 import android.support.design.widget.CoordinatorLayout;
@@ -19,10 +19,10 @@ import me.looorielovbb.boom.R;
 @SuppressWarnings("unused")
 public class AvatarImageBehavior extends CoordinatorLayout.Behavior<ImageView> {
 
-    private static String TAG = "AvatarImageBehavior";
     private final static float MIN_AVATAR_PERCENTAGE_SIZE = 0.3f;
     private final static int EXTRA_FINAL_AVATAR_PADDING = 80;
-
+    private static String TAG = "AvatarImageBehavior";
+    private final Context mContext;
     private int mStartYPosition; // 起始的Y轴位置
     private int mFinalYPosition; // 结束的Y轴位置
     private int mStartHeight; // 开始的图片高度
@@ -30,8 +30,6 @@ public class AvatarImageBehavior extends CoordinatorLayout.Behavior<ImageView> {
     private int mStartXPosition; // 起始的X轴位置
     private int mFinalXPosition; // 结束的X轴位置
     private float mStartToolbarPosition; // Toolbar的起始位置
-
-    private final Context mContext;
     private float mAvatarMaxSize;
 
     public AvatarImageBehavior(Context context, AttributeSet attrs) {

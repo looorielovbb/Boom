@@ -37,7 +37,6 @@ public class ComingPresenter implements ComingContract.Presenter {
 
     @Override
     public void subscribe() {
-
     }
 
     @Override
@@ -46,13 +45,15 @@ public class ComingPresenter implements ComingContract.Presenter {
     }
 
     @Override
-    public void loaddata(int page) {
+    public void loaddata(final int page) {
+        if (page == 1)
+            mView.showloading();
         Subscription subscription = mRepository.getComingSoonMovie(page)
                 .subscribeOn(Schedulers.io())
                 .doOnSubscribe(new Action0() {
                     @Override
                     public void call() {
-                        mView.showloading();
+
                     }
                 })
                 .observeOn(AndroidSchedulers.mainThread())
@@ -69,7 +70,7 @@ public class ComingPresenter implements ComingContract.Presenter {
 
                     @Override
                     public void onError(Throwable e) {
-                        mView.showloading();
+                        mView.dismissLoading();
                         mView.showerror(e.getMessage());
                     }
 

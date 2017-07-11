@@ -1,13 +1,12 @@
-package me.looorielovbb.boom.ui.home.meizi;
+package me.looorielovbb.boom.ui.home.movieandbooks.books;
 
-import android.os.Handler;
 import android.support.annotation.NonNull;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import me.looorielovbb.boom.config.Constants;
-import me.looorielovbb.boom.data.bean.gank.Meizi;
+import me.looorielovbb.boom.data.bean.douban.book.BooksBean;
 import me.looorielovbb.boom.data.source.DataRepository;
 import rx.Subscriber;
 import rx.Subscription;
@@ -18,76 +17,58 @@ import rx.subscriptions.CompositeSubscription;
 import static me.looorielovbb.boom.utils.Preconditions.checkNotNull;
 
 /**
- * Created by Lulei on 2017/2/9.
- * time : 10:58
- * date : 2017/2/9
+ * Created by Lulei on 2017/7/11.
+ * time : 16:37
+ * date : 2017/7/11
  * mail to lulei4461@gmail.com
  */
 
-public class MeiziPresenter implements MeiziContract.Presenter {
+public class BookPresenter implements BookContract.Presenter {
 
     CompositeSubscription mSubscriptions = new CompositeSubscription();
     @NonNull
     private DataRepository mRepository = DataRepository.getInstance();
     @NonNull
-    private MeiziContract.View mView;
+    private BookContract.View mView;
+    private List<BooksBean> booksBeen = new ArrayList<>();
 
-    private List<Meizi> mList = new ArrayList<>();
-
-    public MeiziPresenter(@NonNull MeiziContract.View mView) {
+    public BookPresenter(@NonNull BookContract.View mView) {
         this.mView = checkNotNull(mView, "mView can not be null");
     }
 
     @Override
-    public void subscribe() {
-
-    }
-
-    @Override
-    public void loaddata(final int page) {
+    public void loaddata(String tag, int page) {
         if (page == 1)
             mView.showloading();
-        Subscription subscription = mRepository
-                .getMeizi(page)
+        Subscription subscription = mRepository.SearchBooks(tag, page)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<List<Meizi>>() {
+                .subscribe(new Subscriber<List<BooksBean>>() {
                     @Override
                     public void onCompleted() {
-                        new Handler().postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                mView.dismissLoading();
-                            }
-                        }, 500);
+                        mView.dismissLoading();
                     }
 
                     @Override
                     public void onError(Throwable e) {
+                        mView.dismissLoading();
                         mView.showerror(e.getMessage());
-                        new Handler().postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                mView.dismissLoading();
-                            }
-                        }, 500);
                     }
 
                     @Override
-                    public void onNext(List<Meizi> list) {
-                        if (list == null) {
+                    public void onNext(List<BooksBean> booksBeen) {
+                        if (booksBeen == null) {
                             mView.showerror("没有数据~ 喵");
-                        } else if (list.size() == 0) {
+                        } else if (booksBeen.size() == 0) {
                             mView.showerror("没有数据~ 喵");
-                            if (!mList.isEmpty()) {
-                                mView.showList(mList);
+                            if (!booksBeen.isEmpty()) {
+                                mView.showList(booksBeen);
                                 mView.loadComplete();
                             }
                         } else {
-
-                            mList.addAll(list);
-                            mView.showList(mList);
-                            if (list.size() < Constants.PAGE_COUNT) {
+                            BookPresenter.this.booksBeen.addAll(booksBeen);
+                            mView.showList(BookPresenter.this.booksBeen);
+                            if (booksBeen.size() < Constants.PAGE_COUNT) {
                                 mView.loadComplete();
                             }
                         }
@@ -97,14 +78,17 @@ public class MeiziPresenter implements MeiziContract.Presenter {
     }
 
     @Override
-    public void clearListData() {
-        mList.clear();
+    public void clear() {
+
+    }
+
+    @Override
+    public void subscribe() {
+
     }
 
     @Override
     public void unsubscribe() {
-        mView.dismissLoading();
         mSubscriptions.clear();
     }
-
 }

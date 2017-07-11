@@ -1,4 +1,4 @@
-package me.looorielovbb.boom.ui.uitools.loadmore;
+package me.looorielovbb.boom.ui.widgets.loadmore;
 
 import android.content.Context;
 import android.support.v7.widget.LinearLayoutManager;

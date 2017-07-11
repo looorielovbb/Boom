@@ -6,6 +6,8 @@ import java.util.List;
 
 import me.looorielovbb.boom.config.Constants;
 import me.looorielovbb.boom.data.bean.douban.MovieListResponse;
+import me.looorielovbb.boom.data.bean.douban.book.BookBean;
+import me.looorielovbb.boom.data.bean.douban.book.BooksBean;
 import me.looorielovbb.boom.data.bean.gank.Meizi;
 import me.looorielovbb.boom.data.bean.others.ZhuangbiImage;
 import me.looorielovbb.boom.data.bean.zhihu.BeforeDailyBean;
@@ -17,6 +19,7 @@ import me.looorielovbb.boom.data.source.local.LocalDataSource;
 import me.looorielovbb.boom.data.source.remote.RemoteDataSource;
 import me.looorielovbb.boom.network.ApiFactory;
 import rx.Observable;
+import rx.functions.Func1;
 
 /**
  * Created by Lulei on 2017/2/21.
@@ -91,7 +94,7 @@ public class DataRepository implements DataSource {
     }
 
      /*
-    * 豆瓣
+    * 豆瓣电影
     * */
 
     public Observable<MovieListResponse> getInTheatersMovie(String city) {
@@ -108,4 +111,16 @@ public class DataRepository implements DataSource {
                 Constants.PAGE_COUNT);
     }
 
+    /*
+   * 豆瓣图书
+   * */
+    public Observable<List<BooksBean>> SearchBooks(String tag, int page) {
+        return ApiFactory.getDoubanApi().getBook(tag, Constants.PAGE_COUNT_GRID * (page - 1),
+                Constants.PAGE_COUNT).map(new Func1<BookBean, List<BooksBean>>() {
+            @Override
+            public List<BooksBean> call(BookBean bookBean) {
+                return bookBean == null ? null : bookBean.getBooks();
+            }
+        });
+    }
 }

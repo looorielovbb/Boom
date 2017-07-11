@@ -36,27 +36,25 @@ public class ZhihuPresenter implements ZhihuContract.Presenter {
 
     @Override
     public void subscribe() {
-        if (mItems.isEmpty()) {
-            loadLatestData();
-        }
+
     }
 
     @Override
     public void loadLatestData() {
         Subscription subscription = Mdata
                 .getLatestDaily()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe(new Action0() {
                     @Override
                     public void call() {
                         mView.showloading();
                     }
                 })
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<DailyListBean>() {
                     @Override
                     public void onCompleted() {
-
+                        mView.dismissLoading();
                     }
 
                     @Override
@@ -67,7 +65,6 @@ public class ZhihuPresenter implements ZhihuContract.Presenter {
 
                     @Override
                     public void onNext(DailyListBean dailyListBean) {
-                        mView.dismissLoading();
                         if (dailyListBean != null) {
                             if (mItems.containsAll(dailyListBean.getStories())) {
                                 return;
@@ -90,12 +87,6 @@ public class ZhihuPresenter implements ZhihuContract.Presenter {
                 .getBeforeDaily(mDate)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .doOnSubscribe(new Action0() {
-                    @Override
-                    public void call() {
-                        mView.showloading();
-                    }
-                })
                 .subscribe(new Subscriber<BeforeDailyBean>() {
                     @Override
                     public void onCompleted() {

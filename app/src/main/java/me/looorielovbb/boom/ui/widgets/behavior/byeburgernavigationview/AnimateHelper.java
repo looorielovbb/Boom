@@ -1,4 +1,4 @@
-package me.looorielovbb.boom.ui.uitools.behavior.byeburgernavigationview;
+package me.looorielovbb.boom.ui.widgets.behavior.byeburgernavigationview;
 
 /**
  * Created by wing on 11/8/16.

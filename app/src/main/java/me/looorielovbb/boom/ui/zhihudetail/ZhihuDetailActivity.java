@@ -51,8 +51,6 @@ public class ZhihuDetailActivity extends AppCompatActivity implements ZdetailCon
 
     ZdetailContract.Presenter mPresenter;
     boolean isNotTransition = false;
-    private String imgUrl;
-    private String shareUrl;
     private int id = 0;
     private int shortNum, longNum = -1;
 
@@ -98,12 +96,9 @@ public class ZhihuDetailActivity extends AppCompatActivity implements ZdetailCon
 
     @Override
     public void showContent(ZhihuDetailBean zhihuDetailBean) {
-        imgUrl = zhihuDetailBean.getImage();
-        shareUrl = zhihuDetailBean.getShare_url();
         ImgUtils.LoadNetImg(this, zhihuDetailBean.getImage(), detailBarImage);
         toolBar.setTitle(zhihuDetailBean.getTitle());
         collapsingToolbar.setTitle(zhihuDetailBean.getTitle());
-//        detailBarTitle.setText(zhihuDetailBean.getTitle());
         detailBarCopyright.setText(zhihuDetailBean.getImage_source());
         String htmlData = HtmlUtil.createHtmlData(zhihuDetailBean.getBody(), zhihuDetailBean.getCss(), zhihuDetailBean.getJs());
         wvDetailContent.loadData(htmlData, HtmlUtil.MIME_TYPE, HtmlUtil.ENCODING);
@@ -111,8 +106,6 @@ public class ZhihuDetailActivity extends AppCompatActivity implements ZdetailCon
 
     @Override
     public void showStoryExtras(DetailExtraBean detailExtraBean) {
-//        commentProvider.setNumInt(String.valueOf(detailExtraBean.getComments()));
-//        praiseProvider.setNumInt(String.valueOf(detailExtraBean.getPopularity()));
         shortNum = detailExtraBean.getShort_comments();
         longNum = detailExtraBean.getLong_comments();
     }

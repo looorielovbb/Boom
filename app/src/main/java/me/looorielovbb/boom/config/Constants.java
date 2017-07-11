@@ -9,8 +9,10 @@ package me.looorielovbb.boom.config;
 
 public class Constants {
     public static final String THEME_MODE = "theme_mode";
+    public static final String DEFAULT_BOOKS = "文化";
     //===================================================//
-    public static final int PAGE_COUNT = 10;
+    public static final int PAGE_COUNT = 20;
+    public static final int PAGE_COUNT_GRID = 18;
 
     public static class ID {
         public static final String BUGLY = "3e48dd529f"; //腾讯Bugly
