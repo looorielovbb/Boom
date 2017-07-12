@@ -107,6 +107,7 @@ public class BDetailActivity extends BaseActivity implements BDetailContract.Vie
     @Override
     public void showContent(BookDetailBean bean) {
         if (bean != null) {
+            statusView.showContent();
             mBookContent.setVisibility(View.VISIBLE);
             ImgUtils.LoadNetImg(this, bean.getImages().getLarge(), ivOnePhoto);
             tvOneDirectors.setText(getResources().getString(R.string.author) + StringUtils.formatGenres(bean.getAuthor()));
@@ -124,7 +125,7 @@ public class BDetailActivity extends BaseActivity implements BDetailContract.Vie
     @Override
     public void showError(String e) {
         mBookContent.setVisibility(View.GONE);
-        statusView.showError(e);
+        statusView.showNetWorkException();
     }
 
     @Override
