@@ -16,6 +16,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <activity
             android:name=".ui.splash.SplashActivity"
             android:label="@string/app_name"
@@ -27,6 +28,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".ui.home.MainActivity"
             android:label="@string/homepage"
@@ -35,6 +37,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".ui.about.AboutActivity"
             android:label="@string/about">
@@ -49,13 +52,18 @@
                     android:scheme="http" />
             </intent-filter>
         </activity>
+
         <activity android:name=".ui.picture.PicActivity" />
+
         <activity
             android:name=".ui.zhihudetail.ZhihuDetailActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustResize" />
+
         <activity android:name=".ui.zhihucomments.CommentsActivity" />
+
+        <activity android:name=".ui.home.movieandbooks.bookdetail.BDetailActivity" />
 
         <!-- 配置腾讯Bugly APP ID -->
         <meta-data

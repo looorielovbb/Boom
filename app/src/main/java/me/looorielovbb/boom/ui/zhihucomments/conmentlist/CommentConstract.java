@@ -17,6 +17,10 @@ public interface CommentConstract {
 
     interface View extends BaseView<CommentConstract.Presenter> {
         void showList(List<Comment> comments);
+
+        void showLoading();
+
+        void dissmissLoading();
     }
 
     interface Presenter extends BasePresenter {

@@ -20,4 +20,7 @@
     <dimen name="textSize_12">12sp</dimen>
     <dimen name="comment_face_size">42dp</dimen>
     <dimen name="gridlayout_margin_decoration">2dp</dimen>
+    <dimen name="detail_height">160dp</dimen>
+    <dimen name="detail_width">120dp</dimen>
+    <dimen name="space_220">220dp</dimen>
 </resources>

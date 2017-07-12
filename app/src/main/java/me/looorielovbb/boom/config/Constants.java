@@ -36,25 +36,5 @@ public class Constants {
         public static final String CURRENT_TIME = "current_time";
     }
 
-    public static class VIEW {
-        public static final String LEFT = "left";
-        public static final String TOP = "top";
-        public static final String WIDTH = "width";
-        public static final String HEIGHT = "height";
-    }
 
-    public static class CONFIG {
-        public static final int ORIENTATION_LANDSCAPE = 2;
-        public static final int ORIENTATION_PORTRAIT = 1;
-    }
-
-    public static class SP {
-        public static final String SHARED_PREFERENCES_NAME = "BIG_BOOM";
-        public static final String THEME = "theme";
-    }
-
-    public static class TYPE {
-        public static final int MOVIE = 1;
-        public static final int CAST = 2;
-    }
 }

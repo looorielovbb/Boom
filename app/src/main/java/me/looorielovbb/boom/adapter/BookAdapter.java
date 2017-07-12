@@ -1,6 +1,9 @@
 package me.looorielovbb.boom.adapter;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Intent;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +16,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import me.looorielovbb.boom.R;
 import me.looorielovbb.boom.data.bean.douban.book.BooksBean;
+import me.looorielovbb.boom.ui.home.movieandbooks.bookdetail.BDetailActivity;
 import me.looorielovbb.boom.ui.widgets.loadmore.LoadMoreAdapter;
 import me.looorielovbb.boom.utils.ImgUtils;
 
@@ -30,13 +34,31 @@ public class BookAdapter extends LoadMoreAdapter<BooksBean> {
         this.activity = activity;
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
-    public void onBindItemViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindItemViewHolder(RecyclerView.ViewHolder holder, final int position) {
         if (holder instanceof ViewHolder) {
             ViewHolder viewHolder = (ViewHolder) holder;
             ImgUtils.LoadNetImg(activity, items.get(position).getImages().getLarge(), viewHolder.ivTopPhoto);
             viewHolder.tvName.setText(items.get(position).getTitle());
-            viewHolder.tvRate.setText(String.valueOf(items.get(position).getRating().getAverage()));
+            viewHolder.tvRate.setText(activity.getResources().getString(R.string.score)
+                    + items.get(position).getRating().getAverage());
+            viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+//                    activity.startActivity(new Intent(activity, BDetailActivity.class));
+                    Intent intent = new Intent();
+                    intent.setClass(activity, BDetailActivity.class);
+                    intent.putExtra("book", items.get(position));
+                    ActivityOptionsCompat options = ActivityOptionsCompat.makeScaleUpAnimation(
+                            v,
+                            v.getWidth(),
+                            v.getHeight(),
+                            0,
+                            0);
+                    activity.startActivity(intent, options.toBundle());
+                }
+            });
         }
     }
 

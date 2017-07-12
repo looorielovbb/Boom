@@ -7,6 +7,7 @@ import java.util.List;
 import me.looorielovbb.boom.config.Constants;
 import me.looorielovbb.boom.data.bean.douban.MovieListResponse;
 import me.looorielovbb.boom.data.bean.douban.book.BookBean;
+import me.looorielovbb.boom.data.bean.douban.book.BookDetailBean;
 import me.looorielovbb.boom.data.bean.douban.book.BooksBean;
 import me.looorielovbb.boom.data.bean.gank.Meizi;
 import me.looorielovbb.boom.data.bean.others.ZhuangbiImage;
@@ -114,13 +115,17 @@ public class DataRepository implements DataSource {
     /*
    * 豆瓣图书
    * */
-    public Observable<List<BooksBean>> SearchBooks(String tag, int page) {
+    public Observable<List<BooksBean>> searchBooks(String tag, int page) {
         return ApiFactory.getDoubanApi().getBook(tag, Constants.PAGE_COUNT_GRID * (page - 1),
-                Constants.PAGE_COUNT).map(new Func1<BookBean, List<BooksBean>>() {
+                Constants.PAGE_COUNT_GRID).map(new Func1<BookBean, List<BooksBean>>() {
             @Override
             public List<BooksBean> call(BookBean bookBean) {
                 return bookBean == null ? null : bookBean.getBooks();
             }
         });
+    }
+
+    public Observable<BookDetailBean> getBookDetail(String id) {
+        return ApiFactory.getDoubanApi().getBookDetail(id);
     }
 }

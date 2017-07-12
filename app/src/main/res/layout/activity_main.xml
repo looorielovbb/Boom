@@ -52,5 +52,5 @@
         android:background="@color/navibottombackgroud"
         app:elevation="2dp"
         app:layout_behavior="@string/ByeBurgerBottomBehavior"
-        app:menu="@menu/navigation" />
+        app:menu="@menu/navi" />
 </android.support.design.widget.CoordinatorLayout>

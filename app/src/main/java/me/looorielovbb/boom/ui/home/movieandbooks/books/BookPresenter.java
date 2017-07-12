@@ -40,7 +40,7 @@ public class BookPresenter implements BookContract.Presenter {
     public void loaddata(String tag, int page) {
         if (page == 1)
             mView.showloading();
-        Subscription subscription = mRepository.SearchBooks(tag, page)
+        Subscription subscription = mRepository.searchBooks(tag, page)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<List<BooksBean>>() {

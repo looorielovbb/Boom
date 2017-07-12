@@ -2,7 +2,7 @@ package me.looorielovbb.boom.ui.zhihucomments.conmentlist;
 
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -16,23 +16,25 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import me.looorielovbb.boom.R;
 import me.looorielovbb.boom.adapter.ZhihuCommentsAdapter;
+import me.looorielovbb.boom.base.LazyLoadFragment;
 import me.looorielovbb.boom.data.bean.zhihu.Comment;
+import me.solidev.statusviewlayout.StatusViewLayout;
 
 
-public class CommentListFragment extends Fragment implements CommentConstract.View {
+public class CommentListFragment extends LazyLoadFragment implements CommentConstract.View, SwipeRefreshLayout.OnRefreshListener {
     private static final String ISHORT = "ishort";
-    @BindView(R.id.list)
-    RecyclerView rvCommentList;
     Unbinder unbinder;
+    @BindView(R.id.recyclerView)
+    RecyclerView rvCommentList;
+    @BindView(R.id.refreshLayout)
+    SwipeRefreshLayout refreshLayout;
+    @BindView(R.id.stateview)
+    StatusViewLayout stateview;
 
     private boolean ishort;
     private CommentConstract.Presenter mPresenter;
     private int id = 0;
     private ZhihuCommentsAdapter adapter;
-
-    public CommentListFragment() {
-    }
-
 
     public static CommentListFragment newInstance(boolean ishort) {
         CommentListFragment fragment = new CommentListFragment();
@@ -52,10 +54,8 @@ public class CommentListFragment extends Fragment implements CommentConstract.Vi
         id = getActivity().getIntent().getExtras().getInt("id");
     }
 
-    private void initView() {
-        rvCommentList.setLayoutManager(new LinearLayoutManager(getContext()));
-        adapter = new ZhihuCommentsAdapter();
-        rvCommentList.setAdapter(adapter);
+    @Override
+    public void requestData() {
         if (ishort) {
             mPresenter.fetchShortCommentInfo(id);
         } else {
@@ -63,10 +63,17 @@ public class CommentListFragment extends Fragment implements CommentConstract.Vi
         }
     }
 
+    private void initView() {
+        rvCommentList.setLayoutManager(new LinearLayoutManager(getContext()));
+        adapter = new ZhihuCommentsAdapter();
+        rvCommentList.setAdapter(adapter);
+        refreshLayout.setOnRefreshListener(this);
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_comment_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_list, container, false);
         unbinder = ButterKnife.bind(this, view);
         initView();
         return view;
@@ -94,5 +101,20 @@ public class CommentListFragment extends Fragment implements CommentConstract.Vi
             adapter.setCommentList(comments);
             adapter.notifyDataSetChanged();
         }
+    }
+
+    @Override
+    public void showLoading() {
+        refreshLayout.setRefreshing(true);
+    }
+
+    @Override
+    public void dissmissLoading() {
+        refreshLayout.setRefreshing(false);
+    }
+
+    @Override
+    public void onRefresh() {
+        requestData();
     }
 }

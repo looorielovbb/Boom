@@ -32,6 +32,9 @@
     <string name="ByeBurgerToolbarBehavior">me.looorielovbb.boom.ui.widgets.behavior.byeburgernavigationview.ToolbarAlphaBehavior</string>
 
     <!--内容-->
-    <string name="start_data">上映时间：</string>
+    <string name="author">作者：</string>
     <string name="score">评分：</string>
+    <string name="publish_date">出版时间:</string>
+    <string name="publisher">出版社：</string>
+    <string name="start_data">上映时间：</string>
 </resources>

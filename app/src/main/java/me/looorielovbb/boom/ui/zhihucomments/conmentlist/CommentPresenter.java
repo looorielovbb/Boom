@@ -16,9 +16,9 @@ import rx.subscriptions.CompositeSubscription;
  */
 
 public class CommentPresenter implements CommentConstract.Presenter {
+    CompositeSubscription subscriptions = new CompositeSubscription();
     private CommentConstract.View mView;
     private DataRepository mDataRepository = DataRepository.getInstance();
-    CompositeSubscription subscriptions = new CompositeSubscription();
 
     public CommentPresenter(CommentConstract.View mView) {
         super();
@@ -32,11 +32,12 @@ public class CommentPresenter implements CommentConstract.Presenter {
 
     @Override
     public void unsubscribe() {
-
+        subscriptions.clear();
     }
 
     @Override
     public void fetchShortCommentInfo(int id) {
+        mView.showLoading();
         Subscription subscription = mDataRepository
                 .getShortComments(id)
                 .subscribeOn(Schedulers.io())
@@ -44,12 +45,12 @@ public class CommentPresenter implements CommentConstract.Presenter {
                 .subscribe(new Subscriber<CommentBean>() {
                     @Override
                     public void onCompleted() {
-
+                        mView.dissmissLoading();
                     }
 
                     @Override
                     public void onError(Throwable e) {
-
+                        mView.dissmissLoading();
                     }
 
                     @Override

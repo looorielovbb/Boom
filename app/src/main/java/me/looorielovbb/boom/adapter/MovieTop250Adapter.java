@@ -2,6 +2,7 @@ package me.looorielovbb.boom.adapter;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -39,15 +40,15 @@ public class MovieTop250Adapter extends LoadMoreAdapter<MovieInfo> {
             itemholder.topMovieItemDate.setText(context.getResources().getString(R.string.start_data) + movieInfo.getYear());
             itemholder.topMovieItemScore.setText(context.getResources().getString(R.string.score) + movieInfo.getRating().getAverage());
             if (position == 0) {
-                itemholder.ranking.setTextColor(context.getResources().getColor(R.color.md_orange_A700));
+                itemholder.ranking.setTextColor(ContextCompat.getColor(context, R.color.md_orange_A700));
             } else if (position == 1) {
-                itemholder.ranking.setTextColor(context.getResources().getColor(R.color.md_orange_A200));
+                itemholder.ranking.setTextColor(ContextCompat.getColor(context, R.color.md_orange_A200));
 
             } else if (position == 2) {
-                itemholder.ranking.setTextColor(context.getResources().getColor(R.color.md_orange_A100));
+                itemholder.ranking.setTextColor(ContextCompat.getColor(context, R.color.md_orange_A100));
 
             } else {
-                itemholder.ranking.setTextColor(context.getResources().getColor(android.R.color.darker_gray));
+                itemholder.ranking.setTextColor(ContextCompat.getColor(context, android.R.color.darker_gray));
 
             }
 
@@ -75,6 +76,7 @@ public class MovieTop250Adapter extends LoadMoreAdapter<MovieInfo> {
 //                            v.getWidth(),
 //                            v.getHeight());
 //                    context.startActivity(intent, options.toBundle());
+
                 }
             });
         }

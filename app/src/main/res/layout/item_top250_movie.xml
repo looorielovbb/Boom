@@ -35,7 +35,7 @@
         <ImageView
             android:id="@+id/top_movie_item_icon"
             android:layout_width="95dp"
-            android:layout_height="100dp"
+            android:layout_height="120dp"
             android:scaleType="fitXY"
             tools:src="@drawable/avatar" />
 

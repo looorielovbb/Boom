@@ -1,4 +1,4 @@
-package me.looorielovbb.boom.utils;
+package me.looorielovbb.boom.ui.widgets.statusbar;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
@@ -11,8 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
-
-import me.looorielovbb.boom.ui.widgets.statusbar.StatusBarView;
 
 
 /**

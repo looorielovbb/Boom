@@ -36,8 +36,8 @@ public class ZhihuDetailActivity extends AppCompatActivity implements ZdetailCon
     ImageView detailBarImage;
     @BindView(R.id.detail_bar_copyright)
     TextView detailBarCopyright;
-    @BindView(R.id.toolBar)
-    Toolbar toolBar;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
     @BindView(R.id.collapsing_toolbar)
     CollapsingToolbarLayout collapsingToolbar;
     @BindView(R.id.app_bar)
@@ -60,7 +60,7 @@ public class ZhihuDetailActivity extends AppCompatActivity implements ZdetailCon
         setContentView(R.layout.activity_zhihu_detail);
         ButterKnife.bind(this);
         mPresenter = new ZdetailPresenter(this);
-        ToolbarUtils.initToolBar(this, toolBar, "");
+        ToolbarUtils.initToolBar(this, toolbar, "");
         initView();
     }
 
@@ -97,7 +97,7 @@ public class ZhihuDetailActivity extends AppCompatActivity implements ZdetailCon
     @Override
     public void showContent(ZhihuDetailBean zhihuDetailBean) {
         ImgUtils.LoadNetImg(this, zhihuDetailBean.getImage(), detailBarImage);
-        toolBar.setTitle(zhihuDetailBean.getTitle());
+        toolbar.setTitle(zhihuDetailBean.getTitle());
         collapsingToolbar.setTitle(zhihuDetailBean.getTitle());
         detailBarCopyright.setText(zhihuDetailBean.getImage_source());
         String htmlData = HtmlUtil.createHtmlData(zhihuDetailBean.getBody(), zhihuDetailBean.getCss(), zhihuDetailBean.getJs());
