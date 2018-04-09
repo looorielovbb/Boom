@@ -2,6 +2,7 @@ package me.looorielovbb.boom.ui.home.movieandbooks;
 
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -96,6 +97,7 @@ public class MBFragment extends LazyLoadFragment {
             return titles[position];
         }
 
+        @NonNull
         @Override
         public Fragment instantiateItem(ViewGroup container, int position) {
             Fragment fragment = (Fragment) super.instantiateItem(container, position);

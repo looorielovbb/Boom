@@ -8,6 +8,7 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -22,7 +23,6 @@ import me.looorielovbb.boom.ui.home.mine.MineFragment;
 import me.looorielovbb.boom.ui.home.movieandbooks.MBFragment;
 import me.looorielovbb.boom.ui.home.zhihu.ZhihuFragment;
 import me.looorielovbb.boom.ui.widgets.BottomNavigationViewHelper;
-import me.looorielovbb.boom.ui.widgets.TabFragmentManager;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
 
     Fragment[] fragments = new Fragment[4];
     FragmentManager fragmentManager;
-    TabFragmentManager tabFragmentManager;
+    private int mCurrentIndex = 0;
 
     public static void fixInputMethodManagerLeak(Context destContext) {
         if (destContext == null) {
@@ -76,8 +76,20 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        BottomNavigationViewHelper.disableShiftMode(bottomNavi);
         fragmentManager = getSupportFragmentManager();
+        BottomNavigationViewHelper.disableShiftMode(bottomNavi);
+
+        if (savedInstanceState != null) {
+            for (int i = 0; i < fragments.length; i++) {
+                fragments[i] = fragmentManager.findFragmentByTag("HomeTab" + i);
+            }
+            mCurrentIndex = savedInstanceState.getInt("mCurrentIndex",0);
+        } else {
+            fragments[0] = ZhihuFragment.newInstance();
+            fragments[1] = MeiziFragment.newInstance();
+            fragments[2] = MBFragment.newInstance();
+            fragments[3] = MineFragment.newInstance();
+        }
 //        if (PreferencesUtils.getBoolean(this, Constants.THEME_MODE, false)) {
 //            switcher.setChecked(true);
 //        } else {
@@ -98,52 +110,57 @@ public class MainActivity extends AppCompatActivity {
 //                recreate();
 //            }
 //        });
-        if (null != savedInstanceState) {
-            fragments[0] = fragmentManager.getFragment(savedInstanceState, ZhihuFragment.class.getCanonicalName());
-            if (fragments[0] == null) {
-                fragments[0] = ZhihuFragment.newInstance();
+
+        for (int i = 0; i < fragments.length; i++) {
+            if (fragments[i] != null && !fragments[i].isAdded()) {
+                fragmentManager
+                        .beginTransaction()
+                        .add(R.id.content, fragments[i], "HomeTab" + i)
+                        .commit();
             }
-            fragments[1] = fragmentManager.getFragment(savedInstanceState, MeiziFragment.class.getCanonicalName());
-            if (fragments[1] == null) {
-                fragments[1] = MeiziFragment.newInstance();
-            }
-            fragments[2] = fragmentManager.getFragment(savedInstanceState, MBFragment.class.getCanonicalName());
-            if (fragments[2] == null) {
-                fragments[2] = MBFragment.newInstance();
-            }
-            fragments[3] = fragmentManager.getFragment(savedInstanceState, MineFragment.class.getCanonicalName());
-            if (fragments[3] == null) {
-                fragments[3] = MineFragment.newInstance();
-            }
-        } else {
-            fragments[0] = ZhihuFragment.newInstance();
-            fragments[1] = MeiziFragment.newInstance();
-            fragments[2] = MBFragment.newInstance();
-            fragments[3] = MineFragment.newInstance();
         }
 
-        tabFragmentManager = new TabFragmentManager(this, fragments, R.id.content);
+
         bottomNavi.setOnNavigationItemSelectedListener(new BottomNavigationView
                 .OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.navi1:
-                        tabFragmentManager.setCurrentItem(0);
+                        showHomeTabByIndex(0);
                         break;
                     case R.id.navi2:
-                        tabFragmentManager.setCurrentItem(1);
+                        showHomeTabByIndex(1);
                         break;
                     case R.id.navi3:
-                        tabFragmentManager.setCurrentItem(2);
+                        showHomeTabByIndex(2);
                         break;
                     case R.id.navi4:
-                        tabFragmentManager.setCurrentItem(3);
+                        showHomeTabByIndex(3);
                         break;
                 }
                 return true;
             }
         });
+        showHomeTabByIndex(mCurrentIndex);
+
+    }
+
+    private void showHomeTabByIndex(int index) {
+        mCurrentIndex = index;
+        fragmentManager
+                .beginTransaction()
+                .show(fragments[index])
+                .commit();
+        for (int i = 0; i < fragments.length; i++) {
+            if (i != index) {
+                fragmentManager
+                        .beginTransaction()
+                        .hide(fragments[i])
+                        .commit();
+            }
+        }
+
     }
 
     @Override
@@ -154,13 +171,18 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
-        super.onSaveInstanceState(outState, outPersistentState);
-        for (Fragment fragment : fragments) {
-            if (fragment != null && fragment.isAdded()) {
-                getSupportFragmentManager().putFragment(outState,
-                        fragment.getClass().getCanonicalName(), fragment);
+        for (int i = 0; i < 4; i++) {
+            if (fragments[i] != null && fragments[i].isAdded()) {
+                fragmentManager.putFragment(outState, "HomeTab" + i, fragments[i]);
             }
         }
+        outState.putInt("mCurrentIndex",mCurrentIndex);
+        super.onSaveInstanceState(outState, outPersistentState);
     }
 
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Log.d("lulei","onRestart");
+    }
 }

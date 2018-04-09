@@ -7,9 +7,7 @@ import android.support.v7.app.AppCompatDelegate;
 
 import com.elvishew.xlog.LogLevel;
 import com.elvishew.xlog.XLog;
-import com.tencent.bugly.crashreport.CrashReport;
 
-import me.looorielovbb.boom.BuildConfig;
 import me.looorielovbb.boom.config.Constants;
 import me.looorielovbb.boom.utils.PreferencesUtils;
 
@@ -37,8 +35,8 @@ public class BoomApp extends MultiDexApplication {
         }
 
         //腾讯bugly 初始化
-        CrashReport.initCrashReport(getApplicationContext(), Constants.ID.BUGLY, BuildConfig.DEBUG);
-        CrashReport.setIsDevelopmentDevice(getApplicationContext(), BuildConfig.DEBUG);
+//        CrashReport.initCrashReport(getApplicationContext(), Constants.ID.BUGLY, BuildConfig.DEBUG);
+//        CrashReport.setIsDevelopmentDevice(getApplicationContext(), BuildConfig.DEBUG);
         //异常配置
 //        CrashHandler crashHandler = CrashHandler.getInstance();
 //        crashHandler.init(this);

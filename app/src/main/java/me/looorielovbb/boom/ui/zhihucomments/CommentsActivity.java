@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
 import java.util.Locale;
+import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -26,7 +27,6 @@ public class CommentsActivity extends AppCompatActivity {
     ViewPager vpZhihuComment;
     private Fragment[] fragments = new Fragment[2];
     private String[] titles = new String[2];
-    private int shortNum, longNum;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,8 +35,8 @@ public class CommentsActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         ToolbarUtils.initToolBar(this, toolbar, "精选评论");
 
-        shortNum = getIntent().getExtras().getInt("shortNum");
-        longNum = getIntent().getExtras().getInt("longNum");
+        int shortNum = Objects.requireNonNull(getIntent().getExtras()).getInt("shortNum");
+        int longNum = Objects.requireNonNull(getIntent().getExtras()).getInt("longNum");
         titles[0] = String.format(Locale.CHINESE, "短评论(%d)", shortNum);
         titles[1] = String.format(Locale.CHINESE, "长评论(%d)", longNum);
         fragments[0] =  CommentListFragment.newInstance(true);
