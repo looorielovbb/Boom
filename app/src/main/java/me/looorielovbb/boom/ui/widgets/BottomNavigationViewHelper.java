@@ -1,8 +1,8 @@
 package me.looorielovbb.boom.ui.widgets;
 
-import android.support.design.internal.BottomNavigationItemView;
-import android.support.design.internal.BottomNavigationMenuView;
-import android.support.design.widget.BottomNavigationView;
+import com.google.android.material.bottomnavigation.BottomNavigationItemView;
+import com.google.android.material.bottomnavigation.BottomNavigationMenuView;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.lang.reflect.Field;
 
@@ -24,11 +24,11 @@ public class BottomNavigationViewHelper {
             shiftingMode.setBoolean(menuView, false);
             shiftingMode.setAccessible(false);
 
-            for (int i = 0; i < menuView.getChildCount(); i++) {
-                BottomNavigationItemView itemView = (BottomNavigationItemView) menuView.getChildAt(i);
-                itemView.setShiftingMode(false);
-                itemView.setChecked(itemView.getItemData().isChecked());
-            }
+//            for (int i = 0; i < menuView.getChildCount(); i++) {
+//                BottomNavigationItemView itemView = (BottomNavigationItemView) menuView.getChildAt(i);
+//                itemView.setShiftingMode(false);
+//                itemView.setChecked(itemView.getItemData().isChecked());
+//            }
 
         } catch (NoSuchFieldException | IllegalAccessException e) {
             e.printStackTrace();

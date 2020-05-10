@@ -1,7 +1,7 @@
 package me.looorielovbb.boom.ui.widgets.loadmore;
 
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * Created by Lulei on 2017/4/6.

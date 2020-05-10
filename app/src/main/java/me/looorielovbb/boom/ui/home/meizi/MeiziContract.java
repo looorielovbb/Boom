@@ -4,7 +4,7 @@ import java.util.List;
 
 import me.looorielovbb.boom.base.BasePresenter;
 import me.looorielovbb.boom.base.BaseView;
-import me.looorielovbb.boom.data.bean.gank.Meizi;
+import me.looorielovbb.boom.data.bean.gank.Girl;
 
 /**
  * Created by Lulei on 2017/2/9.
@@ -21,7 +21,7 @@ public interface MeiziContract {
 
         void showerror(String error);
 
-        void showList(List<Meizi> list);
+        void showList(List<Girl> list);
 
         void loadComplete();
     }

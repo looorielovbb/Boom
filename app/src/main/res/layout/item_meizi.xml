@@ -11,7 +11,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:scaleType="centerCrop"
-        android:transitionName="@string/meizi"
+        android:transitionName="@string/girl"
         tools:ignore="RtlHardcoded"
         tools:src="@drawable/avatar"
         tools:targetApi="lollipop" />

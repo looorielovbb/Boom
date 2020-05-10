@@ -2,8 +2,8 @@ package me.looorielovbb.boom.adapter;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.support.v4.app.ActivityOptionsCompat;
-import android.support.v7.widget.RecyclerView;
+import androidx.core.app.ActivityOptionsCompat;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +16,7 @@ import java.util.Locale;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import me.looorielovbb.boom.R;
-import me.looorielovbb.boom.data.bean.gank.Meizi;
+import me.looorielovbb.boom.data.bean.gank.Girl;
 import me.looorielovbb.boom.ui.picture.PicActivity;
 import me.looorielovbb.boom.ui.widgets.loadmore.LoadMoreAdapter;
 import me.looorielovbb.boom.utils.DateUtils;
@@ -29,7 +29,7 @@ import me.looorielovbb.boom.utils.ImgUtils;
  * mail to lulei4461@gmail.com
  */
 
-public class MeiziAdapter extends LoadMoreAdapter<Meizi> {
+public class MeiziAdapter extends LoadMoreAdapter<Girl> {
     private Activity context;
 
     public MeiziAdapter(Activity activity) {
@@ -40,15 +40,15 @@ public class MeiziAdapter extends LoadMoreAdapter<Meizi> {
     public void onBindItemViewHolder(final RecyclerView.ViewHolder holder, final int position) {
         if (holder instanceof ViewHolder) {
             final ViewHolder itemholder = (ViewHolder) holder;
-            final Meizi meizi = items.get(position);
-            ImgUtils.LoadNetImg(context, meizi.getUrl(), itemholder.imageView);
-            itemholder.tvDate.setText(meizi.getDate());
+            final Girl girl = items.get(position);
+            ImgUtils.LoadNetImg(context, girl.getUrl(), itemholder.imageView);
+            itemholder.tvDate.setText(girl.getCreatedAt());
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("", Locale.CHINA);
             itemholder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = PicActivity.newIntent(context, meizi.getUrl(),
-                            DateUtils.getDateS(meizi.getDate()));
+                    Intent intent = PicActivity.newIntent(context, girl.getUrl(),
+                            DateUtils.getDateS(girl.getCreatedAt()));
                     ActivityOptionsCompat options = ActivityOptionsCompat.makeScaleUpAnimation(
                             v,
                             v.getWidth(),

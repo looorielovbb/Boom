@@ -1,6 +1,6 @@
 package me.looorielovbb.boom.ui.home.movieandbooks.books;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import java.util.ArrayList;
 import java.util.List;

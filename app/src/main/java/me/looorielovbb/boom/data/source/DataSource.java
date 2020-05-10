@@ -2,7 +2,7 @@ package me.looorielovbb.boom.data.source;
 
 import java.util.List;
 
-import me.looorielovbb.boom.data.bean.gank.Meizi;
+import me.looorielovbb.boom.data.bean.gank.Girl;
 import me.looorielovbb.boom.data.bean.others.ZhuangbiImage;
 import rx.Observable;
 
@@ -14,7 +14,7 @@ import rx.Observable;
  */
 
 public interface DataSource {
-    Observable<List<Meizi>> getMeizi(int page);
+    Observable<List<Girl>> getGirl(int page);
 
     Observable<List<ZhuangbiImage>> getEmoji(String keyword);
 }

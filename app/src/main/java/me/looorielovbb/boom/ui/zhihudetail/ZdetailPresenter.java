@@ -1,6 +1,6 @@
 package me.looorielovbb.boom.ui.zhihudetail;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import me.looorielovbb.boom.data.bean.zhihu.DetailExtraBean;
 import me.looorielovbb.boom.data.bean.zhihu.ZhihuDetailBean;

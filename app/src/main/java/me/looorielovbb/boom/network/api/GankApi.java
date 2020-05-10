@@ -1,7 +1,7 @@
 package me.looorielovbb.boom.network.api;
 
 import me.looorielovbb.boom.data.bean.gank.Base;
-import me.looorielovbb.boom.data.bean.gank.Meizi;
+import me.looorielovbb.boom.data.bean.gank.Girl;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
 import rx.Observable;
@@ -14,11 +14,22 @@ import rx.Observable;
  */
 
 public interface GankApi {
-    String GANK = "http://gank.io/";
-    String[] types = {"福利", "Android", "ios"};
+    String GANK = "https://gank.io/api/v2/";
 
-    @GET("api/data/{type}/{count}/{page}")
-    Observable<Base<Meizi>> getGankRes(@Path("type") String type,
-                                       @Path("count") int count,
-                                       @Path("page") int page);
+    //category 可接受参数 Article | GanHuo | Girl
+    String[] CATAGORY_NAMES = {"Girl", "GanHuo", "Article"};
+
+    String[] TYPES = {"Android", "iOS", "Flutter","Girl"};
+    /**
+     * 获取分类数据接口
+     * @param type 可接受参数 Android | iOS | Flutter | Girl，即分类API返回的类型数据
+     * @param count [1, 50]
+     * @param page 页码
+     * @return 数据流
+     */
+    @GET("data/category/{category}/type/{type}/page/{page}/count/{count}")
+    Observable<Base<Girl>> getGankRes(@Path("category") String category,
+                                      @Path("type") String type,
+                                      @Path("page") int page,
+                                      @Path("count") int count);
 }

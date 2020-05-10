@@ -2,8 +2,8 @@ package me.looorielovbb.boom.app;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.support.multidex.MultiDexApplication;
-import android.support.v7.app.AppCompatDelegate;
+import androidx.multidex.MultiDexApplication;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import com.elvishew.xlog.LogLevel;
 import com.elvishew.xlog.XLog;

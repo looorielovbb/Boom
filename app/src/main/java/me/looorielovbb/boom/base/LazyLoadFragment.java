@@ -1,7 +1,7 @@
 package me.looorielovbb.boom.base;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import androidx.fragment.app.Fragment;
 
 /**
  * Created by Lulei on 2017/6/30.

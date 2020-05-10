@@ -2,10 +2,10 @@ package me.looorielovbb.boom.ui.home.meizi;
 
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.fragment.app.Fragment;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +18,7 @@ import me.looorielovbb.boom.R;
 import me.looorielovbb.boom.adapter.MeiziAdapter;
 import me.looorielovbb.boom.base.LazyLoadFragment;
 import me.looorielovbb.boom.config.Constants;
-import me.looorielovbb.boom.data.bean.gank.Meizi;
+import me.looorielovbb.boom.data.bean.gank.Girl;
 import me.looorielovbb.boom.ui.widgets.loadmore.OnVerticalScrollListener;
 import me.looorielovbb.boom.ui.widgets.loadmore.SupportLoadMoreLinearLayoutManager;
 import me.looorielovbb.boom.utils.ToastUtils;
@@ -33,7 +33,7 @@ public class MeiziFragment extends LazyLoadFragment
     @BindView(R.id.refreshLayout) SwipeRefreshLayout refreshLayout;
 
     MeiziContract.Presenter mPresenter;
-    MeiziAdapter meiziAdapter;
+    MeiziAdapter girlAdapter;
     private int mCurrentPage;
 
     public MeiziFragment() {
@@ -49,7 +49,7 @@ public class MeiziFragment extends LazyLoadFragment
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_list, container, false);
         ButterKnife.bind(this, view);
-        setPresenter(new MeiziPresenter(this));
+        setPresenter(new GirlPresenter(this));
         refreshLayout.setOnRefreshListener(this);
         init();
         return view;
@@ -62,29 +62,29 @@ public class MeiziFragment extends LazyLoadFragment
                 onRefresh();
             }
         });
-        meiziAdapter = new MeiziAdapter(getActivity());
+        girlAdapter = new MeiziAdapter(getActivity());
         //设置图片
         SupportLoadMoreLinearLayoutManager layout = new SupportLoadMoreLinearLayoutManager(
                 getContext(),
                 LinearLayoutManager.VERTICAL,
                 false);
         recyclerView.setLayoutManager(layout);
-        recyclerView.setAdapter(meiziAdapter);
+        recyclerView.setAdapter(girlAdapter);
         recyclerView.addOnScrollListener(new OnVerticalScrollListener() {
             @Override
             public void onScrolledDownToLastItem() {
                 super.onScrolledDownToLastItem();
                 if (mCurrentPage == 1) {
                     mCurrentPage++;
-                    meiziAdapter.updateLoadingStatus(false);
+                    girlAdapter.updateLoadingStatus(false);
                     mPresenter.loaddata(mCurrentPage);
                     //Count 为item数量加上Bottom Item 若为其他值 最后一页没有加载10条
-                } else if (meiziAdapter.getItemCount() % Constants.PAGE_COUNT == 1) {
+                } else if (girlAdapter.getItemCount() % Constants.PAGE_COUNT == 1) {
                     mCurrentPage++;
-                    meiziAdapter.updateLoadingStatus(false);
+                    girlAdapter.updateLoadingStatus(false);
                     mPresenter.loaddata(mCurrentPage);
                 } else {
-                    meiziAdapter.updateLoadingStatus(true);
+                    girlAdapter.updateLoadingStatus(true);
                 }
             }
         });
@@ -135,14 +135,14 @@ public class MeiziFragment extends LazyLoadFragment
     }
 
     @Override
-    public void showList(List<Meizi> list) {
-        meiziAdapter.setList(list);
-        meiziAdapter.notifyDataSetChanged();
+    public void showList(List<Girl> list) {
+        girlAdapter.setList(list);
+        girlAdapter.notifyDataSetChanged();
     }
 
     @Override
     public void loadComplete() {
-        meiziAdapter.updateLoadingStatus(true);
+        girlAdapter.updateLoadingStatus(true);
     }
 
     @Override

@@ -1,7 +1,9 @@
 package me.looorielovbb.boom.adapter.decoration;
 
 import android.graphics.Rect;
-import android.support.v7.widget.RecyclerView;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 
 /**
@@ -18,7 +20,8 @@ public class GridMarginDecoration extends RecyclerView.ItemDecoration {
 
 
     @Override
-    public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
+    public void getItemOffsets(Rect outRect, @NonNull View view,@NonNull RecyclerView parent,
+                               @NonNull RecyclerView.State state) {
         outRect.left = space;
         outRect.top = space;
         outRect.bottom = space;

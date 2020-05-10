@@ -10,22 +10,24 @@ import java.util.List;
  */
 
 public class Base<T> {
-    private boolean error;
-    private List<T> results;
+    /**
+     * "page": 1,
+     * "page_count": 5,
+     * "status": 100,
+     * "total_counts": 81
+     */
 
-    public boolean isError() {
-        return error;
-    }
-
-    public void setError(boolean error) {
-        this.error = error;
-    }
+    private int page;
+    private int pageCount;
+    private int status;
+    private int totalCounts;
+    private List<T> data;
 
     public List<T> getList() {
-        return results;
+        return data;
     }
 
     public void setList(List<T> list) {
-        this.results = list;
+        this.data = list;
     }
 }

@@ -2,7 +2,7 @@ package me.looorielovbb.boom.data.source.local;
 
 import java.util.List;
 
-import me.looorielovbb.boom.data.bean.gank.Meizi;
+import me.looorielovbb.boom.data.bean.gank.Girl;
 import me.looorielovbb.boom.data.bean.others.ZhuangbiImage;
 import me.looorielovbb.boom.data.source.DataSource;
 import rx.Observable;
@@ -29,7 +29,7 @@ public class LocalDataSource implements DataSource{
     }
 
     @Override
-    public Observable<List<Meizi>> getMeizi(int page) {
+    public Observable<List<Girl>> getGirl(int page) {
         return Observable.empty();
     }
 

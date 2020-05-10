@@ -1,6 +1,6 @@
 package me.looorielovbb.boom.data.source;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import java.util.List;
 
@@ -9,7 +9,7 @@ import me.looorielovbb.boom.data.bean.douban.MovieListResponse;
 import me.looorielovbb.boom.data.bean.douban.book.BookBean;
 import me.looorielovbb.boom.data.bean.douban.book.BookDetailBean;
 import me.looorielovbb.boom.data.bean.douban.book.BooksBean;
-import me.looorielovbb.boom.data.bean.gank.Meizi;
+import me.looorielovbb.boom.data.bean.gank.Girl;
 import me.looorielovbb.boom.data.bean.others.ZhuangbiImage;
 import me.looorielovbb.boom.data.bean.zhihu.BeforeDailyBean;
 import me.looorielovbb.boom.data.bean.zhihu.CommentBean;
@@ -55,8 +55,8 @@ public class DataRepository implements DataSource {
     * Gank
     * */
     @Override
-    public Observable<List<Meizi>> getMeizi(int page) {
-        return mRemoteDataSource.getMeizi(page);
+    public Observable<List<Girl>> getGirl(int page) {
+        return mRemoteDataSource.getGirl(page);
     }
 
     /*

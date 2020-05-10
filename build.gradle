@@ -2,16 +2,15 @@
 
 buildscript {
     repositories {
+        mavenCentral()
         google()
         jcenter()
     }
     dependencies {
-        //noinspection GradleDependency
-        classpath 'com.android.tools.build:gradle:3.1.0'
+        classpath 'com.android.tools.build:gradle:3.6.3'
         classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
+        classpath 'com.jakewharton:butterknife-gradle-plugin:10.2.1'
 //        classpath 'com.tencent.bugly:symtabfileuploader:2.1.0'
-        // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle files
     }
 }
 
@@ -23,11 +22,6 @@ allprojects {
 
 }
 
-ext {
-    // You can also create properties to specify versions for dependencies.
-    // Having consistent versions between modules can avoid conflicts with behavior.
-    supportLibVersion = "27.1.1"
-}
 
 task clean(type: Delete) {
     delete rootProject.buildDir

@@ -1,7 +1,7 @@
 package me.looorielovbb.boom.ui.home.movieandbooks.comingsoon;
 
 import android.os.Handler;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import java.util.ArrayList;
 import java.util.List;

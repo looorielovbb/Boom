@@ -5,13 +5,14 @@ import java.util.List;
 
 import me.looorielovbb.boom.config.Constants;
 import me.looorielovbb.boom.data.bean.gank.Base;
-import me.looorielovbb.boom.data.bean.gank.Meizi;
+import me.looorielovbb.boom.data.bean.gank.Girl;
 import me.looorielovbb.boom.data.bean.others.ZhuangbiImage;
 import me.looorielovbb.boom.data.source.DataSource;
 import me.looorielovbb.boom.network.ApiFactory;
 import me.looorielovbb.boom.network.api.GankApi;
 import rx.Observable;
 import rx.functions.Func1;
+
 
 
 /**
@@ -36,13 +37,13 @@ public class RemoteDataSource implements DataSource {
     }
 
     @Override
-    public Observable<List<Meizi>> getMeizi(int page) {
-        return ApiFactory.getGankApi().getGankRes(GankApi.types[0], Constants.PAGE_COUNT, page).map(
-                new Func1<Base<Meizi>, List<Meizi>>() {
+    public Observable<List<Girl>> getGirl(int page) {
+        return ApiFactory.getGankApi().getGankRes(GankApi.CATAGORY_NAMES[0],GankApi.TYPES[3], page, Constants.PAGE_COUNT).map(
+                new Func1<Base<Girl>, List<Girl>>() {
 
                     @Override
-                    public List<Meizi> call(Base<Meizi> meiziBase) {
-                        return meiziBase == null ? null : meiziBase.getList();
+                    public List<Girl> call(Base<Girl> girlBase) {
+                        return girlBase == null ? null : girlBase.getList();
                     }
                 });
     }
