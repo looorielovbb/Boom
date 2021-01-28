@@ -35,7 +35,8 @@ public class SubTitleViewBinder extends ItemViewBinder<SubTitle, SubTitleViewBin
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.subtitle) TextView tvSubtitle;
+        @BindView(R.id.subtitle)
+        TextView tvSubtitle;
 
         ViewHolder(View itemView) {
             super(itemView);

@@ -8,7 +8,7 @@
     android:paddingRight="12dp"
     android:paddingTop="12dp">
 
-    <de.hdodenhof.circleimageview.CircleImageView
+    <me.looorielovbb.boom.widget.CircleImageView
         android:id="@+id/civ_comment_face"
         android:layout_width="@dimen/comment_face_size"
         android:layout_height="@dimen/comment_face_size"

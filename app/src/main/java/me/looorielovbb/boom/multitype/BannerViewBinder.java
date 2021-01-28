@@ -8,9 +8,7 @@ import android.view.ViewGroup;
 
 import com.bigkoo.convenientbanner.ConvenientBanner;
 import com.bigkoo.convenientbanner.holder.CBViewHolderCreator;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.bigkoo.convenientbanner.holder.Holder;
 
 import me.drakeet.multitype.ItemViewBinder;
 import me.looorielovbb.boom.R;
@@ -23,8 +21,7 @@ import me.looorielovbb.boom.multitype.bean.Banner;
  * date : 2017/4/17
  * mail to lulei4461@gmail.com
  */
-public class BannerViewBinder
-        extends ItemViewBinder<Banner, BannerViewBinder.ViewHolder> {
+public class BannerViewBinder extends ItemViewBinder<Banner, BannerViewBinder.ViewHolder> {
 
     @NonNull
     @Override
@@ -42,32 +39,31 @@ public class BannerViewBinder
 
     static class ViewHolder extends RecyclerView.ViewHolder {
         @NonNull
-        final ConvenientBanner convenientBanner;
+        final ConvenientBanner<TopStoriesBean> convenientBanner;
 
         ViewHolder(View itemView) {
             super(itemView);
-            convenientBanner = (ConvenientBanner) itemView.findViewById(R.id.convenientBanner);
+            convenientBanner = itemView.findViewById(R.id.convenientBanner);
         }
 
-        @SuppressWarnings("unchecked")
         void setImages(final Banner bean) {
-
-            List<String> imgurls = new ArrayList<>();
-            for (TopStoriesBean img : bean.storiesBeen) {
-                imgurls.add(img.getImage());
-            }
             convenientBanner
-                    .setPages(new CBViewHolderCreator<NetworkImageHolder>() {
+                    .setPages(new CBViewHolderCreator<TopStoriesBean>() {
                         @Override
-                        public NetworkImageHolder createHolder() {
-                            return new NetworkImageHolder(bean.storiesBeen);
+                        public Holder<TopStoriesBean> createHolder(View itemView) {
+                            return new NetworkImageHolder(itemView);
                         }
-                    }, imgurls)
+
+                        @Override
+                        public int getLayoutId() {
+                            return R.layout.view_banner;
+                        }
+                    }, bean.storiesBeen)
                     .setPageIndicator(new int[]{R.drawable.indicator_unselected,
                             R.drawable.indicator_selected})
                     .setPageIndicatorAlign(ConvenientBanner.PageIndicatorAlign.CENTER_HORIZONTAL);
             if (!convenientBanner.isTurning()) {
-                convenientBanner.startTurning(10 * 1000);
+                convenientBanner.startTurning(5 * 1000);
             }
         }
 

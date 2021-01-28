@@ -3,6 +3,7 @@ package me.looorielovbb.boom.utils;
 import android.content.Context;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 
 /**
  * Created by Lulei on 2016/12/8.
@@ -10,15 +11,13 @@ import android.widget.ImageView;
  * date : 2016/12/8
  * mail to lulei4461@gmail.com
  */
-
 public class ImgUtils {
 
 
     public static void LoadNetImg(Context context, String url, ImageView imageView) {
-        GlideApp.with(context).load(url)//图片地址
+        Glide.with(context).load(url)//图片地址
 //             .error(R.drawable.error)//加载出错显示的图片
 //             .crossFade()//淡入效果
-
 //             .diskCacheStrategy(DiskCacheStrategy.NONE)
 //             .centerCrop()
                 .into(imageView);

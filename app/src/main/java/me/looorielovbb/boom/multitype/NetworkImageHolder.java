@@ -3,10 +3,13 @@ package me.looorielovbb.boom.multitype;
 import android.content.Context;
 import android.content.Intent;
 import androidx.core.app.ActivityOptionsCompat;
+
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bigkoo.convenientbanner.holder.CBViewHolderCreator;
 import com.bigkoo.convenientbanner.holder.Holder;
 
 import java.util.List;
@@ -24,48 +27,44 @@ import me.looorielovbb.boom.utils.ImgUtils;
  */
 
 // ConvenientBanner 组件加载网络图片holder
-public class NetworkImageHolder implements Holder<String> {
+public class NetworkImageHolder extends Holder<TopStoriesBean> {
 
     private ImageView imageView;
     private TextView tvTitle;
-    private List<TopStoriesBean> topStoriesBeans;
-    private View convertView;
+    private Context mContext;
 
-
-    public NetworkImageHolder(List<TopStoriesBean> banner) {
-        super();
-        this.topStoriesBeans = banner;
+    public NetworkImageHolder(View itemview) {
+        super(itemview);
     }
 
     @Override
-    public View createView(Context context) {
-        //可以通过layout文件来创建，也可以用代码创建，不一定是Image，任何控件都可以进行翻页
-        convertView = View.inflate(context, R.layout.view_banner,null);
-        imageView = (ImageView) convertView.findViewById(R.id.iv_pic);
-        tvTitle = (TextView) convertView.findViewById(R.id.tv_title);
-        return convertView;
+    protected void initView(View itemView) {
+        mContext = itemView.getContext();
+        imageView = itemView.findViewById(R.id.iv_pic);
+        tvTitle = itemView.findViewById(R.id.tv_title);
     }
 
     @Override
-    public void UpdateUI(final Context context, final int position, String data) {
-        ImgUtils.LoadNetImg(context, data, imageView);
-        tvTitle.setText(topStoriesBeans.get(position).getTitle());
-        convertView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.setClass(context, ZhihuDetailActivity.class);
-                intent.putExtra("id", topStoriesBeans.get(position).getId());
-                intent.putExtra("isNotTransition", true);
-                ActivityOptionsCompat options = ActivityOptionsCompat.makeScaleUpAnimation(
-                        v,
-                        v.getWidth() ,
-                        v.getHeight() ,
-                        0,
-                        0);
-                context.startActivity(intent,options.toBundle());
-            }
-        });
+    public void updateUI(TopStoriesBean data) {
+        if (mContext==null) {
+            return;
+        }
+        if (data!=null) {
+            ImgUtils.LoadNetImg(mContext, data.getImage(), imageView);
+            tvTitle.setText(data.getTitle());
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent();
+                    intent.setClass(mContext, ZhihuDetailActivity.class);
+                    intent.putExtra("id", data.getId());
+                    intent.putExtra("isNotTransition", true);
+                    ActivityOptionsCompat options = ActivityOptionsCompat.makeScaleUpAnimation(
+                            v, v.getWidth() , v.getHeight() , 0, 0);
+                    mContext.startActivity(intent,options.toBundle());
+                }
+            });
+        }
 
     }
 }

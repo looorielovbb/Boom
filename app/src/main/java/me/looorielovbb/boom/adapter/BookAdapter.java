@@ -28,7 +28,7 @@ import me.looorielovbb.boom.utils.ImgUtils;
  */
 
 public class BookAdapter extends LoadMoreAdapter<BooksBean> {
-    private Activity activity;
+    private final Activity activity;
 
     public BookAdapter(Activity activity) {
         this.activity = activity;
@@ -51,11 +51,7 @@ public class BookAdapter extends LoadMoreAdapter<BooksBean> {
                     intent.setClass(activity, BDetailActivity.class);
                     intent.putExtra("book", items.get(position));
                     ActivityOptionsCompat options = ActivityOptionsCompat.makeScaleUpAnimation(
-                            v,
-                            v.getWidth(),
-                            v.getHeight(),
-                            0,
-                            0);
+                        v, v.getWidth(), v.getHeight(), 0, 0);
                     activity.startActivity(intent, options.toBundle());
                 }
             });
@@ -74,7 +70,7 @@ public class BookAdapter extends LoadMoreAdapter<BooksBean> {
     }
 
 
-    class ViewHolder extends RecyclerView.ViewHolder {
+    static class ViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.iv_top_photo)
         ImageView ivTopPhoto;

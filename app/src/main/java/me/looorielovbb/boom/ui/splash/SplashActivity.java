@@ -8,7 +8,7 @@ import butterknife.ButterKnife;
 import me.looorielovbb.boom.R;
 import me.looorielovbb.boom.base.BaseActivity;
 import me.looorielovbb.boom.ui.home.MainActivity;
-import me.wangyuwei.particleview.ParticleView;
+import me.looorielovbb.boom.widget.ParticleView;
 
 
 public class SplashActivity extends BaseActivity {

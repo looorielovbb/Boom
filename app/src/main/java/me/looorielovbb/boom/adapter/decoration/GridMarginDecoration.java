@@ -12,7 +12,7 @@ import android.view.View;
  */
 public class GridMarginDecoration extends RecyclerView.ItemDecoration {
 
-    private int space;
+    private final int space;
 
     public GridMarginDecoration(int space) {
         this.space = space;

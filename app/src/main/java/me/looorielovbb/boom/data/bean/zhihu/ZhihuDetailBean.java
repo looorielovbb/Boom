@@ -1,8 +1,8 @@
 package me.looorielovbb.boom.data.bean.zhihu;
 
+import androidx.annotation.NonNull;
+
 import java.util.List;
-
-
 
 public class ZhihuDetailBean {
 
@@ -106,6 +106,7 @@ public class ZhihuDetailBean {
         return title;
     }
 
+    @NonNull
     @Override
     public String toString() {
         return "ZhihuDetailBean{" +

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="ParticleView">
+        <attr name="pv_host_text" format="string"/>
+        <attr name="pv_host_text_size" format="dimension"/>
+        <attr name="pv_particle_text" format="string"/>
+        <attr name="pv_particle_text_size" format="dimension"/>
+        <attr name="pv_text_color" format="color"/>
+        <attr name="pv_background_color" format="color"/>
+        <attr name="pv_text_anim_time" format="integer"/>
+        <attr name="pv_spread_anim_time" format="integer"/>
+        <attr name="pv_host_text_anim_time" format="integer"/>
+    </declare-styleable>
+
+    <declare-styleable name="CircleImageView">
+        <attr name="civ_border_width" format="dimension" />
+        <attr name="civ_border_color" format="color" />
+        <attr name="civ_border_overlay" format="boolean" />
+        <attr name="civ_circle_background_color" format="color" />
+    </declare-styleable>
+
+</resources>

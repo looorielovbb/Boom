@@ -1,0 +1,131 @@
+com/elvishew/xlog/printer/PrinterSet.java
+ com.elvishew.xlog.printer.PrinterSet
+com/elvishew/xlog/formatter/thread/ThreadFormatter.java
+ com.elvishew.xlog.formatter.thread.ThreadFormatter
+com/elvishew/xlog/LogUtils.java
+ com.elvishew.xlog.LogUtils
+com/elvishew/xlog/printer/file/naming/DateFileNameGenerator.java
+ com.elvishew.xlog.printer.file.naming.DateFileNameGenerator
+ com.elvishew.xlog.printer.file.naming.DateFileNameGenerator$1
+com/elvishew/xlog/formatter/message/object/BundleFormatter.java
+ com.elvishew.xlog.formatter.message.object.BundleFormatter
+com/elvishew/xlog/printer/file/FilePrinter.java
+ com.elvishew.xlog.printer.file.FilePrinter
+ com.elvishew.xlog.printer.file.FilePrinter$1
+ com.elvishew.xlog.printer.file.FilePrinter$Builder
+ com.elvishew.xlog.printer.file.FilePrinter$Builder$1
+ com.elvishew.xlog.printer.file.FilePrinter$LogItem
+ com.elvishew.xlog.printer.file.FilePrinter$Worker
+ com.elvishew.xlog.printer.file.FilePrinter$Writer
+com/elvishew/xlog/printer/file/backup/BackupStrategy.java
+ com.elvishew.xlog.printer.file.backup.BackupStrategy
+com/elvishew/xlog/printer/file/clean/CleanStrategy.java
+ com.elvishew.xlog.printer.file.clean.CleanStrategy
+com/elvishew/xlog/formatter/message/xml/DefaultXmlFormatter.java
+ com.elvishew.xlog.formatter.message.xml.DefaultXmlFormatter
+com/elvishew/xlog/printer/ConsolePrinter.java
+ com.elvishew.xlog.printer.ConsolePrinter
+com/elvishew/xlog/formatter/border/BorderFormatter.java
+ com.elvishew.xlog.formatter.border.BorderFormatter
+com/elvishew/xlog/internal/SystemCompat.java
+ com.elvishew.xlog.internal.SystemCompat
+com/elvishew/xlog/printer/file/naming/LevelFileNameGenerator.java
+ com.elvishew.xlog.printer.file.naming.LevelFileNameGenerator
+com/elvishew/xlog/LogLevel.java
+ com.elvishew.xlog.LogLevel
+com/elvishew/xlog/flattener/ClassicFlattener.java
+ com.elvishew.xlog.flattener.ClassicFlattener
+com/elvishew/xlog/printer/file/backup/FileSizeBackupStrategy.java
+ com.elvishew.xlog.printer.file.backup.FileSizeBackupStrategy
+com/elvishew/xlog/printer/file/backup/NeverBackupStrategy.java
+ com.elvishew.xlog.printer.file.backup.NeverBackupStrategy
+com/elvishew/xlog/formatter/thread/DefaultThreadFormatter.java
+ com.elvishew.xlog.formatter.thread.DefaultThreadFormatter
+com/elvishew/xlog/printer/Printer.java
+ com.elvishew.xlog.printer.Printer
+com/elvishew/xlog/formatter/message/throwable/ThrowableFormatter.java
+ com.elvishew.xlog.formatter.message.throwable.ThrowableFormatter
+com/elvishew/xlog/formatter/border/DefaultBorderFormatter.java
+ com.elvishew.xlog.formatter.border.DefaultBorderFormatter
+com/elvishew/xlog/flattener/DefaultFlattener.java
+ com.elvishew.xlog.flattener.DefaultFlattener
+com/elvishew/xlog/formatter/FormatException.java
+ com.elvishew.xlog.formatter.FormatException
+com/elvishew/xlog/BuildConfig.java
+ com.elvishew.xlog.BuildConfig
+com/elvishew/xlog/flattener/Flattener2.java
+ com.elvishew.xlog.flattener.Flattener2
+com/elvishew/xlog/formatter/Formatter.java
+ com.elvishew.xlog.formatter.Formatter
+com/elvishew/xlog/internal/util/ObjectToStringUtil.java
+ com.elvishew.xlog.internal.util.ObjectToStringUtil
+com/elvishew/xlog/formatter/message/xml/XmlFormatter.java
+ com.elvishew.xlog.formatter.message.xml.XmlFormatter
+com/elvishew/xlog/printer/flattener/DefaultLogFlattener.java
+ com.elvishew.xlog.printer.flattener.DefaultLogFlattener
+com/elvishew/xlog/flattener/PatternFlattener.java
+ com.elvishew.xlog.flattener.PatternFlattener
+ com.elvishew.xlog.flattener.PatternFlattener$DateFiller
+ com.elvishew.xlog.flattener.PatternFlattener$DateFiller$1
+ com.elvishew.xlog.flattener.PatternFlattener$LevelFiller
+ com.elvishew.xlog.flattener.PatternFlattener$MessageFiller
+ com.elvishew.xlog.flattener.PatternFlattener$ParameterFiller
+ com.elvishew.xlog.flattener.PatternFlattener$TagFiller
+com/elvishew/xlog/formatter/message/object/IntentFormatter.java
+ com.elvishew.xlog.formatter.message.object.IntentFormatter
+com/elvishew/xlog/XLog.java
+ com.elvishew.xlog.XLog
+ com.elvishew.xlog.XLog$Log
+com/elvishew/xlog/printer/AndroidPrinter.java
+ com.elvishew.xlog.printer.AndroidPrinter
+com/elvishew/xlog/printer/file/clean/FileLastModifiedCleanStrategy.java
+ com.elvishew.xlog.printer.file.clean.FileLastModifiedCleanStrategy
+com/elvishew/xlog/Logger.java
+ com.elvishew.xlog.Logger
+ com.elvishew.xlog.Logger$Builder
+com/elvishew/xlog/interceptor/Interceptor.java
+ com.elvishew.xlog.interceptor.Interceptor
+com/elvishew/xlog/formatter/message/json/DefaultJsonFormatter.java
+ com.elvishew.xlog.formatter.message.json.DefaultJsonFormatter
+com/elvishew/xlog/internal/Platform.java
+ com.elvishew.xlog.internal.Platform
+ com.elvishew.xlog.internal.Platform$Android
+com/elvishew/xlog/LogConfiguration.java
+ com.elvishew.xlog.LogConfiguration
+ com.elvishew.xlog.LogConfiguration$Builder
+com/elvishew/xlog/printer/file/naming/ChangelessFileNameGenerator.java
+ com.elvishew.xlog.printer.file.naming.ChangelessFileNameGenerator
+com/elvishew/xlog/printer/flattener/LogFlattener.java
+ com.elvishew.xlog.printer.flattener.LogFlattener
+com/elvishew/xlog/flattener/Flattener.java
+ com.elvishew.xlog.flattener.Flattener
+com/elvishew/xlog/formatter/stacktrace/DefaultStackTraceFormatter.java
+ com.elvishew.xlog.formatter.stacktrace.DefaultStackTraceFormatter
+com/elvishew/xlog/formatter/message/throwable/DefaultThrowableFormatter.java
+ com.elvishew.xlog.formatter.message.throwable.DefaultThrowableFormatter
+com/elvishew/xlog/interceptor/AbstractFilterInterceptor.java
+ com.elvishew.xlog.interceptor.AbstractFilterInterceptor
+com/elvishew/xlog/LogItem.java
+ com.elvishew.xlog.LogItem
+com/elvishew/xlog/formatter/stacktrace/StackTraceFormatter.java
+ com.elvishew.xlog.formatter.stacktrace.StackTraceFormatter
+com/elvishew/xlog/internal/util/StackTraceUtil.java
+ com.elvishew.xlog.internal.util.StackTraceUtil
+com/elvishew/xlog/printer/SystemPrinter.java
+ com.elvishew.xlog.printer.SystemPrinter
+com/elvishew/xlog/interceptor/BlacklistTagsFilterInterceptor.java
+ com.elvishew.xlog.interceptor.BlacklistTagsFilterInterceptor
+com/elvishew/xlog/interceptor/WhitelistTagsFilterInterceptor.java
+ com.elvishew.xlog.interceptor.WhitelistTagsFilterInterceptor
+com/elvishew/xlog/internal/DefaultsFactory.java
+ com.elvishew.xlog.internal.DefaultsFactory
+com/elvishew/xlog/printer/file/naming/FileNameGenerator.java
+ com.elvishew.xlog.printer.file.naming.FileNameGenerator
+com/elvishew/xlog/formatter/message/object/ObjectFormatter.java
+ com.elvishew.xlog.formatter.message.object.ObjectFormatter
+com/elvishew/xlog/printer/file/clean/NeverCleanStrategy.java
+ com.elvishew.xlog.printer.file.clean.NeverCleanStrategy
+com/elvishew/xlog/formatter/message/json/JsonFormatter.java
+ com.elvishew.xlog.formatter.message.json.JsonFormatter
+com/elvishew/xlog/printer/RemotePrinter.java
+ com.elvishew.xlog.printer.RemotePrinter

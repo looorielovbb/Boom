@@ -1,6 +1,8 @@
 package me.looorielovbb.boom.adapter;
 
 import android.content.Context;
+
+import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 import android.text.SpannableString;
@@ -18,11 +20,11 @@ import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import de.hdodenhof.circleimageview.CircleImageView;
 import me.looorielovbb.boom.R;
 import me.looorielovbb.boom.data.bean.zhihu.Comment;
 import me.looorielovbb.boom.utils.DateUtils;
 import me.looorielovbb.boom.utils.ImgUtils;
+import me.looorielovbb.boom.widget.CircleImageView;
 
 /**
  * Created by Lulei on 2017/5/23.
@@ -42,6 +44,7 @@ public class ZhihuCommentsAdapter extends RecyclerView.Adapter<ZhihuCommentsAdap
     private List<Comment> commentList = new ArrayList<>();
     private Context mContext;
 
+    @NonNull
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         mContext = viewGroup.getContext();
