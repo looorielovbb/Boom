@@ -3,7 +3,7 @@ package me.looorielovbb.boom.utils;
 import android.content.Context;
 import android.widget.Toast;
 
-import me.looorielovbb.boom.app.BoomApp;
+import me.looorielovbb.boom.BoomApp;
 
 
 /**
@@ -19,7 +19,7 @@ public class ToastUtils {
     }
 
     public static void show(CharSequence text) {
-        show(BoomApp.appCtx, text, Toast.LENGTH_SHORT);
+        show(BoomApp.getInstance(), text, Toast.LENGTH_SHORT);
     }
 
     public static void show(Context context, CharSequence text, int duration) {
@@ -37,7 +37,6 @@ public class ToastUtils {
             mToast.setText(text);
             mToast.setDuration(Toast.LENGTH_SHORT);
         }
-
         mToast.show();
     }
 

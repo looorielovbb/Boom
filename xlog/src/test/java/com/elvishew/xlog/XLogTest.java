@@ -52,7 +52,7 @@ public class XLogTest {
 
   private static final String CUSTOM_PRINTER_MSG_PREFIX = "message from custom printer - ";
 
-  private List<LogItem> logsContainer = new ArrayList<>();
+  final private List<LogItem> logsContainer = new ArrayList<>();
 
   @Before
   public void setup() {

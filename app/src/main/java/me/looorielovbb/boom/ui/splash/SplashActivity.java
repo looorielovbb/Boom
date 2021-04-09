@@ -10,9 +10,7 @@ import me.looorielovbb.boom.base.BaseActivity;
 import me.looorielovbb.boom.ui.home.MainActivity;
 import me.looorielovbb.boom.widget.ParticleView;
 
-
 public class SplashActivity extends BaseActivity {
-
 
     @BindView(R.id.particleview)
     ParticleView mParticleview;
@@ -20,19 +18,13 @@ public class SplashActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Intent intent = new Intent(SplashActivity.this, MainActivity.class);
-        startActivity(intent);
-        finish();
         setContentView(R.layout.activity_splash);
         ButterKnife.bind(this);
 
-        mParticleview.setOnParticleAnimListener(new ParticleView.ParticleAnimListener() {
-            @Override
-            public void onAnimationEnd() {
-                Intent intent = new Intent(SplashActivity.this, MainActivity.class);
-                startActivity(intent);
-                finish();
-            }
+        mParticleview.setOnParticleAnimListener(() -> {
+            Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+            startActivity(intent);
+            finish();
         });
         mParticleview.startAnim();
 //        Rx方法计时器

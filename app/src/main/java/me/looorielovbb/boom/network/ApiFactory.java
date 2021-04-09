@@ -6,7 +6,7 @@ import java.net.CookieManager;
 import java.net.CookiePolicy;
 import java.util.concurrent.TimeUnit;
 
-import me.looorielovbb.boom.app.BoomApp;
+import me.looorielovbb.boom.BoomApp;
 import me.looorielovbb.boom.network.api.DoubanApi;
 import me.looorielovbb.boom.network.api.GankApi;
 import me.looorielovbb.boom.network.api.ZhihuApi;
@@ -35,41 +35,38 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ApiFactory {
 
     //缓存请求拦截器
-    private static final Interceptor REWRITE_CACHE_CONTROL_INTERCEPTOR = new Interceptor() {
-        @Override
-        public Response intercept(Chain chain) throws IOException {
-            Request request = chain.request();
-            if (!NetWorkUtils.isNetworkAvailable(BoomApp.appCtx)) {
-                request = request.newBuilder()
-                        .cacheControl(CacheControl.FORCE_CACHE)
-                        .build();
-            }
-            Response response = chain.proceed(request);
-            if (NetWorkUtils.isNetworkAvailable(BoomApp.appCtx)) {
-                int maxAge = 0;
-                // 有网络时 设置缓存超时时间0个小时
-                response.newBuilder()
-                        .header("Cache-Control", "public, max-age=" + maxAge)
-                        .removeHeader("Boom")// 清除头信息，因为服务器如果不支持，会返回一些干扰信息，不清除下面无法生效
-                        .build();
-            } else {
-                // 无网络时，设置超时为4周
-                int maxStale = 60 * 60 * 24 * 28;
-                response.newBuilder()
-                        .header("Cache-Control", "public, only-if-cached, max-stale=" + maxStale)
-                        .removeHeader("nyn")
-                        .build();
-            }
-            return response;
+    private static final Interceptor REWRITE_CACHE_CONTROL_INTERCEPTOR = chain -> {
+        Request request = chain.request();
+        if (!NetWorkUtils.isNetworkAvailable(BoomApp.getInstance())) {
+            request = request.newBuilder()
+                    .cacheControl(CacheControl.FORCE_CACHE)
+                    .build();
         }
+        Response response = chain.proceed(request);
+        if (NetWorkUtils.isNetworkAvailable(BoomApp.getInstance())) {
+            int maxAge = 0;
+            // 有网络时 设置缓存超时时间0个小时
+            response.newBuilder()
+                    .header("Cache-Control", "public, max-age=" + maxAge)
+                    .removeHeader("Boom")// 清除头信息，因为服务器如果不支持，会返回一些干扰信息，不清除下面无法生效
+                    .build();
+        } else {
+            // 无网络时，设置超时为4周
+            int maxStale = 60 * 60 * 24 * 28;
+            response.newBuilder()
+                    .header("Cache-Control", "public, only-if-cached, max-stale=" + maxStale)
+                    .removeHeader("nyn")
+                    .build();
+        }
+        return response;
     };
     private static DoubanApi doubanApi;
     private static GankApi gankApi;
     private static ZhihuApi zhihuApi;
     private static ZhuangbiApi zhuangbiApi;
     private static OkHttpClient client;
-    private static Converter.Factory gsonConverterFactory = GsonConverterFactory.create();
-    private static RxJavaCallAdapterFactory rxJavaCallAdapterFactory = RxJavaCallAdapterFactory.create();
+    private static final Converter.Factory gsonConverterFactory = GsonConverterFactory.create();
+    private static final RxJavaCallAdapterFactory rxJavaCallAdapterFactory = RxJavaCallAdapterFactory.create();
 
     private static void initOkHttpClient() {
         if (client == null) {
@@ -77,7 +74,7 @@ public class ApiFactory {
 
             CookieManager cookieManager = new CookieManager();
             cookieManager.setCookiePolicy(CookiePolicy.ACCEPT_ALL);
-            File cacheFile = new File(BoomApp.appCtx.getExternalCacheDir(), "BoomCache");
+            File cacheFile = new File(BoomApp.getInstance().getExternalCacheDir(), "BoomCache");
             Cache cache = new Cache(cacheFile, 1024 * 1024 * 50);
             loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
             client = new OkHttpClient.Builder()

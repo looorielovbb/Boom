@@ -5,7 +5,9 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.PersistableBundle;
+
 import androidx.annotation.NonNull;
+
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AlertDialog;
@@ -13,6 +15,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -33,38 +36,36 @@ import me.looorielovbb.boom.utils.ToastUtils;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final String TAG = "MainActivity";
     @BindView(R.id.bottomnavi)
     BottomNavigationView bottomNavi;
 
     Fragment[] fragments = new Fragment[4];
     FragmentManager fragmentManager;
     private int mCurrentIndex = 0;
-    private int PERMISSIONS_REQUEST_INTERNET = 10;
+    private static final int PERMISSIONS_REQUEST_INTERNET = 10;
 
     public static void fixInputMethodManagerLeak(Context destContext) {
         if (destContext == null) {
             return;
         }
-
-        InputMethodManager imm
-                = (InputMethodManager) destContext.getSystemService(Context.INPUT_METHOD_SERVICE);
+        InputMethodManager imm = (InputMethodManager) destContext.getSystemService(Context.INPUT_METHOD_SERVICE);
         if (imm == null) {
             return;
         }
-
         String[] arr = new String[]{"mCurRootView", "mServedView", "mNextServedView"};
         Field f;
-        Object obj_get;
+        Object objGet;
         for (String param : arr) {
             try {
                 f = imm.getClass().getDeclaredField(param);
                 if (!f.isAccessible()) {
                     f.setAccessible(true);
                 }
-                obj_get = f.get(imm);
-                if (obj_get instanceof View) {
-                    View v_get = (View) obj_get;
-                    if (v_get.getContext() == destContext) {
+                objGet = f.get(imm);
+                if (objGet instanceof View) {
+                    View vGet = (View) objGet;
+                    if (vGet.getContext() == destContext) {
                         // 被InputMethodManager持有引用的context是想要目标销毁的
                         f.set(imm, null); // 置空，破坏掉path to gc节点
                     } else {
@@ -73,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
             } catch (Throwable t) {
-                t.printStackTrace();
+                Log.e(TAG,t.getMessage(),t);
             }
         }
     }
@@ -82,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        if (checkSelfPermission(Manifest.permission.INTERNET)!= PackageManager.PERMISSION_GRANTED) {
+        if (checkSelfPermission(Manifest.permission.INTERNET) != PackageManager.PERMISSION_GRANTED) {
             // Permission is not granted
             // Should we show an explanation?
             if (ActivityCompat.shouldShowRequestPermissionRationale(this,
@@ -90,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
                 // Show an explanation to the user *asynchronously* -- don't block
                 // this thread waiting for the user's response! After the user
                 // sees the explanation, try again to request the permission.
-                AlertDialog dialog =  new AlertDialog.Builder(this)
+                AlertDialog dialog = new AlertDialog.Builder(this)
                         .setTitle("提示")
                         .setMessage("请授予网络权限，软件方可正常运行")
                         .create();
@@ -114,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
             for (int i = 0; i < fragments.length; i++) {
                 fragments[i] = fragmentManager.findFragmentByTag("HomeTab" + i);
             }
-            mCurrentIndex = savedInstanceState.getInt("mCurrentIndex",0);
+            mCurrentIndex = savedInstanceState.getInt("mCurrentIndex", 0);
         } else {
             fragments[0] = ZhihuFragment.newInstance();
             fragments[1] = MeiziFragment.newInstance();
@@ -203,21 +204,21 @@ public class MainActivity extends AppCompatActivity {
                 fragmentManager.putFragment(outState, "HomeTab" + i, fragments[i]);
             }
         }
-        outState.putInt("mCurrentIndex",mCurrentIndex);
+        outState.putInt("mCurrentIndex", mCurrentIndex);
         super.onSaveInstanceState(outState, outPersistentState);
     }
 
     @Override
     protected void onRestart() {
         super.onRestart();
-        Log.d("lulei","onRestart");
+        Log.d("lulei", "onRestart");
     }
 
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == PERMISSIONS_REQUEST_INTERNET){
+        if (requestCode == PERMISSIONS_REQUEST_INTERNET) {
             ToastUtils.show("已开启网络权限");
         }
     }
