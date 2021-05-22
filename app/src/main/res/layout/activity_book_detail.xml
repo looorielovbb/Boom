@@ -133,7 +133,7 @@
                 </LinearLayout>
             </RelativeLayout>
 
-            <me.solidev.statusviewlayout.StatusViewLayout
+            <StatusViewLayout
                 android:id="@+id/stateview"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
@@ -238,7 +238,7 @@
                         android:padding="12dp" />
 
                 </LinearLayout>
-            </me.solidev.statusviewlayout.StatusViewLayout>
+            </StatusViewLayout>
 
 
         </LinearLayout>

@@ -20,7 +20,7 @@ import me.looorielovbb.boom.adapter.decoration.GridMarginDecoration;
 import me.looorielovbb.boom.base.LazyLoadFragment;
 import me.looorielovbb.boom.data.bean.douban.MovieInfo;
 import me.looorielovbb.boom.utils.ToastUtils;
-import me.solidev.statusviewlayout.StatusViewLayout;
+import me.looorielovbb.boom.widget.StatusViewLayout;
 
 
 public class InTheatersMovieListFragment extends LazyLoadFragment

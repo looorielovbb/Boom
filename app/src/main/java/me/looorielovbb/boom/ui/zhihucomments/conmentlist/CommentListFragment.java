@@ -18,7 +18,7 @@ import me.looorielovbb.boom.R;
 import me.looorielovbb.boom.adapter.ZhihuCommentsAdapter;
 import me.looorielovbb.boom.base.LazyLoadFragment;
 import me.looorielovbb.boom.data.bean.zhihu.Comment;
-import me.solidev.statusviewlayout.StatusViewLayout;
+import me.looorielovbb.boom.widget.StatusViewLayout;
 
 
 public class CommentListFragment extends LazyLoadFragment implements CommentConstract.View, SwipeRefreshLayout.OnRefreshListener {

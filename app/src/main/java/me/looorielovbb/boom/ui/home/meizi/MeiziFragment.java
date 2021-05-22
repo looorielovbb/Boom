@@ -23,13 +23,14 @@ import me.looorielovbb.boom.data.bean.gank.Girl;
 import me.looorielovbb.boom.ui.widgets.loadmore.OnVerticalScrollListener;
 import me.looorielovbb.boom.ui.widgets.loadmore.SupportLoadMoreLinearLayoutManager;
 import me.looorielovbb.boom.utils.ToastUtils;
-import me.solidev.statusviewlayout.StatusViewLayout;
+import me.looorielovbb.boom.widget.StatusViewLayout;
 
 
 public class MeiziFragment extends LazyLoadFragment
         implements MeiziContract.View, SwipeRefreshLayout.OnRefreshListener {
 
-    @BindView(R.id.stateview) StatusViewLayout mStatusView;
+    @BindView(R.id.stateview)
+    StatusViewLayout mStatusView;
     @BindView(R.id.recyclerView) RecyclerView recyclerView;
     @BindView(R.id.refreshLayout) SwipeRefreshLayout refreshLayout;
 

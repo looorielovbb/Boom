@@ -23,7 +23,7 @@ import me.looorielovbb.boom.data.bean.douban.book.BooksBean;
 import me.looorielovbb.boom.utils.ImgUtils;
 import me.looorielovbb.boom.utils.StringUtils;
 import me.looorielovbb.boom.utils.ToolbarUtils;
-import me.solidev.statusviewlayout.StatusViewLayout;
+import me.looorielovbb.boom.widget.StatusViewLayout;
 
 /**
  * Created by Lulei on 2017/7/12.

@@ -1,10 +1,14 @@
 package me.looorielovbb.boom.utils;
 
+import android.Manifest;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
+
+import androidx.core.app.ActivityCompat;
 
 
 /**
@@ -80,6 +84,16 @@ public class NetWorkUtils {
             return false;
         }
 
+        if (ActivityCompat.checkSelfPermission(context, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return false;
+        }
         switch (telephonyManager.getNetworkType()) {
             case TelephonyManager.NETWORK_TYPE_1xRTT:
                 return false;
@@ -115,7 +129,16 @@ public class NetWorkUtils {
                 return false;
             default:
                 return false;
+            case TelephonyManager.NETWORK_TYPE_GSM:
+                break;
+            case TelephonyManager.NETWORK_TYPE_IWLAN:
+                break;
+            case TelephonyManager.NETWORK_TYPE_NR:
+                break;
+            case TelephonyManager.NETWORK_TYPE_TD_SCDMA:
+                break;
         }
+        return false;
     }
 
     public static boolean isNetworkAvailable(Context context) {

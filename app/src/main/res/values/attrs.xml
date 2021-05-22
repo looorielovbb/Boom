@@ -19,4 +19,11 @@
         <attr name="civ_circle_background_color" format="color" />
     </declare-styleable>
 
+    <declare-styleable name="StatusViewLayout">
+        <attr name="loading_view" format="reference" />
+        <attr name="error_view" format="reference" />
+        <attr name="empty_view" format="reference" />
+        <attr name="no_network_view" format="reference" />
+    </declare-styleable>
+
 </resources>

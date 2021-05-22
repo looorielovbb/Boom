@@ -21,7 +21,7 @@ import me.looorielovbb.boom.data.bean.douban.book.BooksBean;
 import me.looorielovbb.boom.ui.widgets.loadmore.OnVerticalScrollListener;
 import me.looorielovbb.boom.ui.widgets.loadmore.SupportLoadMoreGridLayoutManager;
 import me.looorielovbb.boom.utils.ToastUtils;
-import me.solidev.statusviewlayout.StatusViewLayout;
+import me.looorielovbb.boom.widget.StatusViewLayout;
 
 /**
  * Created by Lulei on 2017/7/10.

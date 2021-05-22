@@ -38,4 +38,12 @@
     <string name="publisher">出版社：</string>
     <string name="start_data">上映时间：</string>
     <string name="crash_test">Try to CrashReport</string>
+
+    <string name="status_view_loading_text">数据加载中</string>
+    <string name="status_view_error_text">加载失败 点击重新加载</string>
+    <string name="status_view_error_text_click_reload">点击重新加载</string>
+    <string name="status_view_empty_text">数据为空</string>
+    <string name="status_view_net_exception_text">请检查你的网络设置</string>
+    <string name="status_view_retry_text">重新加载</string>
+    <string name="status_view_reload">重新加载</string>
 </resources>
